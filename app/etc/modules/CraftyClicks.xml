@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <CraftyClicks>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>2.4.1</version>
+        </CraftyClicks>
+    </modules>
+</config>

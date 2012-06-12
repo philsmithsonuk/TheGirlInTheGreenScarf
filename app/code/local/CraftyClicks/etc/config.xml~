@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Crafty Clicks - Address Finder
+ *
+ * @category   CraftyClicks
+ * @package    CraftyClicks
+ * @copyright  CraftyClicks.co.uk
+ */
+-->
+
+<config>
+	<modules>
+		<CraftyClicks>
+			<version>2.3.3</version>
+		</CraftyClicks>
+	</modules>
+	
+	<frontend>
+          <layout>
+              <updates>
+                  <craftyclicks>
+                      <file>craftyclicks.xml</file>
+                  </craftyclicks>
+              </updates>
+          </layout>
+    </frontend>
+
+	<global>		
+		<helpers>
+			<craftyclicks>
+				<class>CraftyClicks_Helper</class>
+			</craftyclicks>
+		</helpers>		
+	</global>
+
+	<default>
+		<general>
+			<craftyclicks>
+				<active>0</active>
+				<model>craftyclicks</model>
+				<access_token>xxxxx-xxxxx-xxxxx-xxxxx</access_token>
+				<button_image></button_image>
+				<button_class>button</button_class>
+				<hide_fields>0</hide_fields>
+				<hide_county>1</hide_county>
+				<clear_result>0</clear_result>
+				<error_class>error</error_class>
+				<first_res_line>----- please select your address ----</first_res_line>
+				<error_msg_1>This postcode could not be found, please try again or enter your address manually</error_msg_1>
+				<error_msg_2>This postcode is not valid, please try again or enter your address manually</error_msg_2>
+				<error_msg_3>Unable to connect to address lookup server, please enter your address manually</error_msg_3>
+				<error_msg_4>An unexpected error occured, please enter your address manually</error_msg_4>
+			</craftyclicks>
+		</general>
+	</default>
+</config>
