@@ -1,0 +1,226 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro - 07/06/12
+ * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
+ * Generated:   2012-06-12 14:40:26
+ * File path:   app/design/frontend/base/default/template/adjnav/layer.phtml
+ * Copyright:   (c) 2012 AITOC, Inc.
+ */
+?>
+<?php
+/*
+ * Adding javascript include
+ */
+if ('ajax' != Mage::app()->getRequest()->getControllerName())
+{
+    if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
+    ?>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-14.js'); ?>"></script>
+    <?php
+    else:
+    ?>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-13.js');?>"></script>
+    <?php
+    endif;
+}
+?>
+
+<input type="hidden" id="adjnav-attr-expand" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show More Attributes')) ?>" />
+<input type="hidden" id="adjnav-attr-collapse" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show Less Attributes')) ?>" />
+<input type="hidden" id="adjnav-attr-val-expand" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show More')) ?>" />
+<input type="hidden" id="adjnav-attr-val-collapse" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show Less')) ?>" />
+
+
+
+
+
+
+
+
+<?php
+    if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
+?>
+
+
+
+
+
+
+
+
+
+<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+    <div class="block block-layered-nav adj-nav">
+
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Shop by')?></span></strong>
+    </div>
+        <div class="block-content">
+		<?php echo $this->getStateHtml() ?>
+        <?php if($this->canShowOptions()): ?>
+
+            <div class="narrow-by">
+            <input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+            <input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+            <input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+            <dl id="narrow-by-list">
+
+            <?php if ($state[1] && $this->bNeedClearAll()): ?>
+<div class="actions adj-clear-all"><a onclick="return false;" class="adj-nav-clearall" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><?php echo $this->__('Clear All') ?></a></div>
+            <?php endif ?>
+
+            <?php $_filters = $this->getFilters() ?>
+                <?php foreach ($_filters as $_filter): ?>
+                <?php if ($_filter->getItemsCount()): ?>
+                <dt class="adj-nav-dt <?php if ($_filter->getIsOther()) : ?>adjnav-attr-other<?php endif ?>">
+                    <?php if ($clearUrl = $_filter->getClearUrl()): ?>
+
+                    <a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear" title="<?php echo $this->__('Remove This Item')?>"><?php echo $this->__('Remove This Item')?></a>
+                    <?php endif ?>
+                    <?php echo $this->__($_filter->getName()) ?>
+                </dt>
+                <dd <?php echo $this->getHeightStyle()?> id="adj-nav-filter-<?php echo $_filter->getVar()?>" class="<?php if ($_filter->getIsOther()) : ?>adjnav-attr-other<?php endif ?>"><?php echo $_filter->getHtml() ?></dd>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </dl>
+            <dl>
+                <?php if ($this->isShowMoreAttributesButton()) : ?>
+                <dd class="adj-nav-dt adjnav-attr-more-dd">
+                    <a href="javascript:void(0);" class="adjnav-attr-more"><?php echo $this->__('Show More Attributes') ?></a>
+                </dd>
+                <?php endif ?>
+            </dl>
+            <script type="text/javascript">
+            decorateDataList('narrow-by-list');
+            adj_nav_init();
+            </script>
+            </div>
+            <?php endif; ?>
+        </div>
+        <div class="adj-nav-progress" style="display:none"></div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+if ('function' == typeof(sns_layer_add_attr))
+{
+    sns_layer_add_attr();
+}
+adj_nav_toolbar_init();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+    else:
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+    <div class="box layered-nav adj-nav">
+        <div class="head">
+            <h3><?php echo $this->__('Shop by')?></h3>
+        </div>
+        <div class="border-creator">
+        <?php if($this->canShowOptions()): ?>
+            <div class="narrow-by">
+            <input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+            <input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+            <input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+
+            <dl id="narrow-by-list">
+            <?php if ($state[1] && $this->bNeedClearAll()): ?>
+<div class="actions adj-clear-all"><a onclick="return false;" class="adj-nav-clearall" href="<?php echo $this->htmlEscape($this->getClearAllUrl())?>"><?php echo $this->__('Clear All') ?></a></div>
+            <?php endif ?>
+            <?php $_filters = $this->getFilters() ?>
+                <?php foreach ($_filters as $_filter): ?>
+                <?php if ($_filter->getItemsCount()): ?>
+                <dt class="adj-nav-dt <?php if ($_filter->getIsOther()) : ?>adjnav-attr-other<?php endif ?>">
+                    <?php if ($clearUrl = $_filter->getClearUrl()): ?>
+
+                    <a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear" title="<?php echo $this->__('Remove This Item')?>"><?php echo $this->__('Remove This Item')?></a>
+                    <?php endif ?>
+                    <?php echo Mage::helper('catalog')->__($_filter->getName()) ?>
+                </dt>
+                <dd <?php echo $this->getHeightStyle()?> id="adj-nav-filter-<?php echo $_filter->getVar()?>" class="<?php if ($_filter->getIsOther()) : ?>adjnav-attr-other<?php endif ?>"><?php echo $_filter->getHtml() ?></dd>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </dl>
+            <dl>
+                <?php if ($this->isShowMoreAttributesButton()) : ?>
+                <dd class="adj-nav-dt adjnav-attr-more-dd">
+                    <a href="javascript:void(0);" class="adjnav-attr-more"><?php echo $this->__('Show More Attributes') ?></a>
+                </dd>
+                <?php endif ?>
+            </dl>
+            <script type="text/javascript">
+            decorateDataList('narrow-by-list');
+            adj_nav_init();
+            </script>
+            </div>
+            <?php endif; ?>
+        </div>
+        <div class="adj-nav-progress" style="display:none"></div>
+    </div>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+    endif;
+?>
+
+<script type="text/javascript">
+
+adjnavInitFeaturedValues();
+adjnavInitFeaturedAttributes();
+
+</script>
+
+<?php if(Mage::helper('adjnav')->isPageAutoload()):?>
+    
+<script type="text/javascript">
+    adj_nav_page_autoload_init();
+</script>
+
+<?php endif; ?>

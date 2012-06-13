@@ -1,0 +1,46 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro - 07/06/12
+ * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
+ * Generated:   2012-06-12 14:40:26
+ * File path:   app/design/frontend/default/default/template/adjnav/filter_attribute.phtml
+ * Copyright:   (c) 2012 AITOC, Inc.
+ */
+?>
+<?php 
+$items        = $this->getItemsArray();
+$displayStyle = $this->getColumnsNum();
+?>
+<ol>
+<?php if ($displayStyle <=1): // one column ?>
+    <?php foreach ($items as $_key => $_item): ?>
+        <li class="<?php echo $this->getFeaturedItemStyle($_key) ?>"><?php echo $_item?></li>
+    <?php endforeach ?>
+<?php elseif (3 == $displayStyle): // only images ?>
+<li>
+    <div class="adj-icons-filter-one-column">
+    <?php foreach ($items as $_item) echo $_item ?>
+    </div>
+</li>
+<?php else: $n = count($items); $middle = ceil($n/2); //two columns ?>
+<li>
+    <div class="adj-icons-filter-two-column">
+        <?php for ($i = 0; $i < $middle; ++$i) : ?>
+            <div class="<?php echo $this->getFeaturedItemStyle($i) ?>"><?php echo $items[$i] ?></div> 
+        <?php endfor ?>
+    </div>
+    <div class="adj-icons-filter-two-column">
+        <?php for ($i = $middle; $i < $n; ++$i) : ?>
+            <div class="<?php echo $this->getFeaturedItemStyle($i) ?>"><?php echo $items[$i] ?></div>
+        <?php endfor ?>
+    </div>
+</li>
+<?php endif ?>
+
+<?php if ($this->isShowMoreButton()) : ?>
+<li class="attr-val-more-li-<?php echo $this->getVar() ?>">
+    <a href="javascript:void(0);" class="attr-val-more" rel="<?php echo $this->getVar() ?>"><?php echo $this->__('Show more') ?></a>
+</li>
+<?php endif ?>
+</ol>
