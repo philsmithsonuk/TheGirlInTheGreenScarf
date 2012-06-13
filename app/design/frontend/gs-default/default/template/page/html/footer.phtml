@@ -1,0 +1,40 @@
+<div id="footer_1">
+	<div class="pcontent">
+		<form action="" method="get">
+			<span>Sign up for latest news from The Girl in the Green Scarf</span>
+			<input type="text" value="Enter your email address here" />
+			<input name="submit" type="button" id="submit" value="Submit" />
+		</form>
+	</div>
+</div>
+<div id="footer_2">
+	<ul>
+		<li><?php echo $this->getCopyright() ?><span>|</span></li>
+		<?php echo $this->getChildHtml('cms_footer_links') ?>
+	</ul>
+	<div class="social_icons">
+		<div class="icons_block"><img src="images/social_in.png" alt="" /></div>
+		<div class="icons_block"><img src="images/social_twitter.png" alt="" /></div>
+		<div class="icons_block" style="padding:0px;"><img src="images/social_fb.png" alt="" /></div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<?php if(false): ?>
+<div class="footer-container">
+    <div class="footer">
+        <?php echo $this->getChildHtml('bottomContainer') ?>
+        <div class="f-right">
+            <img src="<?php echo $this->getSkinUrl('images/media/footer_callout.png');?>" class="footer-callout" alt="" />
+            <?php echo $this->getChildHtml('store_switcher') ?>
+        </div>
+        <div class="f-left">
+            <?php echo $this->getChildHtml('cms_footer_links') ?>
+            <?php echo $this->getChildHtml('footer_links') ?>
+            <?php echo $this->getChildHtml('newsletter') ?>
+            <p class="bugs"><?php echo $this->__('Help Us to Keep Magento Healthy') ?> - <a href="http://www.magentocommerce.com/bug-tracking" onclick="this.target='_blank'"><strong><?php echo $this->__('Report All Bugs') ?></strong></a> <?php echo $this->__('(ver. %s)', Mage::getVersion()) ?></p>
+            <address><?php echo $this->getCopyright() ?></address>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

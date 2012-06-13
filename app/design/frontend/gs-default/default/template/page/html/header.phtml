@@ -1,0 +1,43 @@
+<div class="logo">
+	<?php if ($this->getIsHomePage()):?>
+		<h1><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+	<?php else:?>
+		<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+	<?php endif?>
+</div>
+<div class="top_links">
+	<?php echo $this->getChildHtml('topLinks') ?>
+	<div class="shop_bag"><?php echo $this->__("SHOPPING BAG  - %d ITEMS",0); ?></div>
+</div>
+<div class="navigation">
+	<ul id="nav">
+		<li><a href="#"<?php if ($this->getIsHomePage()):?> class="active"<?php endif; ?>>HOME</a></li>
+		<?php echo $this->getChildHtml('topMenu') ?>
+	</ul>
+	<div class="search">
+		<form action="" method="get">
+			<input name="" type="text" />
+			<input name="search" type="button" id="search" value="Search" />
+		</form>
+	</div>
+</div>
+<?php if(false): ?>
+<div class="header-container">
+    <div class="header">
+        <?php if ($this->getIsHomePage()):?>
+        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+        <?php else:?>
+        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+        <?php endif?>
+        <p class="top-promo" title="<?php echo $this->__('Free Shipping on orders over 50$'); ?>"><?php echo $this->__('Free Shipping on orders over 50$'); ?></p>
+        <?php echo $this->getChildHtml('topMenu') ?>
+    </div>
+    <div class="quick-access">
+        <?php echo $this->getChildHtml('store_language') ?>
+        <p class="welcome-msg"><?php echo $this->getWelcome()?></p>
+        <?php echo $this->getChildHtml('topLinks') ?>
+    </div>
+    <?php echo $this->getChildHtml('topBar') ?>
+    <?php echo $this->getChildHtml('topContainer'); ?>
+</div>
+<?php endif; ?>

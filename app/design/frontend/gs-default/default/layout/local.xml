@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<layout>
+	
+	<default>
+		<reference name="root">
+			<reference name="top.links">
+				<!-- Add the Signup Link to top links in the header block -->
+				<action method="addLink" translate="label title">
+					<label>SIGN UP FOR EMAIL</label>
+					<url helper="core/url/getHomeUrl"/>
+					<title>SIGN UP FOR EMAIL</title>
+					<prepare/>
+					<urlParams/>
+					<position>99</position>
+					<liParams/>
+					<beforeText></beforeText>
+					<afterText><![CDATA[<span>|</span>]]></afterText>
+				</action>
+				<remove name="wishlist_link"/>
+				<remove name="checkout_cart_link"/>
+			</reference>
+		</reference>
+	</default>
+
+	<customer_logged_out>
+		<!-- Removes 'Log In' link - Default position: 60 -->
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+		</reference>
+	</customer_logged_out>
+
+	<customer_logged_in>
+		<!-- Removes 'Log Out' link - Default position: 60 -->
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLogoutUrl"/></action>
+		</reference>
+	</customer_logged_in>
+	
+</layout>
