@@ -16,9 +16,20 @@
 			<?php echo $this->getChildHtml('header') ?>
 		</div>
 		<div id="main_wrapper">
-			<div class="w898">
-				<?php echo $this->getChildHtml('global_notices') ?>
-				<?php echo $this->getChildHtml('content') ?>
+			<?php echo $this->getChildHtml('global_notices') ?>
+			<div class="w898">			
+				
+				<?php echo $this->getChildHtml('breadcrumbs') ?>
+				
+				<div class="product_list">										
+					<?php echo $this->getChildHtml('left') ?>
+					
+					<div class="product_list_right">
+						<?php echo $this->getChildHtml('global_messages') ?>
+						<?php echo $this->getChildHtml('content') ?>
+					</div>
+				</div>
+				
 				<div class="clear"></div>
 			</div>
 		</div>
@@ -29,25 +40,5 @@
 	</div>
 </div>
 <?php echo $this->getChildHtml('before_body_end') ?>
-<?php if(false): ?>
-		<div class="wrapper">
-			<?php echo $this->getChildHtml('global_notices') ?>
-			<div class="page">
-				<?php echo $this->getChildHtml('header') ?>
-				<div class="main-container col1-layout">
-					<div class="main">
-						<?php echo $this->getChildHtml('breadcrumbs') ?>
-						<div class="col-main">
-							<?php echo $this->getChildHtml('global_messages') ?>
-							<?php echo $this->getChildHtml('content') ?>
-						</div>
-					</div>
-				</div>
-				<?php echo $this->getChildHtml('footer') ?>
-				<?php echo $this->getChildHtml('before_body_end') ?>
-			</div>
-		</div>
-		<?php echo $this->getAbsoluteFooter() ?>
-<?php endif; ?>
 </body>
 </html>

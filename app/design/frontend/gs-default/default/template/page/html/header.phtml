@@ -2,7 +2,9 @@
 	<?php if ($this->getIsHomePage()):?>
 		<h1><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
 	<?php else:?>
-		<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+		<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>">
+			<strong><?php //echo $this->getLogoAlt() ?></strong>
+			<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
 	<?php endif?>
 </div>
 <div class="top_links">
@@ -21,6 +23,7 @@
 		</form>
 	</div>
 </div>
+
 <?php if(false): ?>
 <div class="header-container">
     <div class="header">
