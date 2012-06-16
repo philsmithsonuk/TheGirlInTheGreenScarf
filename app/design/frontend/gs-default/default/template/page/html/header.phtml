@@ -9,7 +9,9 @@
 </div>
 <div class="top_links">
 	<?php echo $this->getChildHtml('topLinks') ?>
-	<div class="shop_bag"><?php echo $this->__("SHOPPING BAG  - %d ITEMS",0); ?></div>
+	<div id="shop-bag" class="shop_bag">
+		<?php echo $this->getChildHtml('cart_sidebar'); ?>
+	</div>
 </div>
 <div class="navigation">
 	<ul id="nav">
@@ -17,16 +19,31 @@
 		<?php echo $this->getChildHtml('topMenu') ?>
 	</ul>
 	<div class="search">
-		<!--
-		<form action="" method="get">
-			<input name="" type="text" />
-			<input name="search" type="button" id="search" value="Search" />
-		</form>
-		-->
 		<?php echo $this->getChildHtml('topSearch'); ?>
 	</div>
 </div>
-
+<script type="text/javascript">
+	//<![CDATA[
+	document.observe("dom:loaded", function(){
+		$('shop-bag').observe('click', function(e,el) {
+			if (el = e.findElement('.status')) {
+				if(el.hasClassName('show')){
+					Effect.SlideUp('header-bag-items', { duration: 0.5 });
+				} else {
+					Effect.SlideDown('header-bag-items', { duration: 0.5 });
+				}
+				el.toggleClassName('show');
+				e.stop();
+			}
+			if (el = e.findElement('.btn-close')) {
+				Effect.SlideUp('header-bag-items', { duration: 0.5 });
+				$('header-bag-status').removeClassName('show');
+				e.stop();
+			}
+		});
+	});
+	//]]>
+</script>
 <?php if(false): ?>
 <div class="header-container">
     <div class="header">

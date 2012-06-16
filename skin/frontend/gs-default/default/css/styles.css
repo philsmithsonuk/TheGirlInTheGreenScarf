@@ -128,11 +128,120 @@ input[type="button"] {
 	padding:0px 5px;
 }
 #header_wrapper .shop_bag{
+	float:left;
+	color:#FFFFFF;
+}
+#header_wrapper .shop_bag .block-subtitle{
+	margin-bottom: 3px;
+}
+/*#header_wrapper .shop_bag{*/
+#header_wrapper .shop_bag .status{
 	padding:1px 5px;
 	text-align:center;
 	background:#77a33f;
+	cursor: pointer;
 	float:left;
 	color:#fff;
+	width:160px;
+	position:relative;
+}
+#header_wrapper .shop_bag .success-msg {
+    color: #FFFFFF;
+    line-height: 1.2em;
+    padding: 0 10px 10px;
+    text-transform:none;
+}
+#header_wrapper .shop_bag .block-cart{
+	position:relative;
+}
+#header_wrapper .shop_bag .block-cart .block-cart-content{
+	background:#77a33f;
+	position:absolute;
+	top:17px;
+	right:0;
+	width:316px;
+	z-index:801;
+}
+#header_wrapper .shop_bag .status .arrow{
+	background: url(../images/arrow_basket.png) no-repeat scroll center center transparent;
+	position:absolute;
+	right:0;
+	top:3px;
+	width:22px;
+	height:12px;
+}
+#header_wrapper .shop_bag .show .arrow{
+	background: url(../images/arrow_basket_up.png) no-repeat scroll center center transparent;
+}
+#header_wrapper .shop_bag .btn-close{
+	background:#90BF53;
+	cursor:pointer;
+	line-height: 12px;
+	padding: 3px 12px;
+	position: absolute;
+	right: 6px;
+	top: 6px;
+}
+#header_wrapper .shop_bag .last-items {
+	display: block;
+	font-size: 0.9em;
+	padding: 8px 0 0 10px;
+	text-transform: uppercase;
+	width: 100%;
+}
+ol#cart-item-list {
+	list-style:none outside none;
+	width:312px;
+	z-index:100;
+}
+ol#cart-item-list li{
+	background:#90BF53;
+	color:#FFFFFF;
+	display:inline;
+	float:left;
+	margin: 0 5px 5px;
+	padding:5px;
+	position:relative;
+	width:296px;
+}
+ol#cart-item-list .product-image{
+	float:left;
+}
+ol#cart-item-list .product-details{
+	display:inline;
+	float:left;
+	margin:0 0 0 5px;
+	width:149px;
+}
+#header_wrapper .shop_bag .subtotal {
+	background: #90BF53;
+	display: inline;
+	float: left;
+	font-size: 1.4em;
+	margin: 0 5px 5px;
+	padding: 5px 6px;
+	text-align: right;
+	text-transform: uppercase;
+	width: 295px;
+}
+#header_wrapper .shop_bag .actions {
+	float: left;
+	margin: 0 5px 5px;
+	width: 306px;
+}
+#header_wrapper .shop_bag .actions .button {
+    float: right;
+    height: 48px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+    width: 150px;
+}
+#header_wrapper .shop_bag .actions a.button {
+    float: left;
+    margin: 0 6px 0 0;
+    padding: 0;
 }
 #header_wrapper .navigation{
 	position:absolute;

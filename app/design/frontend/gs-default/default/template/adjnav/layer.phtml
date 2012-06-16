@@ -103,7 +103,11 @@ if ('function' == typeof(sns_layer_add_attr))
 {
     sns_layer_add_attr();
 }
-adj_nav_toolbar_init();
+
+document.observe("dom:loaded", function() {
+   adj_nav_toolbar_init();
+});
+
 </script>
 
 <?php
