@@ -183,6 +183,16 @@ input[type="button"] {
 	color:#606163;
 	background:url(../images/graydirt_sprite_png.png) no-repeat 0 0;
 }
+#header_wrapper .search button{
+	width:67px;
+	height:25px;
+	font-size:11px;
+	font-weight:700;
+	color:#606163;
+	background:url(../images/graydirt_sprite_png.png) no-repeat 0 0;
+	border: medium none;
+}
+
 /*------------------------header ends------------------------*/
 #main_wrapper {
 	background:#fff;
