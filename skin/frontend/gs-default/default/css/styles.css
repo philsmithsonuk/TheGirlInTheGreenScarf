@@ -588,6 +588,28 @@ ul.sort_list li .price_product{
 	color:#606163;
 	background:url(../images/graydirt_sprite_png.png) no-repeat 0 0;
 }
+/**
+ * Added by Awesemo
+ * override default error message container for newsletter subscription
+ */
+#footer_1 .pcontent button{
+	width:67px;
+	height:25px;
+	font-size:11px;
+	font-weight:700;
+	color:#606163;
+	background:url(../images/graydirt_sprite_png.png) no-repeat 0 0;
+	border: medium none;
+}
+#footer_1 .pcontent .subscription-email, 
+#footer_1 .pcontent .subscription-action {
+	float:left;
+}
+#footer_1 .pcontent .validation-advice {
+	color: #E6D3A9;
+	width: 216px;
+}
+/**********************************************************************/
 #footer_2{
 	padding:12px 0px;
 	color:#fff;

@@ -19,7 +19,14 @@
 				<remove name="wishlist_link"/>
 				<remove name="checkout_cart_link"/>
 			</reference>
+			<reference name="footer">
+				<block type="newsletter/subscribe" before="-" name="newsletter" template="newsletter/subscribe.phtml"/>
+			</reference>
 		</reference>
+		<reference name="lefts">
+			<action method="unsetChild"><name>left.newsletter</name></action>
+		</reference>
+
 	</default>
 
 	<customer_logged_out>
@@ -35,5 +42,5 @@
 			<action method="removeLinkByUrl"><url helper="customer/getLogoutUrl"/></action>
 		</reference>
 	</customer_logged_in>
-	
+
 </layout>

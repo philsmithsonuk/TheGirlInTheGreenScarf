@@ -38,7 +38,6 @@ Default layout, loads most of the pages
         <reference name="left">
             <block type="newsletter/subscribe" name="left.newsletter" template="newsletter/subscribe.phtml"/>
         </reference>
-
     </default>
 
 <!--
