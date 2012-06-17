@@ -119,8 +119,11 @@ class AdjustWare_Nav_Block_Catalog_Layer_Filter_Attribute extends Mage_Catalog_B
             }
 
             $qty = '';
+			
+			/*
             if (!$this->getHideQty())
                 $qty =  '(' .  $_item->getCount() .')';
+			*/
 
             $label = $_item->getLabel();
             if ($iconsOnly){
