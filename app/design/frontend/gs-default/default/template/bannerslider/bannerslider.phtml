@@ -1214,11 +1214,11 @@ $j(document).ready(function(){
 				</li>
 			<?php endforeach;?> 
 			</ul>
-	<ul class="content-list-nav">
-	<?php $i2 = 0; foreach ($bannerCollection as $banner2): $i2++; ?> 	
-		<li class="<?php echo 'nav-'.$i2;?>"><a id="<?php echo 'nav-'.$i2;?>" href="javascript://"><img alt=""  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner2['filename']?>"title="<?php echo $banner2['title']?>" alt="<?php echo $banner2['title']?>" style="width:43px;height:42px;"></a></li>
-	<?php endforeach;?>
-	</ul> 
+		<ul class="content-list-nav">
+		<?php $i2 = 0; foreach ($bannerCollection as $banner2): $i2++; ?> 	
+			<li class="<?php echo 'nav-'.$i2;?>"><a id="<?php echo 'nav-'.$i2;?>" href="javascript://"><img alt=""  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner2['filename']?>"title="<?php echo $banner2['title']?>" alt="<?php echo $banner2['title']?>" style="width:43px;height:42px;"></a></li>
+		<?php endforeach;?>
+		</ul> 
 	</div> 
 <?php elseif ($listStyle == ''):?>
 	<?php echo ("Please Upload Banner Or Configuration"); ?>
