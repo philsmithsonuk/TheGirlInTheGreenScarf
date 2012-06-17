@@ -134,6 +134,11 @@ input[type="button"] {
 #header_wrapper .shop_bag .block-subtitle{
 	margin-bottom: 3px;
 }
+/*
+#header_wrapper .shop_bag .show {
+	border-color:#ff0000;
+}
+*/
 /*#header_wrapper .shop_bag{*/
 #header_wrapper .shop_bag .status{
 	padding:1px 5px;
@@ -151,13 +156,20 @@ input[type="button"] {
     padding: 0 10px 10px;
     text-transform:none;
 }
+#header_wrapper .shop_bag .empty-msg {
+    color: #FFFFFF;
+    line-height: 1.2em;
+    padding: 10px;
+    text-transform:none;
+    text-align: center;
+}
 #header_wrapper .shop_bag .block-cart{
 	position:relative;
 }
 #header_wrapper .shop_bag .block-cart .block-cart-content{
 	background:#77a33f;
 	position:absolute;
-	top:17px;
+	top:20px;
 	right:0;
 	width:316px;
 	z-index:801;
@@ -185,9 +197,21 @@ input[type="button"] {
 #header_wrapper .shop_bag .last-items {
 	display: block;
 	font-size: 0.9em;
+	font-weight: bold;
 	padding: 8px 0 0 10px;
 	text-transform: uppercase;
 	width: 100%;
+}
+#header_wrapper .actions a.button span span {
+	font-size: 13px;
+	height: 50px;
+	line-height: 50px;
+}
+#header_wrapper .actions .cart-btn {
+	background:#CCCCCC;
+}
+#header_wrapper .actions .cart-btn:hover{
+	background:#FFFFFF;
 }
 ol#cart-item-list {
 	list-style:none outside none;
@@ -208,10 +232,52 @@ ol#cart-item-list .product-image{
 	float:left;
 }
 ol#cart-item-list .product-details{
+	color:#FFFFFF;
 	display:inline;
 	float:left;
 	margin:0 0 0 5px;
 	width:149px;
+}
+ol#cart-item-list .product-details .btn-remove {
+    color: #77A33F;
+    display: block;
+    float: right;
+    position: absolute;
+    right: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    top: 5px;
+    font-weight:bold;
+}
+ol#cart-item-list .product-details a,ol#cart-item-list .product-details .btn-remove:hover{
+	color: #FFFFFF;
+}
+ol#cart-item-list .item-options {
+    margin: 0;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+ol#cart-item-list .item-options dt {
+    font-size: 10px;
+    line-height: 1.1em;
+    margin: 0 0 2px;
+    width: 60px;
+    font-weight:bold;
+}
+.item-options dt {
+    clear: left;
+    float: left;
+    margin: 0 0 4px;
+    width: 100px;
+}
+ol#cart-item-list .item-options dd {
+    font-size: 10px;
+    line-height: 1.1em;
+    width: 80px;
+}
+.item-options dd {
+    float: left;
+    width: 100px;
 }
 #header_wrapper .shop_bag .subtotal {
 	background: #90BF53;
@@ -237,11 +303,19 @@ ol#cart-item-list .product-details{
     padding: 0;
     text-align: center;
     width: 150px;
+    border:none;
+    cursor:pointer;
+    font-size:13px;
 }
 #header_wrapper .shop_bag .actions a.button {
     float: left;
     margin: 0 6px 0 0;
     padding: 0;
+}
+#header_wrapper .shop_bag .actions button:hover,
+#header_wrapper .shop_bag .actions button:focus,
+#header_wrapper .shop_bag .actions button:active{
+	background:#FFFFFF;
 }
 #header_wrapper .navigation{
 	position:absolute;

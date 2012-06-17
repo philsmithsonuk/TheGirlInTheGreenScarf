@@ -24,12 +24,16 @@
 				<span class="label"><?php echo $this->__('Total') ?> </span><span class="price"><?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?></span>
 			</p>
 			<div class="actions">
-				<a href="<?php echo $this->getUrl('checkout/cart') ?>" class="button"><?php echo $this->__('Go to Cart') ?></a>
+				<a href="<?php echo $this->getUrl('checkout/cart') ?>" class="button cart-btn"><span><span><?php echo $this->__('Go to Cart') ?></span></span></a>
 				<?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
 					<button type="button" title="<?php echo $this->__('Checkout') ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
 				<?php endif; ?>
 			</div>
 			<script type="text/javascript">decorateList('cart-item-list', 'none-recursive')</script>
+			<?php else: ?>
+			<p class="empty-msg">
+				<?php echo $this->__('You have no items in your shopping cart.') ?>
+			</p>
 			<?php endif; ?>
 		</div>
 	</div>
