@@ -54,7 +54,14 @@
 				e.stop();
 			}
 			if (el = e.findElement('.btn-close')) {
-				Effect.SlideUp('header-bag-items', { duration: 0.5 });
+				Effect.SlideUp('header-bag-items', { duration: 0.5,
+					beforeStart: function(){
+						bagStatusAnimating = true;
+					},
+					afterFinish: function(){
+						bagStatusAnimating = false;
+					}
+				});
 				$('header-bag-status').removeClassName('show');
 				e.stop();
 			}
