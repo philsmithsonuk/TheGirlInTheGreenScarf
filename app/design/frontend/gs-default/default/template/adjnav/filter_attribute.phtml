@@ -1,0 +1,30 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro - 07/06/12
+ * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
+ * Generated:   2012-06-12 14:40:26
+ * File path:   app/design/frontend/base/default/template/adjnav/filter_attribute.phtml
+ * Copyright:   (c) 2012 AITOC, Inc.
+ */
+?>
+<?php 
+$items        = $this->getItemsArray();
+$displayStyle = $this->getColumnsNum();
+
+?>
+
+<?php if ($displayStyle <=1): // one column ?>
+	<?php foreach ($items as $_key => $_item): ?>
+		<li><?php echo $_item?></li>
+	<?php endforeach ?>
+<?php endif ?>
+
+<?php /* ?>
+<?php if ($this->isShowMoreButton()) : ?>
+<li class="attr-val-more-li-<?php echo $this->getVar() ?>">
+	<a href="javascript:void(0);" class="attr-val-more" rel="<?php echo $this->getVar() ?>"><?php echo $this->__('Show more') ?></a>
+</li>
+<?php endif ?>
+<?php */ ?>
+	
