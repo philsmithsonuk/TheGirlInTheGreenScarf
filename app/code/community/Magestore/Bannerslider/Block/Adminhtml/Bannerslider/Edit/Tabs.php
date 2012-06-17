@@ -19,11 +19,11 @@ class Magestore_Bannerslider_Block_Adminhtml_Bannerslider_Edit_Tabs extends Mage
           'content'   => $this->getLayout()->createBlock('bannerslider/adminhtml_bannerslider_edit_tab_form')->toHtml(),
       ));
 	  
-	  $this->addTab('display_section',array(
-			'label'		=> Mage::helper('bannerslider')->__('Categories'),
-			'url'       => $this->getUrl('*/*/categories', array('_current' => true)),
-            'class'     => 'ajax',
-	  ));
+	# $this->addTab('display_section',array(
+	#		'label'		=> Mage::helper('bannerslider')->__('Categories'),
+	#		'url'       => $this->getUrl('*/*/categories', array('_current' => true)),
+    #       'class'     => 'ajax',
+	# ));
      
       return parent::_beforeToHtml();
   }
