@@ -13,16 +13,10 @@
 </div>
 <div class="navigation">
 	<ul id="nav">
-		<li><a href="#"<?php if ($this->getIsHomePage()):?> class="active"<?php endif; ?>>HOME</a></li>
+		<li><a href="<?php echo $this->getUrl('') ?>"<?php if ($this->getIsHomePage()):?> class="active"<?php endif; ?>><?php echo $this->__('HOME')?></a></li>
 		<?php echo $this->getChildHtml('topMenu') ?>
 	</ul>
-	<div class="search">
-		<!--
-		<form action="" method="get">
-			<input name="" type="text" />
-			<input name="search" type="button" id="search" value="Search" />
-		</form>
-		-->
+	<div class="search">		
 		<?php echo $this->getChildHtml('topSearch'); ?>
 	</div>
 </div>
