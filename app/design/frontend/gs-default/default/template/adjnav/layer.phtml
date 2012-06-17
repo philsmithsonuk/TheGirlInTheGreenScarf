@@ -63,20 +63,21 @@ if ('ajax' != Mage::app()->getRequest()->getControllerName())
 				
 				<?php if(count($_filters) > 1) : ?>
 					<h3><?php echo $this->__('CHOOSE'); ?></h3>					
-					<ul id="narrow-by-list" class="selector_list">
+					
 						
 						<?php foreach ($_filters as $_filter): ?>
 							<?php if ($_filter->getItemsCount()): ?>
 							
 								<?php if( strtolower($_filter->getName()) == 'price' || strtolower($_filter->getName()) == 'category' ) continue; ?>
 							
-								<li><span><?php echo $this->__($_filter->getName()) ?></span></li>
-								
+							<ul id="narrow-by-list" class="selector_list">
+								<li><span><?php echo $this->__($_filter->getName()) ?></span></li>								
 								<?php echo $_filter->getHtml() ?>
+							</ul>
 							
 							<?php endif; ?>
 						<?php endforeach; ?>
-					</ul>
+					
 					
 					<script type="text/javascript">
 						decorateDataList('narrow-by-list');
