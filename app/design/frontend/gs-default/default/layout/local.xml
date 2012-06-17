@@ -56,4 +56,10 @@
 		</reference>
 	</customer_logged_in>
 
+    <catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/gs-2columns-right.phtml</template></action>
+        </reference>
+    </catalog_product_view>
+
 </layout>
