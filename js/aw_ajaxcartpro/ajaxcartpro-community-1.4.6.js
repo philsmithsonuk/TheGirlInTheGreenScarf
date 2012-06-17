@@ -140,6 +140,20 @@ function updateCartView(resp){
 
         addEffectACP(__cartObj, aw_ajaxcartpro_cartanim);
         truncateOptions();
+        /**
+         * Added by Awesemo
+         * Trigger Slide Down Cart Status in Header
+         */
+        if(!__cartObj.parentElement.hasClassName('show')){
+			Effect.SlideDown('header-bag-items', { duration: 0.5, 
+				beforeStart: function(){
+					bagStatusAnimating = true;
+				},
+				afterFinish: function(){
+					bagStatusAnimating = false;
+				}
+			});
+		}
     }
     updateDeleteLinks();
     updateTopLinks(resp);

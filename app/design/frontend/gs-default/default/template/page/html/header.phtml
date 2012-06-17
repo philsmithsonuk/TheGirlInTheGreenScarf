@@ -24,19 +24,44 @@
 </div>
 <script type="text/javascript">
 	//<![CDATA[
+	var bagStatusAnimating = false;
 	document.observe("dom:loaded", function(){
 		$('shop-bag').observe('click', function(e,el) {
+			if (bagStatusAnimating) {
+				return false;
+			}
 			if (el = e.findElement('.status')) {
 				if(el.hasClassName('show')){
-					Effect.SlideUp('header-bag-items', { duration: 0.5 });
+					Effect.SlideUp('header-bag-items', { duration: 0.5, 
+						beforeStart: function(){
+							bagStatusAnimating = true;
+						},
+						afterFinish: function(){
+							bagStatusAnimating = false;
+						}
+					});
 				} else {
-					Effect.SlideDown('header-bag-items', { duration: 0.5 });
+					Effect.SlideDown('header-bag-items', { duration: 0.5,
+						beforeStart: function(){
+							bagStatusAnimating = true;
+						},
+						afterFinish: function(){
+							bagStatusAnimating = false;
+						}
+					});
 				}
 				el.toggleClassName('show');
 				e.stop();
 			}
 			if (el = e.findElement('.btn-close')) {
-				Effect.SlideUp('header-bag-items', { duration: 0.5 });
+				Effect.SlideUp('header-bag-items', { duration: 0.5,
+					beforeStart: function(){
+						bagStatusAnimating = true;
+					},
+					afterFinish: function(){
+						bagStatusAnimating = false;
+					}
+				});
 				$('header-bag-status').removeClassName('show');
 				e.stop();
 			}
