@@ -16,7 +16,10 @@ $displayStyle = $this->getColumnsNum();
 
 <?php if ($displayStyle <=1): // one column ?>
 	<?php foreach ($items as $_key => $_item): ?>
-		<li><?php echo $_item?></li>
+		<li>
+			<?php echo $_item?>
+			<div class="clear"></div>
+		</li>
 	<?php endforeach ?>
 <?php endif ?>
 
