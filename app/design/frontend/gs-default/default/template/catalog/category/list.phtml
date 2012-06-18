@@ -30,7 +30,7 @@
 				<div class="img_product_category">
 					<img src="<?php echo $_imgUrl; ?>" alt="<?php echo $this->htmlEscape($cur_category->getName()) ?>" />
 				</div>
-				<div class="catproduct_name"><a href="#"><?php echo $this->htmlEscape($cur_category->getName()) ?></a></div>
+				<div class="catproduct_name"><a href="<?php echo $this->getCategoryUrl($cur_category)?>"><?php echo $this->htmlEscape($cur_category->getName()) ?></a></div>
 				<div class="catproduct_desc"><?php echo $cur_category->getDescription() ?></div>
 			</li>	  
 			<?php endif; ?>
