@@ -1123,6 +1123,9 @@ $j(document).ready(function(){
 <?php elseif ($listStyle == '6'):?> 
 	<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannerslider/jquery-1.4.2.min.js') ?>"></script>
 	<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannerslider/jcarousel.js') ?>"></script> 
+	<script type="text/javascript">
+		var $j = jQuery.noConflict(); 
+	</script>
 		  <style type="text/css">
 		#main-banner-slider .jcarousel-container-horizontal {
 			width: 896px;
@@ -1139,15 +1142,19 @@ $j(document).ready(function(){
 		.rotating_image ul li .view_prod a {
 			display: inline !important;
 		}
+		#content-list li{
+			width:896px;
+		}
 	</style>
-	<script type="text/javascript">
-		var $j = jQuery.noConflict(); 
+	<script type="text/javascript"> 
 		$j(document).ready(function(){
 			 $j("#main-banner-slider #content-list").jcarousel({
 				 scroll: 1,
-				 auto: 5,
-				 wrap: 'circular',
-				 easing: 'swing',
+				 start: 1,
+				 auto: <?php echo (count($bannerCollection) > 1) ? '5': '0';?>,
+				 wrap: '<?php echo (count($bannerCollection) > 1) ? 'circular' : 'null';?>',
+				 easing: 'linear',
+				 animation: 'slow',
 				 initCallback: _initCallback,
 				 itemLoadCallback: _itemLoadCallback,
 				 buttonNextHTML: null,
@@ -1174,19 +1181,18 @@ $j(document).ready(function(){
 				 }
 			 }
 			 carousel.pause = function () {
-				 carousel.paused = true;
+				 carousel.paused = true; 
 				 carousel.stopAuto();
 			 };
 			 carousel.play = function () {
-				 carousel.paused = false;
+				 carousel.paused = false; 
 				 carousel.startAuto();
-			 };
-			 $j('li.jcarousel-item').mouseover(function () {
-				 carousel.pause();
-			 });
-			 $j('li.jcarousel-item').mouseout(function () {
-				 carousel.play();
-			 });
+			 }; 
+			 carousel.clip.hover(function() {
+				carousel.stopAuto();
+			}, function() {
+				carousel.startAuto();
+			}); 
 		 }
 		 carousel.play();
 	 }
@@ -1203,20 +1209,20 @@ $j(document).ready(function(){
 			<ul id="content-list">
 				<?php $i = 0; foreach ($bannerCollection as $banner): $i++; ?>
 				<li rel="<?php echo 'nav-'.$i;?>">
-					  <div class="img_featured"><img alt="" style="width:275px;height:374px;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner['filename']?>"></div>
+					  <div class="img_featured">
+						<img alt="" style="width:275px;height:374px;" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner['filename']?>"></div>
 					  <div class="content_featured">
 						<h2><?php echo str_replace('/','<span>/</span>',$banner['title']);?></h2>
 						<h3><?php echo $banner['sub_title'];?></h3>
 						<p><?php echo $banner['banner_content'];?></p>
 						<div class="rad_8 view_prod"><a href="<?php echo $banner['weblink'];?>"><?php echo $banner['button_text'];?></a></div>
-					  </div>
-				 
+					  </div> 
 				</li>
 			<?php endforeach;?> 
 			</ul>
 		<ul class="content-list-nav">
 		<?php $i2 = 0; foreach ($bannerCollection as $banner2): $i2++; ?> 	
-			<li class="<?php echo 'nav-'.$i2;?>"><a id="<?php echo 'nav-'.$i2;?>" href="javascript://"><img alt=""  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner2['filename']?>"title="<?php echo $banner2['title']?>" alt="<?php echo $banner2['title']?>" style="width:43px;height:42px;"></a></li>
+			<li class="<?php echo 'nav-'.$i2;?>"><a id="<?php echo 'nav-'.$i2;?>" href="javascript://"><img alt=""  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $banner2['thumbnail']?>"title="<?php echo $banner2['title']?>" alt="<?php echo $banner2['title']?>" style="width:43px;height:42px;"></a></li>
 		<?php endforeach;?>
 		</ul> 
 	</div> 
