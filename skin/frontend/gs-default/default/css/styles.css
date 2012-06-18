@@ -736,13 +736,108 @@ ul.sort_list li .img_product{
 ul.sort_list li .name_product{
 	color:#79a240;
 }
-ul.sort_list li .name_product a{
+ul.sort_list li .name_product a {
 	color:#79a240;
-	display:block;
 }
-ul.sort_list li .price_product{
+ul.sort_list li .name_product a:hover {
+	text-decoration:underline;
+}
+ul.sort_list li .price_product {
 	font-size:11px;
 }
+ul.sort_list li .img_product_category {
+	width:188px;
+	height:188px;
+	overflow:hidden;
+	border:1px solid #ccc;
+	padding:0px 0px;
+	text-align:center;
+	margin:0px 0px 7px 0px;
+}
+ul.sort_list li .catproduct_name {
+	color:#79a240;
+	font-size:14px;
+}
+ul.sort_list li .catproduct_name a {
+	color:#79a240;
+}
+ul.sort_list li .catproduct_name a:hover {
+	text-decoration:underline;
+}
+ul.sort_list li .catproduct_desc {
+	font-size:11px;
+}
+ul.dbrands {
+	list-style:none;
+}
+ul.dbrands li {
+	float:left;
+	width:435px;
+	min-height:165px;
+	height:auto !important;
+	height:165px;
+	margin:0px 7px 15px;
+}
+ul.dbrands li .logo_brands {
+	width:112px;
+	height:112px;
+	border:1px solid #ccc;
+	margin:0px 15px 0px 0px;
+	float:left;
+}
+ul.dbrands li .logo_desc {
+	float:left;
+	width:305px;
+}
+ul.dbrands li .logo_desc p {
+	font-size:11px;
+	line-height:1.4em;
+}
+ul.dbrands li .desc_bname {
+	color:#79a240;
+	font-size:14px;
+}
+ul.dbrands li .desc_bname a {
+	color:#79a240;
+}
+ul.dbrands li .desc_bname a:hover {
+	text-decoration:underline;
+}
+.head_result {
+	background:#dfdfe0;
+	padding:20px;
+	font-size:14px;
+	margin:0px 0px 15px 0px;
+}
+.head_result span {
+	font-size:13px;
+}
+.items_number {
+	float:right;
+	font-size:11px;
+}
+.arrow_backtop {
+	background:url(../images/arrow_back_top.gif) no-repeat right 4px;
+	float:right;
+	color:#79a240;
+}
+.arrow_backtop a {
+	display:block;
+	color:#79a240;
+	padding:0px 15px 0px 0px;
+}
+.arrow_backtop a:hover {
+	text-decoration:underline;
+}
+.product_list_right h3, h3.heading_temp {
+	padding:0px 0px 0px 0px;
+	font-size:60px;
+	line-height:normal;
+	color:#79a240;
+	font-family:'GreatVibesRegular';
+	letter-spacing:-1px;
+}
+
 /*------------------------body begin------------------------*/
 /*------------------------body  ends------------------------*/
 /*------------------------footer begin------------------------*/

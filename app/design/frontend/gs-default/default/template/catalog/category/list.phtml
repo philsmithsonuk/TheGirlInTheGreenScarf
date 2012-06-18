@@ -1,0 +1,40 @@
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_current_category  = $this->getCurrentCategory();
+	$_categories=$this->getCurrentChildCategories();
+?>
+
+<div class="product_list_right">
+	<h3><?php echo $_helper->categoryAttribute($_current_category, $_current_category->getName(), 'name') ?></h3>
+	<div class="head_result">
+		<?php if($_description=$_current_category->getDescription()): ?>
+			<span><?php echo $_helper->categoryAttribute($_current_category, $_description, 'description') ?></span>
+		<?php endif; ?>
+	</div>
+	<div class="clear"></div>
+	<ul class="sort_list">
+		<?php foreach ($_categories as $_category): ?>
+	
+			<?php 
+				
+				$cur_category = Mage::getModel('catalog/category')->load($_category->getId());				
+				
+				if(!$_imgUrl = Mage::getBaseUrl('media').'catalog/category/'.$cur_category->getThumbnail()){
+					$_imgUrl = $this->getSkinUrl()."images/placeholder/small_image.jpg";
+				}
+				
+            ?>
+		
+			<?php if($_category->getIsActive()): ?>
+			<li>
+				<div class="img_product_category">
+					<img src="<?php echo $_imgUrl; ?>" alt="<?php echo $this->htmlEscape($cur_category->getName()) ?>" />
+				</div>
+				<div class="catproduct_name"><a href="#"><?php echo $this->htmlEscape($cur_category->getName()) ?></a></div>
+				<div class="catproduct_desc"><?php echo $cur_category->getDescription() ?></div>
+			</li>	  
+			<?php endif; ?>
+		<?php endforeach; ?>
+	</ul>
+	<div class="clear"></div>
+</div>
