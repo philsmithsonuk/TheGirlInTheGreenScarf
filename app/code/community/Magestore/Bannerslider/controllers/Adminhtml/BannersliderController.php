@@ -88,6 +88,7 @@ class Magestore_Bannerslider_Adminhtml_BannersliderController extends Mage_Admin
 	public function saveAction() {
 		if ($data = $this->getRequest()->getPost()) {
 			if($data['filename']['delete']==1){
+				@unlink(Mage::getBaseDir('media') . '/'. $data['filename']['value']);  
 				$data['filename']='';
 			}
 			elseif(is_array($data['filename'])){
@@ -110,14 +111,51 @@ class Magestore_Bannerslider_Adminhtml_BannersliderController extends Mage_Admin
 					$uploader->setFilesDispersion(false);
 							
 					// We set media as the upload dir
-					$path = Mage::getBaseDir('media') . DS ;
+					if(!is_dir(Mage::getBaseDir('media') . DS .'banners')){
+						@mkdir(Mage::getBaseDir('media') . DS .'banners',0777,true);
+					}
+					$path = Mage::getBaseDir('media') . DS .'banners';
 					$result = $uploader->save($path, $_FILES['filename']['name'] );
-					$data['filename'] = $result['file'];
+					$data['filename'] = 'banners/'.$result['file'];
 				} catch (Exception $e) {
 					$data['filename'] = $_FILES['filename']['name'];
 		        }
+			} 
+			//Thumbs added
+			if($data['thumbnail']['delete']==1){ 
+				@unlink(Mage::getBaseDir('media') . '/'. $data['thumbnail']['value']); 
+				$data['thumbnail']='';  
 			}
-	  			
+			elseif(is_array($data['thumbnail'])){
+				$data['thumbnail']=$data['thumbnail']['value'];
+			}
+			
+			if(isset($_FILES['thumbnail']['name']) && $_FILES['thumbnail']['name'] != '') {
+				try {	
+					/* Starting upload */	
+					$uploader = new Varien_File_Uploader('thumbnail');
+					
+					// Any extention would work
+	           		$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
+					$uploader->setAllowRenameFiles(false);
+					
+					// Set the file upload mode 
+					// false -> get the file directly in the specified folder
+					// true -> get the file in the product like folders 
+					//	(file.jpg will go in something like /media/f/i/file.jpg)
+					$uploader->setFilesDispersion(false);
+							
+					// We set media as the upload dir
+					if(!is_dir(Mage::getBaseDir('media') . DS .'banners'. DS .'bannerthumbs')){
+						@mkdir(Mage::getBaseDir('media') . DS .'banners'. DS .'bannerthumbs',0777,true);
+					}
+					$path = Mage::getBaseDir('media') . DS .'banners'. DS .'bannerthumbs';
+					$result = $uploader->save($path, $_FILES['thumbnail']['name'] );
+					$data['thumbnail'] = 'banners/bannerthumbs/'.$result['file'];
+				} catch (Exception $e) {
+					$data['thumbnail'] = $_FILES['thumbnail']['name'];
+		        }
+			} 
 	  			
 			$model = Mage::getModel('bannerslider/bannerslider');		
 			$model->setData($data)
