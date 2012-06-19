@@ -134,6 +134,13 @@ class Magestore_Bannerslider_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends 
           'name'      => 'filename',
 		  'note'	    => Mage::helper('bannerslider')->__('Image width :275px height: 374px'),
 	  ));
+	  
+	  $fieldset->addField('thumbnail', 'image', array(
+          'label'     => Mage::helper('bannerslider')->__('Image Thumb'),
+          'required'  => false,
+          'name'      => 'thumbnail',
+		  'note'	    => Mage::helper('bannerslider')->__('Image width :43px height: 42px'),
+	  ));
 			
 	  $fieldset->addField('is_home', 'select', array(
           'label'     => Mage::helper('bannerslider')->__('Show in'),

@@ -41,24 +41,27 @@
     }
 ?>
 
-<div class="dheader">
-	<?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
-        <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
-    <?php endif; ?>
-	<div class="img_featured">
-		<?php if($_imgUrl): ?>
-			<img alt="<?php echo $this->htmlEscape($_category->getName()); ?>" src="<?php echo $_imgUrl; ?>">
+<?php if(!$this->isContentMode() && !$this->isMixedMode()) :?>
+
+	<div class="dheader">
+		<?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+			<a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
 		<?php endif; ?>
+		<div class="img_featured">
+			<?php if($_imgUrl): ?>
+				<img alt="<?php echo $this->htmlEscape($_category->getName()); ?>" src="<?php echo $_imgUrl; ?>">
+			<?php endif; ?>
+		</div>
+		<div class="content_featured">
+			<h2><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h2>
+			
+			<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+				<p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
+			<?php endif; ?>
+		</div>
+		<div class="clear"></div>
 	</div>
-	<div class="content_featured">
-		<h2><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h2>
-		
-		<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
-			<p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
-		<?php endif; ?>
-	</div>
-	<div class="clear"></div>
-</div>
+<?php endif; ?>
 
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 
