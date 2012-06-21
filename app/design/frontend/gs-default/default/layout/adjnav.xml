@@ -126,7 +126,7 @@
 		<remove name="right.permanent.callout"/> 
 		<remove name="sale.reorder.sidebar"/> 
 		<remove name="wishlist_sidebar"/>		
-		<remove name="cart_sidebar"/>			
+		<!--<remove name="cart_sidebar"/>-->
 	</reference>		
 	
 	

@@ -838,6 +838,277 @@ ul.dbrands li .desc_bname a:hover {
 	font-family:'GreatVibesRegular';
 	letter-spacing:-1px;
 }
+.account_content {
+	width:430px;
+}
+.account_content .sign_in {
+    margin:auto;
+    width:410px;
+}
+.account_content td{
+	padding:5px 0px;
+}
+.account_content label{
+	display:block;
+	position:relative;
+}
+.account_content label ins{
+	color:#cccccc;
+}
+.account_content span{
+	font-size:11px;
+	position:absolute;
+	right:0px;
+	top:0px;
+}
+.account_content input[type="text"]{
+	padding:4px;
+	border:1px solid #bcbcbc;
+	width:310px;
+	color:#606163;
+}
+.account_content select {
+	padding:4px;
+	width:310px;
+	color:#606163;
+}
+.account_content input.error_field[type="text"]{
+	border:1px solid #ef132d;
+}
+.account_content .sign_in a.forgot_pword, .account_content .sign_in a.forgot_pword:hover{
+	color:#77a33f;
+	font-weight:400;
+}
+.account_content .btn_block{
+	float:right;
+	position:relative;
+	padding:6px 20px 7px;
+	background:url(../images/btn_bg1.jpg) repeat-x 0 0;
+}
+.account_content .btn_block button{
+	background:none;
+	border:none;
+}
+.account_content .btn_block span{
+	position:static;
+	color:#fff;
+	font-size:13px;
+	font-weight:700;
+}
+.account_content .create_acctn{
+	width:410px;
+	margin:auto;
+}
+.account_content .create_acctn ul{
+	padding:0px 0px 15px 0px;
+	margin:0px 0px 15px 0px;
+	border-bottom:1px solid #ccc;
+}
+.account_content .create_acctn li{
+	background:url(../images/list_bg1.gif) no-repeat 0 7px;
+	padding:0px 0px 0px 10px;
+}
+.account_content input[type="checkbox"]{
+	float:left;
+	width:13px;
+	height:13px;
+	margin:0px 10px 0px 0px;
+}
+.account_content .ppolicy{
+	float:left;
+	font-size:9px;
+	color:#cccccc;
+	width:300px;
+	line-height:1.4em;
+}
+.account_content .ppolicy strong{
+	display:block;
+	font-size:12px;
+	color:#606163;
+}
+.account_content .ppolicy a, .account_content .ppolicy a:hover{
+	color:#77a33f;
+}
+.user_acctn{
+}
+.user_acctn p, .user_acctn span{
+	padding:7px;
+}
+.user_acctn p{
+	font-size:16px;
+	line-height:normal;
+}
+.user_acctn span{
+	font-size:11px;
+	display:block;
+}
+.user_acctn .user_content{
+	width:190px;
+	float:left;
+	margin:10px 10px;
+}
+.user_acctn .head_result {
+	background:#dfdfe0;
+	padding:5px 15px;
+	font-size:12px;
+	margin:0px 0px 10px 0px;
+}
+.user_acctn .user_area{
+	padding:0px 15px 10px;
+}
+.user_acctn .user_area p{
+	padding:1px;
+	font-size:11px;
+}
+.user_acctn .user_area p a, .user_acctn .user_area p a:hover{
+	color:#77a33f;
+	text-decoration:underline;
+}
+.acctn_personal{
+	display:block;
+	width:100%;
+}
+.acctn_personal td{
+	padding:5px 0px;
+}
+.acctn_personal label{
+	display:block;
+	position:relative;
+}
+.acctn_personal label ins{
+	color:#cccccc;
+}
+.acctn_personal span{
+	font-size:11px;
+	position:absolute;
+	right:0px;
+	top:0px;
+}
+.acctn_personal input[type="text"]{
+	padding:4px;
+	border:1px solid #bcbcbc;
+	width:310px;
+	color:#606163;
+}
+.acctn_personal select {
+	padding:4px;
+	width:310px;
+	color:#606163;
+}
+.acctn_personal input.error_field[type="text"]{
+	border:1px solid #ef132d;
+}
+.acctn_personal .btn_block{
+	position:relative;
+	padding:6px 20px 7px;
+	margin:0px 280px 0px 0px;
+	float:right;
+	background:url(../images/btn_bg1.jpg) repeat-x 0 0;
+}
+.acctn_personal .btn_block button{
+	background:none;
+	border:none;
+}
+.acctn_personal .btn_block span{
+	position:static;
+	color:#fff;
+	font-size:13px;
+	font-weight:700;
+}
+.acctn_wishlist{
+	display:block;
+	width:100%;
+}
+.acctn_wishlist th, .acctn_wishlist td{
+	border-bottom:1px solid #dfdfe0;
+	font-size:14px;
+	padding:0px 0px 10px 10px;
+}
+.acctn_wishlist .img_product {
+    border:1px solid #CCCCCC;
+    height:103px;
+    margin:10px 10px 0px 0px;
+    overflow:hidden;
+    padding:5px 0px;
+    text-align:center;
+    width:113px;
+	float:left;
+}
+.acctn_wishlist .name_product {
+	float:left;
+	font-size:11px;
+	margin:10px 0px 0px 0px;
+}
+.acctn_wishlist .name_product a, .acctn_wishlist .name_product a:hover{
+	color:#79A240;
+	display:block;
+}
+.acctn_wishlist textarea{
+	width:160px;
+	padding:5px;
+	height:80px;
+	background:none;
+	border:1px solid #CCCCCC;
+	resize:none;
+	color:#606163;
+	font-size:11px;
+	margin:10px 0px 0px 0px;
+}
+.acctn_wishlist .added_date{
+	float:left;
+	margin:10px 0px 0px 0px;
+	font-size:11px;
+}
+.acctn_wishlist .remove_list{
+	float:right;
+	margin:10px 0px 0px 0px;
+	font-size:11px;
+}
+.acctn_wishlist .remove_list a, .acctn_wishlist .remove_list a:hover{
+	color:#77a33f;
+	text-decoration:underline;
+}
+.acctn_wishlist .btn_block{
+	overflow:hidden;
+	font-size:11px;
+	font-weight:700;
+	color:#fff;
+	background:url(../images/btn_bg1.jpg) repeat-x 0 0;
+	float:right;
+	margin:10px 0px;
+}
+.acctn_wishlist .btn_block button{
+	background:none;
+	border:none;
+	padding:4px 10px 5px;
+}
+.acctn_wishlist .btn_block span{
+	position:static;
+	color:#fff;
+	font-size:11px;
+	font-weight:700;
+}
+.acctn_wishlist .btn_block2{
+	overflow:hidden;
+	font-size:11px;
+	font-weight:700;
+	color:#fff;
+	background:url(../images/btn_bg2.jpg) repeat-x 0 0;
+	float:right;
+	border:1px solid #ccc;
+	margin:10px 0px;
+}
+.acctn_wishlist .btn_block2 button{
+	background:none;
+	border:none;
+	padding:3px 10px 4px;
+}
+.acctn_wishlist .btn_block2 span{
+	position:static;
+	color:#606163;
+	font-size:11px;
+	font-weight:700;
+}
 
 /*------------------------body begin------------------------*/
 /*------------------------body  ends------------------------*/
