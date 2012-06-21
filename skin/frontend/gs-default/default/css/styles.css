@@ -700,6 +700,7 @@ ol#cart-item-list .item-options dd {
 	font-size:11px;
 }
 .sort_block{
+	float: left;
 	padding:0px 0px 15px 0px;
 	font-size:11px;
 }
