@@ -25,13 +25,15 @@ if ('ajax' != Mage::app()->getRequest()->getControllerName())
 
 <?php
 	$_helper    = $this->helper('catalog/output');
-	$_currentCategory  = Mage::registry('current_category');
-	$_currentCategoryParent = $_currentCategory->getParentCategory();
-	$layer = Mage::getSingleton('catalog/layer');
-	$parentChildCategories = $_currentCategoryParent->getChildrenCategories();
+	
+	if($_currentCategory  = Mage::registry('current_category')){
+		$_currentCategoryParent = $_currentCategory->getParentCategory();
+		$layer = Mage::getSingleton('catalog/layer');
+		$parentChildCategories = $_currentCategoryParent->getChildrenCategories();
+	}
 ?>
 
-	<?php if($this->canShowBlock()): $state = $this->getStateInfo()?>
+	<?php if($this->canShowBlock() && $_currentCategory): $state = $this->getStateInfo()?>
 
 		<div class="product_list_left adj-nav">
 			
@@ -88,7 +90,51 @@ if ('ajax' != Mage::app()->getRequest()->getControllerName())
 			
 			<div class="adj-nav-progress" style="display:none"></div>
 		</div>
+		
+	<?php else: ?>
+				
+		<?php $state = $this->getStateInfo() ?>		
+		<div class="product_list_left adj-nav">
+			<?php if($this->canShowOptions()): ?>
+
+			<div class="narrow-by">
+				<input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+				<input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+				<input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+				
+				<?php $_filters = $this->getFilters(); ?>				
+				
+				<?php if(count($_filters) > 1) : ?>
+					<h3><?php echo $this->__('CHOOSE'); ?></h3>					
+					
+						<ul id="narrow-by-list" class="selector_list">
+							<?php foreach ($_filters as $_filter): ?>
+								<?php if ($_filter->getItemsCount()): ?>
+								
+									<?php if( strtolower($_filter->getName()) == 'price' || strtolower($_filter->getName()) == 'category' ) continue; ?>							
+								
+									<li><span><?php echo $this->__($_filter->getName()) ?></span></li>								
+									<?php echo $_filter->getHtml() ?>						
+								
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</ul>
+					
+					<script type="text/javascript">
+						decorateDataList('narrow-by-list');
+						adj_nav_init();
+					</script>
+				<?php endif; ?>
+				
+			</div>
+			<?php endif; ?>
+			<div class="adj-nav-progress" style="display:none"></div>
+		</div>
 	<?php endif; ?>
+	
+	
+	
+	
 
 <script type="text/javascript">
 if ('function' == typeof(sns_layer_add_attr))

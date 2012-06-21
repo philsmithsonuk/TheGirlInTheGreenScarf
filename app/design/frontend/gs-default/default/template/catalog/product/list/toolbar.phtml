@@ -98,7 +98,8 @@
 
 <?php */ ?>
 
-<div class="sort_block"><span><?php echo $this->__('SORT BY') ?>:</span>
+<div class="sort_block">
+	<span><?php echo $this->__('SORT BY') ?>:</span>
 	<select onchange="setLocation(this.value)">
 		<?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
 			<option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
@@ -108,6 +109,7 @@
 	</select>  
 	<div class="clear"></div>
 </div>
-
+<div class="items_number"><?php echo $this->__('%s ITEM(S)', $this->getTotalNum()) ?> </div>
+<div class="clear"></div>
 <?php endif ?>
 

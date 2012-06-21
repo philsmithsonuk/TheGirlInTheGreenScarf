@@ -1,0 +1,99 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro - 07/06/12
+ * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
+ * Generated:   2012-06-12 14:40:26
+ * File path:   app/design/frontend/base/default/template/adjnav/filter_price_input.phtml
+ * Copyright:   (c) 2012 AITOC, Inc.
+ */
+?>
+<?php
+    if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
+?>
+
+<ol>
+<?php
+    $items = $this->getItems();
+    list($from, $to) = explode($this->getDelimeter(), $items[0]->getValueString());
+
+    if ($from < 0.01)
+    {
+        $from = $this->__('From');
+    }
+    else
+    {
+        $from = round($from,2);
+    }
+
+    if ($to < 0.01)
+    {
+        $to = $this->__('To');
+    }
+    else
+    {
+        $to = round($to,2);
+    }
+
+?>
+<li>
+<input class="input-text" type="text" maxlength="12" size="4" id="adj-nav-price-from---<?php echo $this->_filter->getRequestVar()?>" value="<?php echo $from?>"
+onclick="if(this.value==this.name) this.value='';"  name="<?php echo $this->__('From')?>"/>
+<span class="adj-nav-separator">-</span>
+<input class="input-text" type="text" maxlength="12" size="4" id="adj-nav-price-to---<?php echo $this->_filter->getRequestVar()?>" value="<?php echo $to?>"
+onclick="if(this.value==this.name) this.value='';" name="<?php echo $this->__('To')?>"/>
+<button type="button" class="button" id="adj-nav-price-go---<?php echo $this->_filter->getRequestVar()?>"><span><?php echo $this->__('Go')?></span></button>
+</li>
+</ol>
+
+
+<input type="hidden" value="<?php echo $this->_filter->getRequestVar()?>" class="adj-nav-price-input-id">
+
+
+
+
+
+
+
+
+
+
+<?php
+    else:
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+<ol>
+<?php
+    $items = $this->getItems();
+    list($from, $to) = explode(',', $items[0]->getValueString());
+
+    if ($from < 0.01)
+        $from = $this->__('From');
+    if ($to < 0.01)
+        $to = $this->__('To');
+?>
+<li>
+<input class="input-text" type="text" maxlength="12" size="3" id="adj-nav-price-from" value="<?php echo $from?>"
+onclick="if(this.value==this.name) this.value='';"  name="<?php echo $this->__('From')?>"/>
+<span class="adj-nav-separator">-</span>
+<input class="input-text" type="text" maxlength="12" size="3" id="adj-nav-price-to" value="<?php echo $to?>"
+onclick="if(this.value==this.name) this.value='';" name="<?php echo $this->__('To')?>"/>
+<input type="button" class="form-button" value="<?php echo $this->__('Go')?>" id="adj-nav-price-go"/>
+</li>
+</ol>
+
+
+<?php
+    endif;
+?>
