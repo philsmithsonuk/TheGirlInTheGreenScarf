@@ -1,0 +1,18 @@
+<div class="user_content">
+	<div class="head_result"><?php echo $this->__('BILLING ADDRESS') ?></div>
+	<div class="user_area">
+		<address>
+			<?php echo $this->getPrimaryBillingAddressHtml() ?><br />
+		</address> 
+		<p><a href="<?php echo $this->getPrimaryBillingAddressEditUrl() ?>"><?php echo $this->__('Edit') ?></a></p>
+	</div>
+</div> 
+ <div class="user_content">
+	<div class="head_result"><?php echo $this->__('DELIVERY ADDRESS') ?></div>
+	<div class="user_area">
+	   <address>
+			<?php echo $this->getPrimaryShippingAddressHtml() ?><br /> 
+		</address>
+	  <p><a href="<?php echo $this->getPrimaryShippingAddressEditUrl() ?>"><?php echo $this->__('Edit') ?></a></p>
+	</div>
+</div>
