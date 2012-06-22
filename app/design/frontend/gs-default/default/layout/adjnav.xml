@@ -127,6 +127,7 @@
 		<remove name="sale.reorder.sidebar"/> 
 		<remove name="wishlist_sidebar"/>		
 		<!--<remove name="cart_sidebar"/>-->
+		<action method="unsetChild"><name>cart_sidebar</name></action>
 	</reference>		
 	
 	
