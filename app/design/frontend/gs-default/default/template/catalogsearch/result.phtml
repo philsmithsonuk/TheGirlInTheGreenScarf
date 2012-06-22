@@ -50,8 +50,8 @@
     <?php echo $this->getProductListHtml() ?>
 	
 <?php else: ?>
-<div class="page-title">
-    <h1><?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("Search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()) ?></h1>
+<div class="head_result">
+	<?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("SHOWING SEARCH RESULTS FOR <strong>'%s'</strong>", $this->helper('catalogsearch')->getEscapedQueryText()) ?>
 </div>
 <p class="note-msg">
     <?php echo ($this->getNoResultText()) ? $this->getNoResultText() : $this->__('Your search returns no results.') ?>
