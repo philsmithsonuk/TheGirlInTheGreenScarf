@@ -1,0 +1,11 @@
+<?php 
+	$item = $this->getItem();
+	$product = $item->getProduct();
+?>
+<div class="img_product"> 
+   <img src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(113, 103); ?>"  height="103" alt="<?php echo $this->escapeHtml($product->getName()) ?>" />
+ </div> 
+<div class="name_product">
+	<a href="<?php echo $this->getProductUrl($item) ?>" title="<?php echo $this->escapeHtml($product->getName()) ?>"><?php echo $this->escapeHtml($product->getName()) ?></a>
+<?php echo $this->getPriceHtml($product);?>
+ </div>

@@ -4,36 +4,22 @@
 	<?php if ($this->helper('wishlist')->isRssAllow() && $this->hasWishlistItems()): ?>
 		<a href="<?php echo $this->helper('wishlist')->getRssUrl($this->getWishlistInstance()->getId()); ?>" class="link-rss"><?php echo $this->__('RSS Feed') ?></a>
 	<?php endif; ?>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-	  <th width="287">PRODUCT</th>
-	  <th width="192">COMMENT</th>
-	  <th>ADDED ON</th>
-	</tr>
-	<tr valign="top">
-	  <td><div class="img_product"><img src="images/wishlist_img_1.jpg" alt="" /></div>
-		<div class="name_product"><a href="#">Gold Sequin Dress</a> £515.00</div></td>
-	  <td><textarea name=""></textarea></td>
-	  <td><div class="added_date">17 June 2012</div>
-		<div class="remove_list"><a href="#">Remove</a></div></td>
-	</tr>
-	<tr valign="top">
-	  <td><div class="img_product"><img src="images/wishlist_img_2.jpg" alt="" /></div>
-		<div class="name_product"><a href="#">Lace-Print Silk Crepe Dress</a> £575.00</div></td>
-	  <td><textarea name=""></textarea></td>
-	  <td><div class="added_date">17 June 2012</div>
-		<div class="remove_list"><a href="#">Remove</a></div></td>
-	</tr>
-  </table>
-  <div class="fright">
-	<div class="rad_8 btn_block2" style="margin-right:10px;">
-	  <button><span>Update Wishlist</span></button>
-	</div>
-	<div class="rad_8 btn_block" style="margin-right:10px;">
-	  <button><span>Share Wishlist</span></button>
-	</div>
-	<div class="clear"></div>
-  </div>
+   <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<form id="wishlist-view-form" action="<?php echo $this->getUrl('*/*/update', array('wishlist_id' => $this->getWishlistInstance()->getId())) ?>" method="post">
+ 		<?php if ($this->hasWishlistItems()): ?>
+				<?php echo $this->getBlockHtml('formkey');?>
+				<?php $this->getChild('items')->setItems($this->getWishlistItems()); ?>
+				<?php echo $this->getChildHtml('items');?>
+				<script type="text/javascript">decorateTable('wishlist-table')</script>
+		<?php else: ?>
+			 <p class="wishlist-empty"><?php echo $this->__('You have no items in your wishlist.') ?></p> 
+		<?php endif ?>
+	  <div class="fright">
+		<?php echo $this->getChild('control_buttons')->toHtml();?> 
+		<div class="clear"></div>
+	  </div>
+ </form>
+
   <div class="clear"></div>
 </div>
-<?php endif ?>
+<?php endif ?> 
