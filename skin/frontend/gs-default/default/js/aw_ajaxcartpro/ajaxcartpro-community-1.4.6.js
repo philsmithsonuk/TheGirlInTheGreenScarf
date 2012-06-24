@@ -144,6 +144,9 @@ function updateCartView(resp){
         /** Added by Awesemo
          * Trigger Slide Down Cart Status in Header when cart is updated
          */
+         GSWrapper.HeaderCart.initialize('header-bag-items');
+         GSWrapper.HeaderCart.showCart();
+        /*
         if(!__cartObj.parentElement.hasClassName('show')){
 			Effect.SlideDown('header-bag-items', { duration: 0.5, 
 				beforeStart: function(){
@@ -186,6 +189,7 @@ function updateCartView(resp){
 				}
 			});
 		}
+		*/
     }
     updateDeleteLinks();
     updateTopLinks(resp);
