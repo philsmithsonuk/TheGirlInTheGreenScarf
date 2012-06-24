@@ -1102,7 +1102,7 @@ ul.dbrands li .desc_bname a:hover {
 	right:0px;
 	top:0px;
 }
-.account_content input[type="text"]{
+.account_content input[type="text"],.account_content input[type="password"]{
 	padding:4px;
 	border:1px solid #bcbcbc;
 	width:310px;

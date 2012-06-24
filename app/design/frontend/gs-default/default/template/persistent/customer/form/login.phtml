@@ -1,0 +1,90 @@
+<div class="account_content fleft">
+          <div class="head_result"><?php echo $this->__('MY ACCOUNT SIGN IN') ?></div>
+          <div class="sign_in">
+			<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+              <table width="410" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><label> Email*:<span>* Required fields</span> </label> 
+					<input type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+					</td>
+                </tr>
+                <tr>
+                  <td><label><?php echo $this->__('Password*:') ?></label>
+                     <input style="" type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#" class="forgot_pword"><?php echo $this->__('Forgotten your password') ?></a></td>
+                </tr>
+                <tr>
+                  <td><div class="rad_8 btn_block">
+                      <button><span><?php echo $this->__('Sign In') ?></span></button>
+                    </div></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+	<script type="text/javascript">
+		//<![CDATA[
+		var dataForm = new VarienForm('login-form', true);
+		//]]>
+	</script>
+ </div>
+        <div class="account_content fright">
+          <div class="head_result">CREATE AN ACCOUNT</div>
+          <div class="create_acctn"> <strong>Benefits of creating an account:</strong>
+            <ul>
+              <li>Proceed through checkout faster</li>
+              <li>Track the status of your orders</li>
+              <li>Make changes to your account information</li>
+              <li>Create and share a wishlist</li>
+            </ul>
+            <form action="" method="get">
+              <table width="410" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><label> Title: <span>* Required fields</span></label>
+                    <select>
+                      <option selected="selected">Select  Title</option>
+                    </select></td>
+                </tr>
+                <tr>
+                  <td><label>First Name*:</label>
+                    <input name="" type="text" class="error_field" /></td>
+                </tr>
+                <tr>
+                  <td><label>Surname*:</label>
+                    <input name="" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><label>Email Address*:</label>
+                    <input name="" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><label>Confirm Email Address*:</label>
+                    <input name="" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input name="" type="checkbox" value="" />
+                    <div class="ppolicy"><strong>Newsletter signup</strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris <a href="#">Privacy Policy</a>.</div></td>
+                </tr>
+                <tr>
+                  <td><label>Password*: <ins>Password must be at least 6 characters</ins></label>
+                    <input name="" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><label>Confirm Password*:</label>
+                    <input name="" type="text" /></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><div class="rad_8 btn_block">
+                      <button><span>Create Account</span></button>
+                    </div></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="clear"></div>
