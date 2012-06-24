@@ -699,6 +699,132 @@ ol#cart-item-list .item-options dd {
 	color:#fff;
 	font-size:11px;
 }
+.detail_block {
+	display:block;
+	padding:0px 0px 15px 0px;
+}
+.detail_tn {
+	float:left;
+	width:134px;
+}
+.detail_tn ul {
+	list-style:none;
+}
+.detail_tn ul li {
+	width:134px;
+	text-align:center;
+	margin:0px 0px 25px 0px;
+}
+.detail_tn ul li a {
+	display:block;
+	width:69px;
+	margin:auto;
+}
+.detail_large {
+	float:left;
+	width:305px;
+	border:1px solid #ccc;
+	height:456px;
+	text-align:center;
+}
+.detail_description {
+	float:right;
+	width:435px;
+}
+.detail_description h3 {
+	font-family:'GreatVibesRegular';
+	font-size:50px;
+	line-height:normal;
+	color:#79a240;
+	padding:0px;
+	margin:0px;
+}
+.detail_description table.tbl_quality {
+	border-collapse:inherit;
+}
+.detail_description table.tbl_quality td {
+	padding:3px 2px;
+	font-size:11px;
+}
+.detail_description table.tbl_quality strong {
+	font-size:13px;
+}
+.detail_description table.tbl_quality select {
+	font-size:11px;
+	color:#606163;
+	width:100px;
+}
+.detail_description table.tbl_quality input[type="text"] {
+	font-size:11px;
+	color:#606163;
+	width:32px;
+	padding:2px 4px;
+	text-align:center;
+}
+.detail_description .addtobag {
+	overflow:hidden;
+	font-size:13px;
+	font-weight:700;
+	color:#fff;
+	background:url(../images/btn_bg1.jpg) repeat-x 0 0;
+	float:left;
+	position:relative;
+	margin:10px 0px;
+}
+.detail_description .addtobag a {
+	color:#fff;
+	text-decoration:none;
+	padding:8px 20px;
+	display:block;
+}
+.detail_description .add_wishfriend {
+	overflow:hidden;
+	font-size:11px;
+	font-weight:700;
+	color:#fff;
+	background:url(../images/btn_bg2.jpg) repeat-x 0 0;
+	float:left;
+	position:relative;
+	margin-right:10px;
+	margin-bottom:10px;
+	border:1px solid #ccc;
+}
+.detail_description .add_wishfriend a {
+	color:#606163;
+	text-decoration:none;
+	padding:2px 20px 3px;
+	display:block;
+}
+.detail_description .pdescription {
+	border-top:1px dotted #B2B2B3;
+	padding:10px 5px 5px;
+	font-size:11px;
+	margin:5px 0px;
+	line-height:1.4em;
+}
+.detail_description .pdescription p {
+	padding-bottom:8px;
+}
+.detail_description .social_icons {
+	display:block;
+	padding:15px 0px 15px 0px;
+}
+.detail_description .social_block {
+	float:left;
+	margin:0px 15px 0px 0px;
+}
+.carousel_wrapper {
+	height:178px;
+	width:960px;
+	overflow:hidden;
+	border-top:1px dotted #B2B2B3;
+	background:url(../images/carousel_wrapper_bg.jpg) repeat-x 0 0;
+}
+.carousel_wrapper h4 {
+	font-size:18px;
+	line-height:normal;
+	padding:20px 53px;
+}
 .sort_block{
 	padding:0px 0px 15px 0px;
 	font-size:11px;
