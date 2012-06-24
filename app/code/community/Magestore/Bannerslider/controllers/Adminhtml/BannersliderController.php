@@ -87,9 +87,10 @@ class Magestore_Bannerslider_Adminhtml_BannersliderController extends Mage_Admin
  
 	public function saveAction() {
 		if ($data = $this->getRequest()->getPost()) {
-			if($data['filename']['delete']==1){
-				@unlink(Mage::getBaseDir('media') . '/'. $data['filename']['value']);  
-				$data['filename']='';
+			if($data['filename']['delete']==1){ 
+				$unique_directory_array  = explode('/',$data['filename']['value']);  	 
+				$this->_cleanDir(Mage::getBaseDir('media') . '/banners/'.$unique_directory_array[1]);		 
+				$data['filename'] = '';
 			}
 			elseif(is_array($data['filename'])){
 				$data['filename']=$data['filename']['value'];
@@ -111,20 +112,22 @@ class Magestore_Bannerslider_Adminhtml_BannersliderController extends Mage_Admin
 					$uploader->setFilesDispersion(false);
 							
 					// We set media as the upload dir
-					if(!is_dir(Mage::getBaseDir('media') . DS .'banners')){
-						@mkdir(Mage::getBaseDir('media') . DS .'banners',0777,true);
-					}
-					$path = Mage::getBaseDir('media') . DS .'banners';
-					$result = $uploader->save($path, $_FILES['filename']['name'] );
-					$data['filename'] = 'banners/'.$result['file'];
+					$unique_banner_dir = date('mdyhi').rand(1,50);
+					$target_url = Mage::getBaseDir('media') . DS .'banners'. DS .$unique_banner_dir;
+					if(!is_dir($target_url)){
+						@mkdir($target_url,0777,true);
+					}  
+					$result = $uploader->save($target_url, $_FILES['filename']['name'] );
+					$data['filename'] = 'banners/'.$unique_banner_dir.'/'.$result['file'];
 				} catch (Exception $e) {
 					$data['filename'] = $_FILES['filename']['name'];
 		        }
 			} 
 			//Thumbs added
-			if($data['thumbnail']['delete']==1){ 
-				@unlink(Mage::getBaseDir('media') . '/'. $data['thumbnail']['value']); 
-				$data['thumbnail']='';  
+			if($data['thumbnail']['delete']==1){   
+				$unique_directory_array  = explode('/',$data['thumbnail']['value']);  	 
+				$this->_cleanDir(Mage::getBaseDir('media') . '/banners/bannerthumbs/'.$unique_directory_array[2]);	 
+				$data['thumbnail']='';   
 			}
 			elseif(is_array($data['thumbnail'])){
 				$data['thumbnail']=$data['thumbnail']['value'];
@@ -148,10 +151,16 @@ class Magestore_Bannerslider_Adminhtml_BannersliderController extends Mage_Admin
 					// We set media as the upload dir
 					if(!is_dir(Mage::getBaseDir('media') . DS .'banners'. DS .'bannerthumbs')){
 						@mkdir(Mage::getBaseDir('media') . DS .'banners'. DS .'bannerthumbs',0777,true);
-					}
-					$path = Mage::getBaseDir('media') . DS .'banners'. DS .'bannerthumbs';
-					$result = $uploader->save($path, $_FILES['thumbnail']['name'] );
-					$data['thumbnail'] = 'banners/bannerthumbs/'.$result['file'];
+					} 
+					
+					$unique_banner_dir = date('mdyhi').rand(1,50);
+					$target_url = Mage::getBaseDir('media') . DS .'banners'. DS .'bannerthumbs' . DS . $unique_banner_dir;
+					if(!is_dir($target_url)){
+						@mkdir($target_url,0777,true);
+					}  
+					$result = $uploader->save($target_url, $_FILES['thumbnail']['name'] );
+					$data['thumbnail'] = 'banners/bannerthumbs/'.$unique_banner_dir.'/'.$result['file'];
+					
 				} catch (Exception $e) {
 					$data['thumbnail'] = $_FILES['thumbnail']['name'];
 		        }
@@ -292,4 +301,18 @@ class Magestore_Bannerslider_Adminhtml_BannersliderController extends Mage_Admin
         $response->sendResponse();
         die;
     }
+	
+	protected function _cleanDir($path)
+	{
+		$path = rtrim($path, '/').'/';
+		$handle = opendir($path);
+		while(false !== ($file = readdir($handle))) {
+			if($file != '.' and $file != '..' ) {
+				$fullpath = $path.$file;
+				if(is_dir($fullpath)) _remove_dir($fullpath); else unlink($fullpath);
+			}
+		}
+		closedir($handle);
+		rmdir($path);
+	}
 }

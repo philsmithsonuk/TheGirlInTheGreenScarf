@@ -1,0 +1,8 @@
+<div class="user_content">
+	<div class="head_result"><?php echo $this->__('PERSONAL DETAILS') ?></div>
+	<div class="user_area">
+		<p> <?php echo $this->htmlEscape($this->getCustomer()->getName()) ?></p>
+		<p><?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?></p>  
+		<p>   <a href="<?php echo $this->getUrl('customer/account/edit') ?>"><?php echo $this->__('Edit') ?></a></p>
+	</div>
+</div> 
