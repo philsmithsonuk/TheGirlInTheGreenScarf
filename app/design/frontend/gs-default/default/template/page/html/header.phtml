@@ -28,6 +28,12 @@
 </div>
 <script type="text/javascript">
 	//<![CDATA[
+	GSWrapper.HeaderCart.initialize('header-bag-items');
+	//]]>
+</script> 
+<script type="text/javascript">
+	//<![CDATA[
+	<?php if(false): ?>
 	var bagStatusAnimating = false;
 	var bagStatusTmId = null;
 	document.observe("dom:loaded", function(){
@@ -111,6 +117,7 @@
 		});
 
 	});
+	<?php endif; ?>
 	//]]>
 </script>
 <?php if(false): ?>

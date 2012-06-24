@@ -18,7 +18,7 @@
 					<p><?php echo $this->__('%s was successfully added to your shopping bag.', $lastProduct->getName()) ?></p>
 				<?php endif; ?>
 				<div>
-					<a href="#" class="btn-close"><?php echo $this->__('Close') ?></a>
+					<a href="#" class="btn-close" onclick="GSWrapper.HeaderCart.hideCart();"><?php echo $this->__('Close') ?></a>
 				</div>
 			</div>
 			<!--<ol id="cart-item-list" class="mini-products-list">-->
