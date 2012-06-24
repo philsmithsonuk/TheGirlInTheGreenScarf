@@ -116,13 +116,17 @@ input[type="button"] {
 	/*top:63px;*/
 	/*top:20px;*/
 	top:19px;
-	width:306px;
-	padding:5px;
+	/*width:306px;*/
+	width: 316px;
+	/*padding:5px;*/
 	background:#606163;
 	z-index:1000;
 	font-size:11px;
 	color:#fff;
 	text-transform:none;
+}
+.added_tobag .block-content {
+	padding:5px;
 }
 .added_tobag .block_notes{
 	position:relative;
