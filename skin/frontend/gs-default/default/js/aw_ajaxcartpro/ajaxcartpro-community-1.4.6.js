@@ -146,50 +146,6 @@ function updateCartView(resp){
          */
          GSWrapper.HeaderCart.initialize('header-bag-items');
          GSWrapper.HeaderCart.showCart();
-        /*
-        if(!__cartObj.parentElement.hasClassName('show')){
-			Effect.SlideDown('header-bag-items', { duration: 0.5, 
-				beforeStart: function(){
-					bagStatusAnimating = true;
-					$('header-bag-status').toggleClassName('show');
-				},
-				afterFinish: function(){
-					bagStatusAnimating = false;
-					bagStatusTmId = Effect.SlideUp.delay(4,'header-bag-items', { duration: 0.5, 
-						beforeStart: function(){
-							bagStatusAnimating = true;
-						},
-						afterFinish: function(){
-							bagStatusAnimating = false;
-							$('header-bag-status').toggleClassName('show');
-						}
-					});
-					$('header-bag-items').observe('mouseover', function() {
-						if (bagStatusTmId) {
-							window.clearTimeout(bagStatusTmId);
-						}
-					});
-
-					$('header-bag-items').observe('mouseout', function() {
-						if ($('header-bag-status').hasClassName('show')) {
-							if (bagStatusTmId) {
-								window.clearTimeout(bagStatusTmId);
-							}
-							bagStatusTmId = Effect.SlideUp.delay(4,'header-bag-items', { duration: 0.5, 
-								beforeStart: function(){
-									bagStatusAnimating = true;
-								},
-								afterFinish: function(){
-									bagStatusAnimating = false;
-									$('header-bag-status').toggleClassName('show');
-								}
-							});
-						}
-					});
-				}
-			});
-		}
-		*/
     }
     updateDeleteLinks();
     updateTopLinks(resp);

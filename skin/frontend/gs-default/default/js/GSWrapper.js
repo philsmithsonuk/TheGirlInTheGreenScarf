@@ -26,12 +26,12 @@ GSWrapper.HeaderCart = {
     },
 	handleMouseOut: function (evt) {
         if($(this.elementHeader).hasClassName('show')) {
-            //this.interval = setTimeout(this.hideCart.bind(this), this.intervalDuration);
+            this.interval = setTimeout(this.hideCart.bind(this), this.intervalDuration);
         }
     },
     handleMouseOver: function (evt) {
         if (this.interval !== null) {
-             //clearTimeout(this.interval);
+             clearTimeout(this.interval);
              this.interval = null;
         }
     },
