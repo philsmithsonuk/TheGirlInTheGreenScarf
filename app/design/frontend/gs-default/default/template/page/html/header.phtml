@@ -12,6 +12,10 @@
 	<div id="shop-bag" class="shop_bag">
 		<?php echo $this->getChildHtml('cart_sidebar'); ?>
 	</div>
+	<span id="updating-cart-status" style="display:none;">
+		<?php echo $this->__('UPDATING BAG') ?>
+		<img src="<?php echo $this->getSkinUrl('images/cart/progress.gif') ?>" width="10" height="10">
+	</span>
 </div>
 <div class="navigation">
 	<ul id="nav">
@@ -25,6 +29,7 @@
 <script type="text/javascript">
 	//<![CDATA[
 	var bagStatusAnimating = false;
+	var bagStatusTmId = null;
 	document.observe("dom:loaded", function(){
 		$('shop-bag').observe('click', function(e,el) {
 			if (bagStatusAnimating) {
@@ -47,6 +52,18 @@
 						},
 						afterFinish: function(){
 							bagStatusAnimating = false;
+							if (bagStatusTmId) {
+								window.clearTimeout(bagStatusTmId);
+							}
+							bagStatusTmId = Effect.SlideUp.delay(4,'header-bag-items', { duration: 0.5, 
+								beforeStart: function(){
+									bagStatusAnimating = true;
+								},
+								afterFinish: function(){
+									bagStatusAnimating = false;
+									$('header-bag-status').toggleClassName('show');
+								}
+							});
 						}
 					});
 				}
@@ -60,12 +77,39 @@
 					},
 					afterFinish: function(){
 						bagStatusAnimating = false;
+						if (bagStatusTmId) {
+							window.clearTimeout(bagStatusTmId);
+						}
 					}
 				});
 				$('header-bag-status').removeClassName('show');
 				e.stop();
 			}
 		});
+		
+		$('header-bag-items').observe('mouseover', function() {
+			if (bagStatusTmId) {
+				window.clearTimeout(bagStatusTmId);
+			}
+		});
+
+		$('header-bag-items').observe('mouseout', function() {
+			if ($('header-bag-status').hasClassName('show')) {
+				bagStatusTmId = Effect.SlideUp.delay(4,'header-bag-items', { duration: 0.5, 
+					beforeStart: function(){
+						bagStatusAnimating = true;
+					},
+					afterFinish: function(){
+						bagStatusAnimating = false;
+						if (bagStatusTmId) {
+							window.clearTimeout(bagStatusTmId);
+						}
+						$('header-bag-status').toggleClassName('show');
+					}
+				});
+			}
+		});
+
 	});
 	//]]>
 </script>

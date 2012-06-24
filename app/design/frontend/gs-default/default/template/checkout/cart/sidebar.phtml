@@ -5,7 +5,53 @@
 		<span><?php echo $this->__("SHOPPING BAG  - %d ITEMS",$_cartQty); ?></span>
 		<span class="arrow"></span>
 	</div>
-	<div id="header-bag-items" class="block-cart-content" style="display:none">
+	<!--added to bag begin-->
+	<div id="header-bag-items" class="added_tobag" style="display:none;">
+		<div class="block-content">
+			<?php $_items = $this->getRecentItems() ?>
+			<?php if ($_count = count($_items)): ?>
+			<?php $_lastItem = $_items[$_count-1] ?>
+			<div class="block_notes">
+				<p><?php echo $this->__('Last %d Item(s) added to bag',$_count) ?></p>
+				<?php $lastProductid = Mage::getSingleton('checkout/session')->getLastAddedProductId(true); ?>
+				<?php if (($lastProduct = Mage::getModel('catalog/product')->load($lastProductid)) && $lastProduct->getId()): ?>
+					<p><?php echo $this->__('%s was successfully added to your shopping bag.', $lastProduct->getName()) ?></p>
+				<?php endif; ?>
+				<div>
+					<a href="#" class="btn-close"><?php echo $this->__('Close') ?></a>
+				</div>
+			</div>
+			<!--<ol id="cart-item-list" class="mini-products-list">-->
+			<?php foreach($_items as $_item): ?>
+				<?php echo $this->getItemHtml($_item) ?>
+			<?php endforeach; ?>
+			<!--</ol>-->
+			<div class="prod_brand">
+				<div class="total_prod">
+					<?php echo $this->__('Total') ?> </span><span class="price"><?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+				</div>
+			</div>
+			<div class="rad_8 btn_block">
+				<?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+				<button type="button" title="<?php echo $this->__('Checkout') ?>" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')">
+					<span>CHECKOUT</span>
+				</button>
+				<?php endif; ?>
+			</div>            
+			<div class="rad_8 btn_block2" style="margin-right:10px;">
+				<a href="<?php echo $this->getUrl('checkout/cart') ?>" class="button">
+					<span><?php echo $this->__('GO TO BAG') ?></span>
+				</a>
+			</div>
+			<?php else: ?>
+			<p class="empty-msg">
+				<?php echo $this->__('You have no items in your shopping cart.') ?>
+			</p>
+			<?php endif; ?>
+		</div>
+	</div>
+	<!--added to bag ends-->
+	<div id="xheader-bag-items" class="block-cart-content" style="display:none">
 		<div class="block-content">
 			<?php $_items = $this->getRecentItems() ?>
 			<?php if ($_count = count($_items)): ?>

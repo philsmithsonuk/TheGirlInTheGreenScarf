@@ -2,6 +2,16 @@
 <layout>
 	
 	<default>
+		<reference name="head">
+			 // lets remove the original Ajax Cart Pro js, we will not be modifying the original code in /js/aw_ajaxcartpro folder
+			 // this is to prevent breaking the default layout if we change the package
+			 <action method="removeItem"><type>js</type><name>aw_ajaxcartpro/ajaxcartpro-1.4.6.js</name></action>
+			 <action method="removeItem"><type>js</type><name>aw_ajaxcartpro/ajaxcartpro-community-1.4.6.js</name></action>
+			 // now lets add our customized Ajax Cart Pro js from the gs-default package
+			 <action method="addItem"><type>skin_js</type><name>js/aw_ajaxcartpro/ajaxcartpro-1.4.6.js</name></action>
+			 <action method="addItem"><type>skin_js</type><name>js/aw_ajaxcartpro/ajaxcartpro-community-1.4.6.js</name></action>
+		</reference>
+		
 		<reference name="root">
 			<reference name="top.links">
 				<!-- Add the Signup Link to top links in the header block -->
@@ -23,12 +33,15 @@
 				<block type="newsletter/subscribe" before="-" name="newsletter" template="newsletter/subscribe.phtml"/>
 			</reference>
 		</reference>
+		
 		<reference name="left">
 			<action method="unsetChild"><name>left.newsletter</name></action>
 		</reference>
+		
 		<reference name="header">
 			<action method="unsetChild"><name>cart_sidebar</name></action>
 		</reference>
+		
         <reference name="header">
             <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml" before="-">
                 <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
