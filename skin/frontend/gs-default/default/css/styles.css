@@ -490,7 +490,23 @@ ol#cart-item-list .item-options dd {
 	background:url(../images/graydirt_sprite_png.png) no-repeat 0 0;
 	border: medium none;
 }
-
+.form-search {
+    position: relative;
+}
+#search_autocomplete {
+	background-color:#FFFFFF;
+	border:1px solid #CCCCCC;
+	margin:1px 0 0;
+	padding:0 0 3px;
+	position:absolute;
+	top:22px !important;
+	width:204px !important;
+	font-size:11px;
+}
+#search_autocomplete li {
+	margin: 0;
+	padding: 3px 8px;
+}
 /*------------------------header ends------------------------*/
 #main_wrapper {
 	background:#fff;
