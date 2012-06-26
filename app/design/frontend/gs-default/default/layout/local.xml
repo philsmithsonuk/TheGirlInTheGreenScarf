@@ -3,6 +3,16 @@
 	
 	<default>
 		<reference name="head">
+             // lets modify the default styles, use our custom styles
+             // first remove the default styles
+             <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>
+             <action method="addItem"><type>skin_css</type><name>css/reset.css</name></action>
+             <action method="addItem"><type>skin_css</type><name>css/styles.css</name></action>
+             <action method="addItem"><type>skin_css</type><name>css/fonts.css</name></action>
+             // add our custom styles
+             <action method="removeItem"><type>css</type><name>css/reset.css</name></action>
+             <action method="removeItem"><type>css</type><name>css/styles.css</name></action>
+             <action method="removeItem"><type>css</type><name>css/styles.css</name></action>
 			 // lets remove the original Ajax Cart Pro js, we will not be modifying the original code in /js/aw_ajaxcartpro folder
 			 // this is to prevent breaking the default layout if we change the package
 			 <action method="removeItem"><type>js</type><name>aw_ajaxcartpro/ajaxcartpro-1.4.6.js</name></action>
