@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GreenScarf_CatalogSearch>
+            <version>1.6.0.0</version>
+        </GreenScarf_CatalogSearch>
+    </modules>
+	<global>
+		<blocks>
+			<catalogsearch>
+				<rewrite>
+					<autocomplete>GreenScarf_CatalogSearch_Block_Autocomplete</autocomplete> 
+				</rewrite>
+			</catalogsearch>
+		</blocks> 
+	</global> 
+</config>
