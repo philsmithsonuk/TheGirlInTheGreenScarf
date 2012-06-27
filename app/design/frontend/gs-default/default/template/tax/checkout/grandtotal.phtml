@@ -29,6 +29,19 @@
  */
 ?>
 <?php if ($this->includeTax() && $this->getTotalExclTax()>=0):?>
+	<div class="head_result">
+		<p style="padding-right:10px;"><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotalExclTax(),false) ?></p>
+		<p>Items Subtotal<span>VAT Excluded</span></p>
+		<div class="clear"></div>
+	</div>
+	<?php echo $this->renderTotals('taxes', $this->getColspan()); ?>
+	<div class="head_result">
+		<p style="padding-right:10px;"><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValue(),false) ?></p>
+		<p>Items Subtotal<span>VAT included</span></p>
+		<div class="clear"></div>
+	</div>
+
+<?php /* ?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <strong><?php echo $this->helper('tax')->__('Grand Total Excl. Tax')?></strong>
@@ -46,7 +59,15 @@
         <strong><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></strong>
     </td>
 </tr>
+<?php */ ?>
 <?php else:?>
+
+<div class="head_result">
+	<p style="padding-right:10px;"><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValue(),false) ?></p>
+	<p>Items Subtotal<span>VAT included</span></p>
+	<div class="clear"></div>
+</div>
+<?php /* ?>	
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <strong><?php echo $this->getTotal()->getTitle() ?></strong>
@@ -55,4 +76,5 @@
         <strong><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></strong>
     </td>
 </tr>
+<?php */ ?>
 <?php endif;?>

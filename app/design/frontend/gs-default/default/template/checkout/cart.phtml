@@ -49,11 +49,13 @@
 	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
     <?php echo $this->getChildHtml('form_before') ?>
 	
-	<div class="rad_8 btn_block" style="margin-right:10px;">
-		<button>
-			<span><?php echo $this->__('Proceed to Checkout');?></span>
-		</button>
-	</div>
+	<?php foreach ($this->getMethods('top_methods') as $method): ?>
+		<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+			<div class="rad_8 btn_block" style="margin-right:10px;">
+				<?php echo $methodHtml; ?>
+			</div>
+		<?php endif; ?>
+	<?php endforeach; ?>
 	
 	<?php if($this->getContinueShoppingUrl()): ?>
 		<div class="rad_8 btn_block2" style="margin-right:10px;">
@@ -82,18 +84,37 @@
 			</tbody>
 		</table>
 	
-		<div class="sub_total">
-			<p>£1,090.00</p>
-			<p>Items Subtotal</p>
-			<div class="clear"></div>
-		</div>
-		
-		
-	
 	</form>
 	
-	<?php //echo $this->getChildHtml('totals'); ?>  
+	<?php echo $this->getChildHtml('totals'); ?>  
 	
+	
+	<div class="logos_merchant">
+		<div class="fleft"><img alt="" src="<?php echo $this->getSkinUrl('images/logos_merch_1.jpg') ?>"> <img alt="" src="<?php echo $this->getSkinUrl('images/logos_merch_2.jpg') ?>"></div>
+		<div class="fright">
+		
+		
+			 <?php foreach ($this->getMethods('top_methods') as $method): ?>
+				<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+					<div class="rad_8 btn_block" style="margin-right:10px;">
+						<?php echo $methodHtml; ?>
+					</div>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			
+			<div class="rad_8 btn_block2" style="margin-right:10px;">
+				<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')">
+					<span><?php echo $this->__('Continue Shopping') ?></span>
+				</button>
+			</div>		
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	
+	<?php //echo $this->getChildHtml('checkout.cart.extra') ?>
+	
+	<?php //if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
 	
 	
 	 <script type="text/javascript">
