@@ -24,6 +24,21 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<div class="procode">
+	<p>0.00</p>
+	<p>£</p>
+	<div style="margin-right:10px; margin-bottom:0px; float:right" class="rad_8 btn_block2">
+		<button><span>Update</span></button>
+	</div>
+	<!-- Enter your promotion code (if applicable) and click update. -->
+	<input type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape( $this->getCouponCode()) ?>">
+	<label><?php echo $this->__('Promotional Code') ?></label>
+	<div class="clear"></div>
+</div>
+
+
+
+<?php /* ?>
 <form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
     <div class="discount">
         <h2><?php echo $this->__('Discount Codes') ?></h2>
@@ -57,3 +72,4 @@ discountForm.submit = function (isRemove) {
 }
 //]]>
 </script>
+<?php */ ?>

@@ -30,6 +30,27 @@
 ?>
 
 <?php if ($this->displayBoth()):?>
+
+	<div class="sub_total">
+		<p><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValueExclTax(),false) ?></p>
+		<p> <?php echo $this->helper('tax')->__('Items Subtotal (Excl. Tax)') ?></p>
+		<div class="clear"></div>
+	</div>
+	<div class="sub_total">
+		<p><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValueInclTax(),false) ?></p>
+		<p> <?php echo $this->helper('tax')->__('Items Subtotal (Inc. Tax)') ?></p>
+		<div class="clear"></div>
+	</div>
+<?php else : ?>
+	<div class="sub_total">
+		<p><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValue(),false) ?></p>
+		<p> <?php echo $this->helper('tax')->__('Items Subtotal') ?></p>
+		<div class="clear"></div>
+	</div>
+<?php endif;?>
+
+<?php /* ?>
+<?php if ($this->displayBoth()):?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <?php echo $this->helper('tax')->__('Subtotal (Excl. Tax)') ?>
@@ -56,3 +77,4 @@
     </td>
 </tr>
 <?php endif;?>
+<?php */ ?>
