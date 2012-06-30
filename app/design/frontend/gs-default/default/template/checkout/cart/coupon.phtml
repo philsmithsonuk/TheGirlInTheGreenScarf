@@ -24,19 +24,50 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="procode">
-	<p>0.00</p>
-	<p>£</p>
-	<div style="margin-right:10px; margin-bottom:0px; float:right" class="rad_8 btn_block2">
-		<button><span>Update</span></button>
+<?php 
+$quote = $this->helper('checkout')->getQuote(); 
+$discount = $quote->getSubtotal() - $quote->getSubtotalWithDiscount();
+?>
+<form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
+	<input type="hidden" name="remove" id="remove-coupone" value="0" />
+	<div class="procode">
+		
+		<?php if($discount) : ?>
+			<p>-<?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($quote->getSubtotal() - $quote->getSubtotalWithDiscount(), false);?></p>
+			<p></p>
+		<?php endif; ?>
+		
+		<?php if(strlen($this->getCouponCode())): ?>
+		<div style="margin-right:10px; margin-bottom:0px; float:right" class="rad_8 btn_block2">
+			<button onclick="discountForm.submit(true)"><span>Remove</span></button>
+		</div>
+		<?php endif; ?>
+		
+		<div style="margin-right:5px; margin-bottom:0px; float:right" class="rad_8 btn_block2">
+			<button onclick="discountForm.submit(false)"><span>Update</span></button>
+		</div>
+		
+		<!-- Enter your promotion code (if applicable) and click update. -->
+		<input type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape( $this->getCouponCode()) ?>" style="color:#000">
+		<label><?php echo $this->__('Promotional Code') ?></label>
+		<div class="clear"></div>
 	</div>
-	<!-- Enter your promotion code (if applicable) and click update. -->
-	<input type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape( $this->getCouponCode()) ?>">
-	<label><?php echo $this->__('Promotional Code') ?></label>
-	<div class="clear"></div>
-</div>
-
-
+</form>
+<script type="text/javascript">
+//<![CDATA[
+var discountForm = new VarienForm('discount-coupon-form');
+discountForm.submit = function (isRemove) {
+    if (isRemove) {
+        $('coupon_code').removeClassName('required-entry');
+        $('remove-coupone').value = "1";
+    } else {
+        $('coupon_code').addClassName('required-entry');
+        $('remove-coupone').value = "0";
+    }
+    return VarienForm.prototype.submit.bind(discountForm)();
+}
+//]]>
+</script>
 
 <?php /* ?>
 <form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
