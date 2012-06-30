@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<GreenScarf_Customer>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Mage_Customer/>
+			</depends>
+		</GreenScarf_Customer>
+	</modules>
+</config>
