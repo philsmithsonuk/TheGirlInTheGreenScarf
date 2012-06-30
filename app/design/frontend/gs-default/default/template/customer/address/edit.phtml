@@ -27,19 +27,14 @@
 	</tr>   
 	   <tr>
 		<td>
-			<label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
-			 
+			<label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>			 
 				<?php echo $this->getCountryHtmlSelect() ?>
-			 
 	  </td>
-	</tr> 
-	
+	</tr> 	
 	<tr>
 		<td> 
 			<label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label> 
 			<input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
-					
-			 
 		<div class="btn-dynamic" id="postcode_finder_btn" style="display:none;position:relative;"> <br/>
 					<div class="rad_8 btn_block" style="float:none;width:89px;">  
 						<button type="button" id="postcode_finder" title="<?php echo $this->__('Find Address') ?>" class="button"><span><span><?php echo $this->__('Find Address') ?></span></span></button>

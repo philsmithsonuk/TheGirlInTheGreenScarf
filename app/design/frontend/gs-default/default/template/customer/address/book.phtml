@@ -3,8 +3,8 @@
 <div class="acctn_personal">
 <div class="rad_8 btn_block" style="margin:0px;">  
 	<button type="button" onclick="window.location='<?php echo $this->getAddAddressUrl() ?>';" title="<?php echo $this->__('Add New Address') ?>" class="button"><span><span><?php echo $this->__('Add New Address') ?></span></span></button>
-</div><div class="clear"></div>
-    <div class="col-1 addresses-primary">
+</div> 
+    <div class="col-1 addresses-primary" style="width:400px;">
         <h2><?php echo $this->__('Default Addresses') ?></h2> 
         <?php if($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultBilling()): ?>
             <div class="user_content" style="width:350px;">
@@ -48,19 +48,20 @@
     <div class="user_content" style="width:350px;">
 				<div class="head_result" style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;"><?php echo $this->__('Additional Address Entries') ?></div>
 				<div class="user_area">   
-        <?php if($_pAddsses = $this->getAdditionalAddresses()): ?>
-            <?php foreach($_pAddsses as $_address): ?> 
-                <address>
-                    <?php echo $this->getAddressHtml($_address) ?>
-                </address>
-                <p><a style="color: #77A33F; text-decoration: underline;" href="<?php echo $this->getUrl('customer/address/edit', array('id'=>$_address->getId())) ?>"><?php echo $this->__('Edit Address') ?></a> <span class="separator">|</span> <a href="#" class="link-remove" onclick="return deleteAddress('<?php echo $_address->getId() ?>');"><?php echo $this->__('Delete Address') ?></a></p>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="user_area"> 
-				<?php echo $this->__('You have no additional address entries in your address book.') ?>
-			</div> 
-        <?php endif ?>
-        </ol>
+					<?php if($_pAddsses = $this->getAdditionalAddresses()): ?>
+						<?php foreach($_pAddsses as $_address): ?> 
+							<address>
+								<?php echo $this->getAddressHtml($_address) ?>
+							</address>
+							<p><a style="color: #77A33F; text-decoration: underline;" href="<?php echo $this->getUrl('customer/address/edit', array('id'=>$_address->getId())) ?>"><?php echo $this->__('Edit Address') ?></a> <span class="separator">|</span> <a href="#" style="color: #77A33F; text-decoration: underline;"   class="link-remove" onclick="return deleteAddress('<?php echo $_address->getId() ?>');"><?php echo $this->__('Delete Address') ?></a></p>
+							<br />
+						<?php endforeach; ?>
+					<?php else: ?>
+						<div class="user_area"> 
+							<?php echo $this->__('You have no additional address entries in your address book.') ?>
+						</div> 
+					<?php endif ?>         
+		</div>
     </div>
 </div> 	
 <script type="text/javascript">

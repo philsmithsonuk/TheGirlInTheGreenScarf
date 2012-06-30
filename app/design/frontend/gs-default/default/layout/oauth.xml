@@ -1,0 +1,14 @@
+<?xml version="1.0"?> 
+<layout version="1.0.0.0">  
+    <!-- My Applications-->
+    <customer_account>
+        <!--<reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="oauth">
+                <name>OAuth Customer Tokens</name>
+                <path>oauth/customer_token</path>
+                <label>My Applications</label>
+            </action>
+        </reference>-->
+    </customer_account> 
+    <!-- EOF My Applications-->
+</layout>

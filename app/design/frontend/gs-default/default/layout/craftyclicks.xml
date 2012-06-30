@@ -5,7 +5,6 @@
 		<reference name="head"> 
 			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
 			<action method="addJs"><script>craftyclicks/craftyclicks_magento.js</script></action>
-			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
 		</reference>
 	</customer_address_form>			 
 </layout>
