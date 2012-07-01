@@ -1,0 +1,42 @@
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+?>
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+	<?php foreach($_attributes as $_attribute): ?>
+	<tr<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+		<td>
+			<label><?php echo $_attribute->getLabel() ?></label>
+		</td>
+		<td>
+			<div class="input-box">
+				<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+					<option><?php echo $this->__('Choose an Option...') ?></option>
+				</select>
+			</div>
+		</td>
+	</tr>
+	<?php endforeach; ?>
+	<script type="text/javascript">
+		var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+	</script>
+<?php endif; ?>
+<?php if(false): ?>
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <dl>
+    <?php foreach($_attributes as $_attribute): ?>
+        <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
+        <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+            <div class="input-box">
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                  </select>
+              </div>
+        </dd>
+    <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+    </script>
+<?php endif;?>
+<?php endif; ?>

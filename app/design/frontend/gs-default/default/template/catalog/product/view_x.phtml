@@ -6,95 +6,29 @@
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <div class="product-view product_list">
     <div class="product-essential detail_block">
-	<?php // add placeholder div for any ajax-loaded custom options ?>
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
         <div class="no-display">
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
-        <div class="product-img-box fleft">
-			<?php echo $this->getChildHtml('media') ?>
-		</div>
-        <div class="product-shop  detail_description">
+        <?php echo $this->getChildHtml('media') ?>
+        <div class="product-shop detail_description">
             <div class="product-name">
                 <h3><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
             </div>
-			<table width="100%" cellspacing="0" cellpadding="0" border="0" class="tbl_quality">
-				<tbody>
-				<tr>
-					<td colspan="2">
-						<?php echo $this->getPriceHtml($_product) ?>
-					</td>
-				</tr>
-				<?php if ($_product->isSaleable() && $this->hasOptions()):?>
-					<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-				<?php endif;?>
-				<?php if($_product->isSaleable()): ?>
-					<?php if(!$_product->isGrouped()): ?>
-					<tr>
-						<td width="55">
-							<label for="qty"><?php echo $this->__('Quantity:') ?></label>
-						</td>
-						<td>
-							<input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
-						</td>
-					</tr>
-					<?php endif; ?>
-				<?php endif; ?>
-				</tbody>
-			</table>
-			<div class="rad_8 addtobag">
-				<?php echo $this->getChildHtml('addtocart') ?>
-			</div>
-			<div class="clear"></div>
-			<div class="rad_8 add_wishfriend">
-				<?php echo $this->getChildHtml('addto') ?>
-			</div>
-			<div class="rad_8 add_wishfriend">
+			<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+				<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+			<?php endif;?>
             <?php if ($this->canEmailToFriend()): ?>
-                <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Tell a Friend') ?></a>
+                <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
             <?php endif; ?>
-            </div>
-            <div class="clear"></div>
-            <div class="pdescription">
-				<?php if ($_product->getShortDescription()):?>
-					<?php if(false): ?>
-					<?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
-					<?php endif; ?>
-					<?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
-				<?php endif;?>
-            </div>
-			<!-- Size Guide and Delivery Returns Begins-->
-			<div id="size-guide-delivery-returns">
-				<h4>
-					<a href="javascript:void();"><?php echo $this->__('Size Guide') ?></a>
-				</h4>
-				<div>
-					<p><?php echo $_product->getGsSizeGuide() ?></p>
-				</div>
-				<h4>
-					<a href="javascript:void();"><?php echo $this->__('Delivery and Returns') ?></a>
-				</h4>
-				<div>
-					<p><?php echo $_product->getGsDeliveryReturns() ?></p>
-				</div>
-			</div>
-			<!-- Size Guide and Delivery Returns Ends-->
-			<div class="social_icons">
-				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_fb.jpg') ?>"></div>
-				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_twitter.jpg') ?>"></div>
-				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_gplus.jpg') ?>"></div>
-				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_share.jpg') ?>"></div>
-			</div>
-			<?php if(false): ?>
-			<!-- NO REVIEW SUMMARY -->
+
             <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-            <!-- NO ALERT URLS -->
             <?php echo $this->getChildHtml('alert_urls') ?>
             <?php echo $this->getChildHtml('product_type_data') ?>
             <?php echo $this->getTierPriceHtml() ?>
             <?php echo $this->getChildHtml('extrahint') ?>
-			<?php endif; ?>
+
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
@@ -112,25 +46,21 @@
                 </div>
             <?php endif; ?>
 
-            
+            <?php if ($_product->getShortDescription()):?>
+                <div class="short-description">
+                    <h2><?php echo $this->__('Quick Overview') ?></h2>
+                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                </div>
+            <?php endif;?>
 
             <?php echo $this->getChildHtml('other');?>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
             <?php endif;?>
+
         </div>
-<?php if(false): ?>
-        <div class="product-img-box">
-            <?php echo $this->getChildHtml('media') ?>
-        </div>
-<?php endif; ?>
-        <div class="clear"></div>
-<?php if(false): ?>
-        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-        <?php endif;?>
-<?php endif; ?>
+        <div class="clearer"></div>
     </form>
     <script type="text/javascript">
     //<![CDATA[
@@ -184,8 +114,7 @@
     //]]>
     </script>
     </div>
-</div>
-<?php if(false): ?>
+
     <div class="product-collateral">
 <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
         <div class="box-collateral <?php echo "box-{$alias}"?>">
@@ -199,15 +128,3 @@
         <?php echo $this->getChildHtml('product_additional_data') ?>
     </div>
 </div>
-<?php endif; ?>
-<script type="text/javascript">
-//<![CDATA[
-	jQuery(document).ready(function(){
-		jQuery( "#size-guide-delivery-returns" ).accordion({
-				active: false,
-				collapsible: true,
-				autoHeight: true
-		});	
-	});
-//]]>
-</script>
