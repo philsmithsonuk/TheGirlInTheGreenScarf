@@ -24,7 +24,7 @@
 					<layout_handle>gs_two_columns_right</layout_handle>
 				</gs_two_columns_right>
 				<gs_two_columns_left module="page" translate="label">
-					<label>2 Columns Right(TGITGS)</label>
+					<label>2 Columns Left(TGITGS)</label>
 					<template>page/gs-2columns-left.phtml</template>
 					<layout_handle>gs_two_columns_left</layout_handle>
 				</gs_two_columns_left>
