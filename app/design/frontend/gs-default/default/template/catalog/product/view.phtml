@@ -94,7 +94,7 @@
             <?php echo $this->getChildHtml('product_type_data') ?>
             <?php echo $this->getTierPriceHtml() ?>
             <?php echo $this->getChildHtml('extrahint') ?>
-			<?php endif; ?>
+			
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
@@ -112,9 +112,9 @@
                 </div>
             <?php endif; ?>
 
-            
+            <?php endif; ?>
 
-            <?php echo $this->getChildHtml('other');?>
+            <?php //echo $this->getChildHtml('other');?>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
