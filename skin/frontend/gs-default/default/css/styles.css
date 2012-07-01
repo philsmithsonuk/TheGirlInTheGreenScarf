@@ -836,6 +836,7 @@ ol#cart-item-list .item-options dd {
 .detail_block {
 	display:block;
 	padding:0px 0px 15px 0px;
+	position:relative;
 }
 .detail_tn {
 	float:left;
@@ -860,6 +861,7 @@ ol#cart-item-list .item-options dd {
 	border:1px solid #ccc;
 	height:456px;
 	text-align:center;
+	position:relative;
 }
 .detail_description {
 	float:right;
@@ -910,6 +912,18 @@ ol#cart-item-list .item-options dd {
 	text-decoration:none;
 	padding:8px 20px;
 	display:block;
+}
+.detail_description .addtobag button{
+	background:none;
+	border:none;
+	cursor:pointer;
+	padding:8px 20px;
+}
+.detail_description .addtobag span {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    position: static;
 }
 .detail_description .add_wishfriend {
 	overflow:hidden;
@@ -1644,6 +1658,16 @@ ul.dbrands li .desc_bname a:hover {
 #footer_2 .icons_block{
 	float:left;
 	padding:0px 8px 0px 0px;
+}
+.price-box .label {
+	width:55px;
+	font-weight:700;
+	font-size:13px;
+	display:inline-block;
+}
+.price-box span.price {
+	font-weight:700;
+	font-size:13px;
 }
 /*------------------------footer ends------------------------*/
 /*clark fortuna - http://www.graydirt.com*/
