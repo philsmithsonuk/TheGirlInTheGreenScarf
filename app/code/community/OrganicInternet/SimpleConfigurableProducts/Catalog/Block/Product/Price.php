@@ -16,7 +16,8 @@ class OrganicInternet_SimpleConfigurableProducts_Catalog_Block_Product_Price
                 . '"><span class="configurable-price-from-label">';
 
                 if ($product->getMaxPossibleFinalPrice() != $product->getFinalPrice()) {
-                    $extraHtml .= $this->__('Price From:');
+                    //$extraHtml .= $this->__('Price From:');
+                    $extraHtml .= $this->__('Price:');
                 }
                 $extraHtml .= '</span></span>';
                 $priceHtml = parent::_toHtml();
