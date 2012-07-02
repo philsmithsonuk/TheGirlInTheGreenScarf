@@ -1,6 +1,8 @@
 <?php if ($this->showPrefix()): ?>
 	<tr>
-		<td><label  for="<?php echo $this->getFieldId('prefix')?>" <?php if ($this->isPrefixRequired()) echo ' class="required"' ?>> Title: <span>* Required fields</span></label>
+		<td>
+		 <label for="<?php echo $this->getFieldId('prefix')?>"<?php if ($this->isPrefixRequired()) echo ' class="required"' ?>><?php echo $this->helper('customer')->__('Title'); ?><?php if ($this->isPrefixRequired()) echo '<em>*</em>' ?></label>
+   
 		<?php if ($this->getPrefixOptions() === false): ?>
                 <input type="text" id="<?php echo $this->getFieldId('prefix')?>" name="<?php echo $this->getFieldName('prefix')?>" value="<?php echo $this->escapeHtml($this->getObject()->getPrefix()) ?>" title="<?php echo $this->getStoreLabel('prefix') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('prefix') ?>" <?php echo $this->getFieldParams() ?> />
             <?php else: ?>
@@ -15,7 +17,7 @@
 <?php endif; ?>
 	<tr>
 		<td>
-			<label for="<?php echo $this->getFieldId('firstname')?>" class="required"><em>*</em><?php echo $this->getStoreLabel('firstname') ?></label>
+			<label for="<?php echo $this->getFieldId('firstname')?>" class="required"><?php echo $this->getStoreLabel('firstname') ?><em>*</em></label>
 			<input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" value="<?php echo $this->escapeHtml($this->getObject()->getFirstname()) ?>" title="<?php echo $this->getStoreLabel('firstname') ?>" maxlength="255" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('firstname') ?>" <?php echo $this->getFieldParams() ?> />
 		</td>
 	</tr>
@@ -24,14 +26,14 @@
 	<?php $isMiddlenameRequired = $this->isMiddlenameRequired(); ?> 
 		<tr>
 			<td>
-			<label for="<?php echo $this->getFieldId('middlename')?>"<?php echo $isMiddlenameRequired ? ' class="required"' : '' ?>><?php echo $isMiddlenameRequired ? '<em>*</em>' : '' ?><?php echo $this->getStoreLabel('middlename') ?></label>
+			<label for="<?php echo $this->getFieldId('middlename')?>"<?php echo $isMiddlenameRequired ? ' class="required"' : '' ?>><?php echo $this->getStoreLabel('middlename') ?><?php echo $isMiddlenameRequired ? '<em>*</em>' : '' ?></label>
 			<input type="text" id="<?php echo $this->getFieldId('middlename')?>" name="<?php echo $this->getFieldName('middlename')?>" value="<?php echo $this->escapeHtml($this->getObject()->getMiddlename()) ?>" title="<?php echo $this->getStoreLabel('middlename') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('middlename') ?>" <?php echo $this->getFieldParams() ?> />
 			</td>
 		</tr>
 <?php endif; ?>
 	<tr>
 		<td>
-			<label for="<?php echo $this->getFieldId('lastname')?>" class="required"><em>*</em><?php echo $this->getStoreLabel('lastname') ?></label>
+			<label for="<?php echo $this->getFieldId('lastname')?>" class="required"><?php echo $this->getStoreLabel('lastname') ?><em>*</em></label>
 			<input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" value="<?php echo $this->escapeHtml($this->getObject()->getLastname()) ?>" title="<?php echo $this->getStoreLabel('lastname') ?>" maxlength="255" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('lastname') ?>" <?php echo $this->getFieldParams() ?> />
 		</td>
 	</tr>
