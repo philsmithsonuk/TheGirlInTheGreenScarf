@@ -1615,6 +1615,11 @@ ul.dbrands li .desc_bname a:hover {
 .checkout_block .block_step1 .fleft input[type="text"], .checkout_block .block_step1 .fright input[type="text"]{
 	width:125px;
 }
+
+.checkout_block .block_step1 .fleft input[type="password"], .checkout_block .block_step1 .fright input[type="password"]{
+	width:125px;
+}
+
 .checkout_block .block_step1 input[type="checkbox"], .checkout_block .block_step3 input[type="checkbox"]{
 	float:left;
 	width:13px;
