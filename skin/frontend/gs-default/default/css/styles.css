@@ -1258,7 +1258,7 @@ ul.dbrands li .desc_bname a:hover {
 	right:0px;
 	top:0px;
 }
-.acctn_personal input[type="text"]{
+.acctn_personal input[type="text"],.acctn_personal input[type="password"]{
 	padding:4px;
 	border:1px solid #bcbcbc;
 	width:310px;
