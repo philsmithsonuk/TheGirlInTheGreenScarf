@@ -4,9 +4,9 @@
 <input type="hidden" name="billing[use_for_shipping]" id="billing:use_for_shipping" value="1" />
 <?php endif; ?>
 
-
 <table width="100%" cellspacing="0" cellpadding="0" border="0" id="billing-new-address-form" <?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
-<tbody>
+	<tbody>
+
 	<tr valign="top">
 		<td>
 			<div class="fleft">				
@@ -157,7 +157,17 @@
 	</tr>
 	<?php endif;?>	
 	
-</tbody>
+	<?php if ($this->isShowShippingAddress()):?>
+		<tr valign="top">
+			<td>
+				<input type="checkbox" name="shipping[different_shipping]" id="shipping:different_shipping" value="1" />
+				<label for="shipping:different_shipping"><?php echo $this->__('Ship to different address'); ?></label>
+			</td>
+		</tr>	
+	<?php else:?>
+	<?php endif;?>
+	
+	</tbody>
 </table>
 
 <?php /* ?>

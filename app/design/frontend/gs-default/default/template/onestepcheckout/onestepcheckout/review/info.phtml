@@ -25,6 +25,25 @@
  */
 ?>
 <?php echo $this->getChildHtml('items_before'); ?>
+
+
+<table align="center" width="97%" cellspacing="0" cellpadding="0" border="0" class="tbl_prodtotal">
+	<tbody>
+	<tr valign="top">
+		<td width="130"><strong><?php echo $this->__('Product Name') ?></strong></td>
+		<td align="center" width="40"><strong><?php echo $this->__('Price') ?></strong></td>
+		<td align="center" width="40"><strong><?php echo $this->__('Qty') ?></strong></td>
+		<td align="right"><strong><?php echo $this->__('Subtotal') ?></strong></td>
+	</tr>	
+	<?php foreach($this->getItems() as $_item): ?>
+		<?php echo $this->getItemHtml($_item)?>
+	<?php endforeach ?>
+	<?php echo $this->getChildHtml('totals'); ?>
+	</tbody>
+</table>
+
+
+<?php /* ?>
 <div id="checkout-review-table-wrapper">
     <table class="data-table" id="checkout-review-table">
         <?php if ($this->helper('tax')->displayCartBothPrices()): $colspan = $rowspan = 2; else: $colspan = $rowspan = 1; endif; ?>
@@ -66,3 +85,4 @@
     truncateOptions();
 //]]>
 </script>
+<?php */ ?>

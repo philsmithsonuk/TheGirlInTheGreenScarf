@@ -15,95 +15,49 @@
   
 	<form id="one-step-checkout-form" method="post" action="<?php echo $this->getCheckoutUrl(); ?>">
   
-	<div class="checkout_block">
-  
-		<div class="head_area">1. BILLING ADDRESS</div>
+		<div class="checkout_block">
+	  
+			<div class="head_area">1. BILLING ADDRESS</div>
 
-		<div class="block_step1">
-			<?php echo $this->getChildHtml('onestepcheckout.billing');?>
-			<?php echo $this->getChildHtml('onestepcheckout.shipping');?>
-		</div>
-	
-	</div>
-  
-  
-	<div class="checkout_block">
-		<div class="head_area">2. DELIVERY METHOD</div>
+			<div class="block_step1">			
+				<?php echo $this->getChildHtml('onestepcheckout.billing');?>			
+			</div>					
+			<?php echo $this->getChildHtml('onestepcheckout.shipping');?>		
 		
-		<div class="block_step2">
-	  
-			<?php echo $this->getChildHtml('onestepcheckout.shipping_method'); ?>
-			
-			<div class="ajax-loader1" id="ajax-loader1" style="display:none;"></div>
-		
-			<div class="head_area">3. PAYMENT METHOD</div>	  
-			
-			<?php echo $this->getChildHtml('onestepcheckout.payment_method'); ?> 	  
-	  
 		</div>
-	</div>
+	  
+	  
+		<div class="checkout_block">
+			<div class="head_area">2. DELIVERY METHOD</div>
+			
+			<?php if (!$this->isVirtual() && !Mage::helper('onestepcheckout')->isHideShippingMethod()):?>		
+				<?php echo $this->getChildHtml('onestepcheckout.shipping_method'); ?>			
+				<div class="ajax-loader1" id="ajax-loader1" style="display:none;"></div>
+			<?php elseif (Mage::helper('onestepcheckout')->isHideShippingMethod()):?>
+				<?php $_shippingMethod = $this->hasOnlyOneShippingMethod();?>
+				<span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_shippingMethod;?>" id="s_method_<?php echo $_shippingMethod; ?>" checked="checked" /></span>
+			<?php endif; ?>
+			
+			<div class="head_area">3. PAYMENT METHOD</div>			
+			<div class="block_step3">
+				<?php echo $this->getChildHtml('onestepcheckout.payment_method'); ?>
+			</div>
+			
+			
+		</div>
+	  
+		<div style="margin-right:0px;" class="checkout_block">
+			<div class="head_area">4. REVIEW YOUR ORDER</div>
+			<?php echo $this->getChildHtml('onestepcheckout.review') ?>
+			<div class="ajax-loader3" id="ajax-loader3"  style="display:none;"></div>
+		</div>
   
-  <div style="margin-right:0px;" class="checkout_block">
-	
-	<div class="head_area">4. REVIEW YOUR ORDER</div>
-	
-	<div class="block_step3">
-
-		<?php echo $this->getChildHtml('onestepcheckout.review') ?>
-		<div class="ajax-loader3" id="ajax-loader3"  style="display:none;"></div>
-	  
-	  
-	  
-	  <div class="head_result">TOTAL  £1,095.00 </div>
-	  <table width="100%" cellspacing="0" cellpadding="0" border="0">
-		<tbody><tr valign="top">
-		  <td><label>Promotional Code</label>
-			<input type="text" name="">
-			<div style="margin-right:10px;" class="rad_8 btn_block2">
-			  <button><span>Apply Code</span></button>
-			</div></td>
-		</tr>
-		<tr valign="top">
-		  <td><label>Comments</label>
-			<textarea name=""></textarea></td>
-		</tr>
-		<tr valign="top">
-		  <td><input type="checkbox" value="" name="">
-			<span class="cbox_text">Add a gift message</span></td>
-		</tr>
-		<tr valign="top">
-		  <td><input type="checkbox" value="" name="">
-			<span class="cbox_text">Gift Wrap (£5.00)</span></td>
-		</tr>
-		<tr valign="top">
-		  <td></td>
-		</tr>
-		<tr valign="top">
-		  <td><label>Where did you hear about us?</label>
-			<select>
-			  <option selected="selected">Please Choose</option>
-			</select></td>
-		</tr>
-		<tr valign="top">
-		  <td></td>
-		</tr>
-		<tr valign="top">
-		  <td><input type="checkbox" value="" name="">
-			<span class="cbox_text">I accept the <a href="#">Terms and Conditions</a></span></td>
-		</tr>
-	  </tbody></table>
-	  <div style="margin-right:10px;" class="rad_8 btn_block">
-		<button><span>PLACE ORDER NOW</span></button>
-	  </div>
-	</div>
-  </div>
-  
-  </form>
+	</form>
   <div class="clear"></div>
 </div>
 
 
-<?php if(true) : ?>
+<?php if(false) : ?>
 <ol class="one-step-checkout clearfix">
 	<li>
 		<h1 class="checkout_header"><?php echo $this->getCheckoutTitle();?></h1>

@@ -24,6 +24,64 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
+<div class="block_step2">
+	
+	<?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody>
+		<tr valign="top">
+			<td><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></td>
+		</tr>
+	</tbody>
+	</table>
+	<?php else: ?>
+		<?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>
+		
+			<table width="100%" cellspacing="0" cellpadding="0" border="0">
+			<tbody>
+				<tr valign="top">
+					<td>
+						<label><strong><?php echo $this->getCarrierName($code) ?></strong></label>
+						
+						<?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): ?>
+						
+							<?php if ($_rate->getErrorMessage()): ?>
+								<ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>							
+							<?php else: ?>
+							
+								 <?php if ($_sole) : ?>
+									<span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" onclick="save_shipping_method(shipping_method_url, enable_update_payment);" /></span>
+								<?php else: ?>												
+									<input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio" onclick="save_shipping_method(shipping_method_url, enable_update_payment);" />
+								<?php endif; ?>
+								
+								 <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $_rate->getMethodTitle() ?>
+								<?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+								<?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+								<?php echo $_excl; ?>
+								<?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+									(<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+								<?php endif; ?>
+								</label>
+								<div class="clear"></div>
+								
+							<?php endif; ?>
+						
+						<?php endforeach; ?>
+						
+						
+					</td>
+				</tr>
+		  </tbody>
+		  </table>
+		
+		<?php endforeach; ?>
+		
+	<?php endif; ?>
+</div>
+
+<?php /* ?>
 <?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
     <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
 <?php else: ?>
@@ -58,3 +116,4 @@
     <?php endforeach; ?>
 </dl>
 <?php endif; ?>
+<?php */ ?>

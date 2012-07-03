@@ -1,8 +1,10 @@
 <?php $_helper = Mage::helper('onestepcheckout');?>
 
-<div id="checkout-review-load" class="default-box">
+
+<div id="checkout-review-load" class="block_step3">
   <?php echo $this->getChildHtml('info') ?>
 </div>
+
 
 <!-- Begin of Discount section -->
 <?php if ($_helper->showDiscount()):?>
