@@ -27,7 +27,8 @@
 						<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 						<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 						<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
-						<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+						<!--<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>-->
+						<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>						
 					</block>
 				</block>				
 			</block>

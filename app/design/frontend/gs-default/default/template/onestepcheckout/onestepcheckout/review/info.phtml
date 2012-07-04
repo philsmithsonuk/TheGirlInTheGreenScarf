@@ -37,10 +37,10 @@
 	</tr>	
 	<?php foreach($this->getItems() as $_item): ?>
 		<?php echo $this->getItemHtml($_item)?>
-	<?php endforeach ?>
-	<?php echo $this->getChildHtml('totals'); ?>
+	<?php endforeach ?>	
 	</tbody>
 </table>
+<?php echo $this->getChildHtml('totals'); ?>
 
 
 <?php /* ?>
