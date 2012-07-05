@@ -1,0 +1,6 @@
+<div class="head_result"><span><?php echo Mage::helper('customer')->__('You have logged out and will be redirected to our homepage in 5 seconds.') ?></span></div>
+<script type="text/javascript">
+//<![CDATA[
+    setTimeout(function(){ location.href = '<?php echo $this->getUrl() ?>'},5000);
+//]]>
+</script> 

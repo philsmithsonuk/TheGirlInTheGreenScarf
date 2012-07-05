@@ -1,6 +1,6 @@
 /**
- * @author: Andrew A. Aculana
- * @email : andrew.aculana@gmail.com
+ * @author: Awesemo
+ * @email : xdreucker@gmail.com
  * Copyrights 2012
  */
 if (!window.GSWrapper) {
@@ -12,7 +12,7 @@ GSWrapper.HeaderCart = {
         this.container = $(container);
         this.element = this.container.up(0);
         this.elementHeader = this.container.previous(0);
-        
+
         this.intervalDuration = 4000;
         this.interval = null;
         this.onElementMouseOut = this.handleMouseOut.bindAsEventListener(this);
