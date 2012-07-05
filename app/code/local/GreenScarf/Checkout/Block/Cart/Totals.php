@@ -46,7 +46,11 @@ class GreenScarf_Checkout_Block_Cart_Totals extends Mage_Checkout_Block_Cart_Tot
         foreach($this->getTotals() as $total) {
             if($total->getCode() == $code){
 				if(!$displayLabel) $total->setTitle(null);
-				else $total->setTitle($label);
+				else {
+					if(!empty($label))
+						$total->setTitle($label);
+				}
+				
 				if($isForShipping) $total->getAddress()->setTitle($label);
 				$html .= $this->renderTotal($total, null, $colspan);
 			}

@@ -56,12 +56,24 @@
 </tr>
 <?php else:?>
 
-<div class="e_delivery">
-	<p><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getShippingExcludeTax(),false) ?></p>
-	<p></p>
-	<p>Estimated Delivery<span>Based on standard UK delivery. See more <a href="#">Delivery Information</a>.</span></p>
-	<div class="clear"></div>
-</div>
+	<?php // Custom template display because default magento checkout and onestepcheckout use this template. ?>
+	
+	<?php if($this->getRequest()->getControllerName() == 'cart') : ?>	
+		<div class="e_delivery">
+			<p><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getShippingExcludeTax(),false) ?></p>
+			<p></p>
+			<p>Estimated Delivery<span>Based on standard UK delivery. See more <a href="#">Delivery Information</a>.</span></p>
+			<div class="clear"></div>
+		</div>
+	<?php else: ?>
+	
+		<?php // This is shipping display for onestepcheckout ?>
+		<tr valign="top">
+			<td colspan="3"><?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?></td>			
+			<td align="right"><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getShippingExcludeTax(),false) ?></td>
+		</tr>
+	
+	<?php endif; ?>
 
 <?php /* ?>
 <tr>

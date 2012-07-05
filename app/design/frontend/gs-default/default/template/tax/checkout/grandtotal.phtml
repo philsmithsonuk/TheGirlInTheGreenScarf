@@ -62,11 +62,17 @@
 <?php */ ?>
 <?php else:?>
 
-<div class="head_result">
-	<p style="padding-right:10px;"><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValue(),false) ?></p>
-	<p>Items Subtotal<span>VAT included</span></p>
-	<div class="clear"></div>
-</div>
+	<?php if($this->getRequest()->getControllerName() == 'cart') : ?>	
+		<div class="head_result">
+			<p style="padding-right:10px;"><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValue(),false) ?></p>
+			<p>Items Subtotal<span>VAT included</span></p>
+			<div class="clear"></div>
+		</div>
+	<?php else: ?>
+		
+		<div class="head_result"><?php echo $this->helper('tax')->__('TOTAL');?> <?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getTotal()->getValue(),false) ?> </div>
+	
+	<?php endif; ?>
 <?php /* ?>	
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">

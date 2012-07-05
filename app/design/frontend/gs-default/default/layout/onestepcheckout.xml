@@ -22,13 +22,17 @@
 					<action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
 				</block>
 				<block type="checkout/onepage_review" name="onestepcheckout.onestepcheckout.review" as="onestepcheckout.review" template="onestepcheckout/onestepcheckout/review.phtml">
+					
 					<block type="checkout/agreements" name="onestepcheckout.onestepcheckout.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
 					<block type="checkout/onepage_review_info" name="review_info" as="info" template="onestepcheckout/onestepcheckout/review/info.phtml">
+					
 						<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 						<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 						<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 						<!--<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>-->
 						<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>						
+						<block type="checkout/cart_totals" name="onestepcheckout.grandtotals" as="grand.totals" template="onestepcheckout/onestepcheckout/review/grandtotals.phtml"/>
+						
 					</block>
 				</block>				
 			</block>
@@ -68,11 +72,13 @@
 		</block>
 	</onestepcheckout_onestepcheckout_paymentmethod>
 	<onestepcheckout_onestepcheckout_review>
-		<block type="checkout/onepage_review_info" name="review" output="toHtml" template="checkout/onepage/review/info.phtml">
-				<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+		<block type="checkout/onepage_review_info" name="review" output="toHtml" template="onestepcheckout/onestepcheckout/review/info.phtml">
+				<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 				<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
 				<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
-				<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+				<!--<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/> -->
+				<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>	
+				<block type="checkout/cart_totals" name="onestepcheckout.grandtotals" as="grand.totals" template="onestepcheckout/onestepcheckout/review/grandtotals.phtml"/>
 		</block>
 	</onestepcheckout_onestepcheckout_review>
 	<onestepcheckout_index_save_address>
@@ -85,7 +91,9 @@
 				<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 				<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 				<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
-				<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>
+				<!--<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>-->
+				<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>	
+				<block type="checkout/cart_totals" name="onestepcheckout.grandtotals" as="grand.totals" template="onestepcheckout/onestepcheckout/review/grandtotals.phtml"/>
 			</block>
 		</block>
 	</onestepcheckout_index_save_address>
@@ -98,7 +106,8 @@
 				<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 				<action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
 				<action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>onestepcheckout/onestepcheckout/review/item.phtml</template></action>
-				<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>
+				<!--<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>-->
+				<block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="onestepcheckout/onestepcheckout/review/totals.phtml"/>	
 			</block>
 		</block>
 	</onestepcheckout_index_save_shipping>

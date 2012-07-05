@@ -26,12 +26,12 @@
 ?>
 <?php if ($this->getTotals()): ?>
 
-<?php echo $this->renderTotals('footer'); ?>
-<?php echo $this->renderSubTotal('subtotal'); ?>
-<?php echo $this->renderDiscountTotal('shipping'); ?>
-<?php echo $this->renderGrandTotal('grand'); ?>
-<?php echo $this->renderTotals(); ?>
-<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+<?php //echo $this->renderTotals('footer'); ?>
+<?php //echo $this->renderSubTotal('subtotal'); ?>
+<?php //echo $this->renderDiscountTotal('shipping'); ?>
+<?php //echo $this->renderGrandTotal('grand'); ?>
+<?php echo $this->renderShippingTotal("",true); // Display default shipping name ?>
+<?php //if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
 
 
 <?php /* ?>
