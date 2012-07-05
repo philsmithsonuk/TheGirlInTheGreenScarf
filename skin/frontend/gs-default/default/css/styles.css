@@ -888,7 +888,7 @@ ol#cart-item-list .item-options dd {
 .detail_description table.tbl_quality select {
 	font-size:11px;
 	color:#606163;
-	width:100px;
+	/*width:100px;*/
 }
 .detail_description table.tbl_quality input[type="text"] {
 	font-size:11px;

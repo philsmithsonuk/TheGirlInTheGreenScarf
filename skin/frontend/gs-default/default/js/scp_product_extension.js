@@ -161,7 +161,7 @@ Product.Config.prototype.reloadPrice = function() {
         optionsPrice.productPrice = finalPrice;
         optionsPrice.productOldPrice = price;
         optionsPrice.reload();
-        //optionsPrice.reloadPriceLabels(true);
+        optionsPrice.reloadPriceLabels(true);
         optionsPrice.updateSpecialPriceDisplay(price, finalPrice);
         this.updateProductShortDescription(childProductId);
         this.updateProductDescription(childProductId);
@@ -184,7 +184,7 @@ Product.Config.prototype.reloadPrice = function() {
         optionsPrice.productPrice = finalPrice;
         optionsPrice.productOldPrice = price;
         optionsPrice.reload();
-        //optionsPrice.reloadPriceLabels(false);
+        optionsPrice.reloadPriceLabels(false);
         optionsPrice.updateSpecialPriceDisplay(price, finalPrice);
         this.updateProductShortDescription(false);
         this.updateProductDescription(false);
