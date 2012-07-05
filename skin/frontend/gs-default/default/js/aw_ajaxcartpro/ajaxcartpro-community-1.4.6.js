@@ -145,7 +145,7 @@ function updateCartView(resp){
          * Trigger Slide Down Cart Status in Header when cart is updated
          */
          GSWrapper.HeaderCart.initialize('header-bag-items');
-         GSWrapper.HeaderCart.showCart();
+         GSWrapper.HeaderCart.showCart(4);
     }
     updateDeleteLinks();
     updateTopLinks(resp);
