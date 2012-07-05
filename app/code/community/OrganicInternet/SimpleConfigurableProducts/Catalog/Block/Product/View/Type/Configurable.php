@@ -65,10 +65,8 @@ class OrganicInternet_SimpleConfigurableProducts_Catalog_Block_Product_View_Type
         $p = $this->getProduct();
         $config['childProducts'] = $childProducts;
         if ($p->getMaxPossibleFinalPrice() != $p->getFinalPrice()) {
-            //$config['priceFromLabel'] = $this->__('Price From:');
-            $config['priceFromLabel'] = $this->__('Price:');
+            $config['priceFromLabel'] = $this->__('Price From:');
         } else {
-            //$config['priceFromLabel'] = $this->__('');
             $config['priceFromLabel'] = $this->__('');
         }
         $config['ajaxBaseUrl'] = Mage::getUrl('oi/ajax/');
