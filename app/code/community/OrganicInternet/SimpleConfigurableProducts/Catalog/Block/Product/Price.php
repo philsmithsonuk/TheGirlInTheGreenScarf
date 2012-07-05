@@ -5,7 +5,7 @@ class OrganicInternet_SimpleConfigurableProducts_Catalog_Block_Product_Price
     #This is overridden as an admittedly nasty hack to not have to change the contents of catalog/product/price.phtml
     #This is because there's no nice way to keep price.phtml in sync between this extension and the magento core version
     #Yes, it's dependent on the value of $htmlToInsertAfter; I'm not aware of a better alternative.
-    public function _toHtml() {
+    public function x_toHtml() {
         $htmlToInsertAfter = '<div class="price-box">';
         if ($this->getTemplate() == 'catalog/product/price.phtml') {
             $product = $this->getProduct();
@@ -17,6 +17,8 @@ class OrganicInternet_SimpleConfigurableProducts_Catalog_Block_Product_Price
 
                 if ($product->getMaxPossibleFinalPrice() != $product->getFinalPrice()) {
                     //$extraHtml .= $this->__('Price From:');
+                    $extraHtml .= $this->__('Price:');
+                } else {
                     $extraHtml .= $this->__('Price:');
                 }
                 $extraHtml .= '</span></span>';
