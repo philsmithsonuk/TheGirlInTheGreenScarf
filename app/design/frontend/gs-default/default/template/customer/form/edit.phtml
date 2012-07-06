@@ -8,7 +8,7 @@
                 <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?> 
 			<tr>
 				<td>
-					<label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+					<label for="email" class="required"><?php echo $this->__('Email Address') ?><em>*</em></label>
 					<input type="text" name="email" id="email" value="<?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
 				</td>
 			</tr>

@@ -1,11 +1,16 @@
+<style type="text/css">
+div.notify-message { margin-bottom:10px; margin-bottom:14px;}    
+div.notify-message ul.messages { padding-bottom:14px;border-bottom:1px solid #CCCCCC;}   
+</style>
 <div class="head_result"><?php echo $this->__('Address Book') ?></div> 
+<div class="notify-message">
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?> 
+</div>
 <div class="acctn_personal">
 <div class="rad_8 btn_block" style="margin:0px;">  
 	<button type="button" onclick="window.location='<?php echo $this->getAddAddressUrl() ?>';" title="<?php echo $this->__('Add New Address') ?>" class="button"><span><span><?php echo $this->__('Add New Address') ?></span></span></button>
 </div> 
-    <div class="col-1 addresses-primary" style="width:400px;">
-        <h2><?php echo $this->__('Default Addresses') ?></h2> 
+    <div class="col-1 addresses-primary" style="width:400px;"> 
         <?php if($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultBilling()): ?>
             <div class="user_content" style="width:350px;">
 				<div class="head_result" style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;"><?php echo $this->__('DEFAULT BILLING ADDRESS') ?></div>

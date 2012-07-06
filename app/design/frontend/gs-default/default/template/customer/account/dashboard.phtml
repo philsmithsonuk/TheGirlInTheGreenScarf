@@ -1,6 +1,12 @@
+<style type="text/css">
+div.notify-message { margin-bottom:10px; margin-bottom:14px;}    
+div.notify-message ul.messages { padding-bottom:14px;}   
+</style>
 <div class="user_acctn"> 
-    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?> 
     <?php echo $this->getChildHtml('hello') ?>
+	<div class="notify-message">	
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?> 
+	</div>
     <?php echo $this->getChildHtml('info') ?>
 	<?php echo $this->getChildHtml('address') ?> 
 	<div class="clear"></div>
