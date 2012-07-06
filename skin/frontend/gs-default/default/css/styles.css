@@ -1143,7 +1143,8 @@ ul.dbrands li .desc_bname a:hover {
 }
 .account_content select {
 	padding:4px;
-	width:310px;
+	/*width:310px;*/
+	width: 321px;
 	color:#606163;
 }
 .account_content input.error_field[type="text"]{
@@ -1266,7 +1267,8 @@ ul.dbrands li .desc_bname a:hover {
 }
 .acctn_personal select {
 	padding:4px;
-	width:310px;
+	/*width:310px;*/
+	width: 321px;
 	color:#606163;
 }
 .acctn_personal input.error_field[type="text"]{
@@ -1769,9 +1771,13 @@ ul.dbrands li .desc_bname a:hover {
 select.error_field{
 	border:1px solid #EF132D;
 }
-
+/** MESSAGES **/
 .validation-advice {
 	color: #79A341;
+	font-size:10px;
+}
+ul.messages{
+	color:#77A33F;
 }
 
 /*------------------------body begin------------------------*/
