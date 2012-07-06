@@ -58,7 +58,7 @@
 			<td>
 				<div class="fleft">
 					<label for="<?php echo $_code ?>_expiration">*<?php echo $this->__('Expiration Date') ?></label>
-					<select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry" style="width:125px">
+					<select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry" style="width:115px">
 						<?php $_ccExpMonth = $this->getInfoData('cc_exp_month') ?>
 						<?php foreach ($this->getCcMonths() as $k=>$v): ?>
 							<option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpMonth): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
@@ -69,7 +69,7 @@
 				<div class="fright">
 					<?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
 					<label>&nbsp;</label>
-					<select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry" style="width:100px">
+					<select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry" style="width:90px">
 					<?php foreach ($this->getCcYears() as $k=>$v): ?>
 						<option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpYear): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
 					<?php endforeach ?>
