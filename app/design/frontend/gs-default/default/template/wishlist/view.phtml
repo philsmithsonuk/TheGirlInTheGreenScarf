@@ -1,10 +1,16 @@
+ <style type="text/css">
+div.notify-message { margin-bottom:10px; margin-bottom:14px;}    
+div.notify-message ul.messages { padding-bottom:14px;border-bottom:1px solid #CCCCCC;}   
+</style>
  <?php if ($this->helper('wishlist')->isAllow()) : ?>
  <div class="head_result"><?php echo __('My Wishlists');?></div>
 <div class="acctn_wishlist">
 	<?php if ($this->helper('wishlist')->isRssAllow() && $this->hasWishlistItems()): ?>
 		<a href="<?php echo $this->helper('wishlist')->getRssUrl($this->getWishlistInstance()->getId()); ?>" class="link-rss"><?php echo $this->__('RSS Feed') ?></a>
 	<?php endif; ?>
-   <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="notify-message">
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?> 
+</div>
 	<form id="wishlist-view-form" action="<?php echo $this->getUrl('*/*/update', array('wishlist_id' => $this->getWishlistInstance()->getId())) ?>" method="post">
  		<?php if ($this->hasWishlistItems()): ?>
 				<?php echo $this->getBlockHtml('formkey');?>

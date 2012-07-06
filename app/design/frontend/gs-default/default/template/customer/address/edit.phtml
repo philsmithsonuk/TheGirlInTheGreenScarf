@@ -14,7 +14,7 @@
 	</tr>
 	<tr>
 		<td>
-			<label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label> 
+			<label for="telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label> 
 			<input type="text" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text  <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" />
 		</td>
 	</tr>           
@@ -27,13 +27,13 @@
 	</tr>   
 	   <tr>
 		<td>
-			<label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>			 
+			<label for="country" class="required"><?php echo $this->__('Country') ?><em>*</em></label>			 
 				<?php echo $this->getCountryHtmlSelect() ?>
 	  </td>
 	</tr> 	
 	<tr>
 		<td> 
-			<label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label> 
+			<label for="zip" class="required"><?php echo $this->__('Zip/Postal Code') ?><em>*</em></label> 
 			<input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
 		<div class="btn-dynamic" id="postcode_finder_btn" style="display:none;position:relative;"> <br/>
 					<div class="rad_8 btn_block" style="float:none;width:89px;">  
@@ -61,7 +61,7 @@
 	<tr>
 		<td> 
         <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?> 
-                <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label> 
+                <label for="street_1" class="required"><?php echo $this->__('Street Address') ?><em>*</em></label> 
                     <input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text <?php echo $_streetValidationClass ?>" />
         	  </td>
 	</tr>  
@@ -84,7 +84,7 @@
 		<?php endif; ?> 
 		<tr>
 		  <td>  
-				<label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>			 
+				<label for="city" class="required"><?php echo $this->__('City') ?><em>*</em></label>			 
                 <input type="text" name="city" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />
 		 </td>
 		</tr>   
