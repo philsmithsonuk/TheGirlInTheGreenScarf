@@ -949,6 +949,9 @@ ol#cart-item-list .item-options dd {
 	font-size:11px;
 	margin:5px 0px;
 	line-height:1.4em;
+	min-height:120px;
+	height:auto !important;
+	height:120px;
 }
 .detail_description .pdescription p {
 	padding-bottom:8px;
@@ -1878,6 +1881,171 @@ ul.messages{
 .price-box span.price {
 	font-weight:700;
 	font-size:13px;
+}
+/**********************************************************************/
+/************************ Product jQZoom ******************************/
+.detail_tn .btn-prev {
+    text-align:center;
+    margin-bottom:40px;
+}
+.detail_tn .btn-next {
+    text-align:center;
+}
+.detail_tn .btn-prev a.prev {
+    background: url(../images/graydirt_sprite_png.png) no-repeat scroll -344px 0 transparent;
+    height: 20px;
+    width: 33px;
+    display: block;
+    position: absolute;
+    left: 46px;
+}
+.detail_tn .btn-prev a.prev:hover {
+    background: url(../images/graydirt_sprite_png.png) no-repeat scroll -377px 0 transparent;
+}
+.detail_tn .btn-next a.next {
+    background: url(../images/graydirt_sprite_png.png) no-repeat scroll -278px 0 transparent;
+    height: 20px;
+    width: 33px;
+    display: block;
+    position: absolute;
+    left: 46px;
+}
+.detail_tn .btn-next a.next:hover {
+    background: url(../images/graydirt_sprite_png.png) no-repeat scroll -311px 0 transparent;
+}
+/**********************************************************************/
+/********************* Related Products List **************************/
+#related-product-list {
+	margin:0 auto 20px;
+	width:960px;
+	height:173px;
+	position:relative;
+	padding:0px 0px 0px 0px;
+}
+#related-product-list .carousel {
+	padding:0px 53px 0px 53px;
+	width:854px;
+}
+#related-product-list .carousel button { /*Don't remove this. we still use this for individual demos. only the front pages use images as of now*/
+	float: left;
+}
+#related-product-list .carousel .btn-prev{
+	width:24px;
+	height:39px;
+	position:absolute;
+	left:7px;
+	top:100px;
+	z-index:500;
+}
+#related-product-list .carousel .btn-prev a.prev {
+	color:#000;
+	width:24px;
+	height:39px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:400;
+	background:url(../images/graydirt_sprite_png.png) no-repeat -134px 0px;
+	display:block;
+	text-indent:-1000px;
+}
+#related-product-list .carousel .btn-prev a.prev:hover {
+	text-decoration: none;
+	color:#0c6b77;
+	display:block;
+	background:url(../images/graydirt_sprite_png.png) no-repeat -158px 0px;
+}
+#related-product-list .carousel .btn-prev a.disabled, #related-product-list .carousel .btn-prev a.disabled:active {
+	color:#000;
+	width:24px;
+	height:39px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:400;
+	background:url(../images/graydirt_sprite_png.png) no-repeat -182px 0px !important;
+	display:block;
+	text-indent:-1000px;
+	cursor:auto;
+}
+#related-product-list .carousel .btn-next{
+	width:24px;
+	height:39px;
+	position:absolute;
+	top:100px;
+	right:7px;
+	z-index:500;
+}
+#related-product-list .carousel .btn-next a.next {
+	color:#000;
+	width:24px;
+	height:39px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:400;
+	background:url(../images/graydirt_sprite_png.png) no-repeat -254px 0px;
+	display:block;
+	text-indent:-1000px;
+}
+#related-product-list .carousel .btn-next a.next:hover {
+	text-decoration: none;
+	color:#0c6b77;
+	display:block;
+	background:url(../images/graydirt_sprite_png.png) no-repeat -230px 0px;
+}
+#related-product-list .carousel .btn-next a.disabled, #related-product-list .carousel .btn-next a.disabled:active {
+	color:#000;
+	width:24px;
+	height:39px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:400;
+	background:url(../images/graydirt_sprite_png.png) no-repeat -206px 0px !important;
+	display:block;
+	text-indent:-1000px;
+	cursor:auto;
+}
+#related-product-list .carousel .jCarouselLite {
+	float: left;
+	/* Needed for rendering without flicker */
+     position: relative;
+	visibility: hidden;
+	left: -5000px;
+}
+#related-product-list .carousel ul {
+	margin: 0;
+}
+#related-product-list .carousel li{
+	height:124px;
+	width:200px;
+	margin:0px 13px 0px 0px;
+	overflow:hidden;
+	float:left;
+	position:relative;
+}
+#related-product-list .carousel li .img_wrapper{
+	float:left;
+	margin:0px 2px 0px 0px;
+}
+#related-product-list .carousel li .prod_name{
+	float:left;
+	font-size:13px;
+	color:#7aa83d;
+	padding:42px 0px 0px 0px;
+}
+#related-product-list .carousel li .prod_name a{
+	text-decoration:none;
+	color:#7aa83d;
+}
+#related-product-list .carousel li .prod_name a:hover{
+	text-decoration:underline;
+}
+#related-product-list .carousel li .prod_name span{
+	display:block;
+	font-size:11px;
+	color:#606163;
 }
 /*------------------------footer ends------------------------*/
 /*clark fortuna - http://www.graydirt.com*/
