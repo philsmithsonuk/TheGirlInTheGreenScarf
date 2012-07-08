@@ -99,8 +99,11 @@
         
 		<reference name="head">
 			<action method="addItem"><type>skin_css</type><name>css/jquery/jquery-ui-1.8.21.custom.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/jquery/jquery.jqzoom.css</name></action>
 			<action method="addJs"><script>jquery/jquery-1.7.1.min.js</script></action>
 			<action method="addJs"><script>jquery/jquery-ui-1.8.21.custom.min.js</script></action>
+			<action method="addJs"><script>jquery/jquery.jqzoom-core-pack.js</script></action>
+            <action method="addJs"><script>jquery/jcarousellite_1.0.1.js</script></action>
             // add our extended product.js
             <action method="addItem"><type>skin_js</type><name>js/productExt.js</name></action>
 		</reference>
