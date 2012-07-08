@@ -1,4 +1,6 @@
 /**
+ * Based from Magento Enterprise Edition Enterprise.TopCart Class
+ * 
  * @author: Awesemo
  * @email : xdreucker@gmail.com
  * Copyrights 2012
