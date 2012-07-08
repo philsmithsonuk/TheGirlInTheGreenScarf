@@ -310,7 +310,7 @@ Product.Config.prototype.showFullImageDiv = function(productId, parentId) {
 
     //TODO: This is needed to reinitialise Product.Zoom correctly,
     //but there's still a race condition (in the onComplete below) which can break it
-    try {product_zoom.draggable.destroy();} catch(x) {}
+    //try {product_zoom.draggable.destroy();} catch(x) {}
 
     if(productId) {
 		$$('div.scp-please-wait').each(function(el) {el.show()});
@@ -334,11 +334,17 @@ Product.Config.prototype.showFullImageDiv = function(productId, parentId) {
                     product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint')
                 }
 */
+                if ($('image')) {
+                    initProductZoom();
+                }
           }
         });
     } else {
         destElement.innerHTML = defaultZoomer;
         //product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
+    }
+    if ($('image')) {
+        initProductZoom();
     }
 };
 
