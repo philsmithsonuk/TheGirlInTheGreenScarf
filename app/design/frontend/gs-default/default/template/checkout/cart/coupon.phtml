@@ -47,15 +47,17 @@ $discount = $quote->getSubtotal() - $quote->getSubtotalWithDiscount();
 			<button onclick="discountForm.submit(false)"><span>Update</span></button>
 		</div>
 		
-		<!-- Enter your promotion code (if applicable) and click update. -->
-		<input type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape( $this->getCouponCode()) ?>" style="color:#000">
+		<!-- Enter your promotion code (if applicable) and click update. -->		
+		<input type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape( $this->getCouponCode()) ?>" style="color:#000">		
 		<label><?php echo $this->__('Promotional Code') ?></label>
 		<div class="clear"></div>
 	</div>
+	
 </form>
 <script type="text/javascript">
 //<![CDATA[
 var discountForm = new VarienForm('discount-coupon-form');
+
 discountForm.submit = function (isRemove) {
     if (isRemove) {
         $('coupon_code').removeClassName('required-entry');
