@@ -62,7 +62,7 @@
 		<div class="e_delivery">
 			<p><?php echo $this->helper('checkout')->getQuote()->getStore()->formatPrice($this->getShippingExcludeTax(),false) ?></p>
 			<p></p>
-			<p>Estimated Delivery<span>Based on standard UK delivery. See more <a href="#">Delivery Information</a>.</span></p>
+			<p>Estimated Delivery<span>Based on standard UK delivery. See more <a href="<?php echo $this->getUrl('').'delivery-information';?>">Delivery Information</a>.</span></p>
 			<div class="clear"></div>
 		</div>
 	<?php else: ?>

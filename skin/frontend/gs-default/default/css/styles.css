@@ -489,6 +489,8 @@ ol#cart-item-list .item-options dd {
 	color:#606163;
 	background:url(../images/graydirt_sprite_png.png) no-repeat 0 0;
 	border: medium none;
+	cursor: pointer;
+	cursor: hand;
 }
 .form-search {
     position: relative;
@@ -1503,6 +1505,14 @@ ul.dbrands li .desc_bname a:hover {
 	float:right;
 	font-weight:700;
 }
+
+.shopping_bag .procode .validation-advice {
+	float: right;
+    margin-right: -202px;
+    padding-top: 26px;
+    width: 201px;
+}
+
 .shopping_bag .head_result {
 	background:#606163;
 	padding:15px 20px;
@@ -1540,6 +1550,8 @@ ul.dbrands li .desc_bname a:hover {
 	background:none;
 	border:none;
 	padding:4px 10px 5px;
+	cursor: pointer;
+	cursor: hand;
 }
 .shopping_bag .btn_block span{
 	position:static;
@@ -1561,6 +1573,8 @@ ul.dbrands li .desc_bname a:hover {
 	background:none;
 	border:none;
 	padding:3px 10px 4px;
+	cursor: pointer;
+	cursor: hand;
 }
 .shopping_bag .btn_block2 span{
 	position:static;
@@ -1735,6 +1749,8 @@ ul.dbrands li .desc_bname a:hover {
 	background:none;
 	border:none;
 	padding:5px 20px 6px;
+	cursor: pointer;
+	cursor: hand;
 }
 .checkout_block .btn_block span{
 	position:static;
@@ -1756,6 +1772,8 @@ ul.dbrands li .desc_bname a:hover {
 	background:none;
 	border:none;
 	padding:3px 10px 4px;
+	cursor: pointer;
+	cursor: hand;
 }
 .checkout_block .btn_block2 span{
 	position:static;
@@ -1833,6 +1851,8 @@ ul.messages{
 	color:#606163;
 	background:url(../images/graydirt_sprite_png.png) no-repeat 0 0;
 	border: medium none;
+	cursor: pointer;
+	cursor: hand;
 }
 #footer_1 .pcontent .subscription-email, 
 #footer_1 .pcontent .subscription-action {

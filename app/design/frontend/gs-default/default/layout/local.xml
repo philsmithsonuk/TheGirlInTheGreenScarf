@@ -27,7 +27,7 @@
 			 <action method="setTemplate"><template>page/gs-2columns-left.phtml</template></action>
 			<reference name="top.links">
 				<!-- Add the Signup Link to top links in the header block -->
-				<action method="addLink" translate="label title">
+				<!--<action method="addLink" translate="label title">
 					<label>SIGN UP FOR EMAIL</label>
 					<url helper="core/url/getHomeUrl"/>
 					<title>SIGN UP FOR EMAIL</title>
@@ -37,7 +37,7 @@
 					<liParams/>
 					<beforeText></beforeText>
 					<afterText><![CDATA[<span>|</span>]]></afterText>
-				</action>
+				</action>-->
 				<remove name="wishlist_link"/>
 				<remove name="checkout_cart_link"/>
 			</reference>
