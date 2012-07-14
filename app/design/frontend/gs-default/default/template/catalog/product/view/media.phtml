@@ -3,15 +3,15 @@
     $_helper = $this->helper('catalog/output');
 ?>
 <div class="more-views detail_tn" style="height:458px;">
-<?php if (count($this->getGalleryImages()) > 0): ?>
+<?php if (($galleryItemCount = count($this->getGalleryImages())) > 0): ?>
     <div class="btn-prev">
-        <a href="javascript:void(0);" class="prev"></a>
+        <a href="javascript:void(0);" class="prev disabled"></a>
     </div>
     <div class="gallery-carousel" style="height:400px;">
         <ul id="thumblist">
         <?php foreach ($this->getGalleryImages() as $_image): ?>
             <li>
-                <a rel="{gallery: 'product-gallery', smallimage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(305,456); ?>',largeimage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(510,912); ?>'}" href="javascript:void(0);" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
+                <a rel="{gallery: 'product-gallery', smallimage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(305,456); ?>',largeimage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(610,912); ?>'}" href="javascript:void(0);" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
                     <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(69,104); ?>" width="69" height="104" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
                 </a>
             </li>
@@ -20,7 +20,7 @@
         <div class="clear"></div>
     </div>
     <div class="btn-next">
-        <a href="javascript:void(0);" class="next"></a>
+        <a href="javascript:void(0);" class="next<?php if($galleryItemCount<=3):?> disabled<?php endif; ?>"></a>
     </div>
 <?php else: ?>
 	&nbsp;
@@ -28,7 +28,7 @@
 </div>
 <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
 <div class="product-image product-image-zoom detail_large">
-    <a rel='product-gallery' href="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(510,912) ?>" class="jqzoom-image">
+    <a rel='product-gallery' href="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(610,912) ?>" class="jqzoom-image">
 	<?php
 		$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(305,456).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
 		echo $_helper->productAttribute($_product, $_img, 'image');
