@@ -2,6 +2,9 @@
 div.notify-message { margin-bottom:10px; margin-bottom:14px;}    
 div.notify-message ul.messages { padding-bottom:14px;border-bottom:1px solid #CCCCCC;}   
 </style>
+<style type="text/css">
+	.btn_block,.btn_block *{cursor:pointer;}
+</style>    
 <div class="head_result"><?php echo $this->__('Address Book') ?></div> 
 <div class="notify-message">
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?> 
