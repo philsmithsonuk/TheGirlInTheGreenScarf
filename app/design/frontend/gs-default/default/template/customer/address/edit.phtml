@@ -129,7 +129,8 @@
 	
 	</table> 
 </form>
-<script type="text/javascript">
+<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannerslider/jquery-1.4.2.min.js') ?>"></script>
+<script type="text/javascript"> 
 //<![CDATA[
     var dataForm = new VarienForm('form-validate', true);
     new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
