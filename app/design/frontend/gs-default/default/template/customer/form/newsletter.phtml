@@ -4,6 +4,10 @@
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <?php echo $this->getChildHtml('form_before')?>
 <div class="acctn_personal">
+ 
+			<div class="rad_8 btn_block" style="margin:0px;"> 
+				<button type="submit" title="<?php echo $this->__('Save') ?>" class="button"><span><?php echo $this->__('Save Changes') ?></span></button>
+			</div>  
 	<form action="<?php echo $this->getAction() ?>" method="post" id="form-validate">
 		<div class="fieldset">
 			<?php echo $this->getBlockHtml('formkey')?>
@@ -14,11 +18,6 @@
 				<?php /* Extensions placeholder */ ?>
 				<?php echo $this->getChildHtml('customer.form.newsletter.extra')?>
 			</ul>
-		</div>
-		<div class="buttons-set">
-		<div class="rad_8 btn_block"> 
-			<button type="submit" title="<?php echo $this->__('Save') ?>" class="button"><span><?php echo $this->__('Save') ?></span></button>
-		</div> 
 		</div>
 	</form>
 </div>

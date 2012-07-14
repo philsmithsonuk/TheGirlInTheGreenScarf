@@ -49,7 +49,8 @@
 	position:relative;ss
 }
 .data-table thead th {
-    background: url("<?php echo $this->getSkinUrl();?>images/bkg_th.gif") repeat-x scroll 0 100% #D9E5EE;
+    /*background: url("<?php //echo $this->getSkinUrl();?>images/bkg_th.gif") repeat-x scroll 0 100% #D9E5EE;*/
+	background-color:#DFDFE0;
 }
 .data-table thead th {
     border-right: 1px solid #C2D3E0;
@@ -76,6 +77,11 @@ caption, th, td {
 }
 .nobr {
     white-space: nowrap !important;
+}
+table#my-orders-table a{ 
+}
+table#my-orders-table a:hover{
+	color:#77A33F;
 }
 </style>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>

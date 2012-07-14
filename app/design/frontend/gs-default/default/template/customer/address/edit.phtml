@@ -6,12 +6,14 @@
 <?php endif; ?> 
 <div class="acctn_personal">
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<div class="rad_8 btn_block" style="margin:0px;">  
+	<button type="submit" title="<?php echo $this->__('Save Address') ?>" class="button"><span><span><?php echo $this->__('Save Address') ?></span></span></button>
+</div>			
 <form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate">
 
  <table width="100%" border="0" cellspacing="0" cellpadding="0">  
-	<tr>
-		<td><?php echo $this->getNameBlockHtml() ?></td>
-	</tr>
+	<?php echo $this->getNameBlockHtml() ?> 
 	<tr>
 		<td>
 			<label for="telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label> 
@@ -122,14 +124,6 @@
                     <input type="hidden" name="default_shipping" value="1" />
                 <?php endif; ?>
             </li> 
-	</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="rad_8 btn_block">  
-				<button type="submit" title="<?php echo $this->__('Save Address') ?>" class="button"><span><span><?php echo $this->__('Save Address') ?></span></span></button>
-			</div>				
-		   <p class="required"><?php echo $this->__('* Required Fields') ?></p>
 		</td>
 	</tr> 
 	
