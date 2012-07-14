@@ -106,42 +106,12 @@ caption, th, td {
 }
 .data-table td {
     padding: 3px 8px;
-}
-.buttons-set button.button {
-    float: right;
-    margin-left: 5px;
-}
-button.button {
-    background: none repeat scroll 0 0 transparent;
-    border: 0 none;
-    cursor: pointer;
-    margin: 0;
-    overflow: visible;
-    padding: 0;
-    width: auto;
-}
-button.button {
-}
+} 
 input, select, textarea, button {
     color: #2F2F2F;
     font: 12px/15px Arial,Helvetica,sans-serif;
     vertical-align: middle;
-}
-button.button span span {
-    border: 0 none;
-    padding: 0;
-}
-button.button span {
-    background: none repeat scroll 0 0 #F18200;
-    border: 1px solid #DE5400;
-    color: #FFFFFF;
-    display: block;
-    font: bold 12px/19px Arial,Helvetica,sans-serif;
-    height: 19px;
-    padding: 0 8px;
-    text-align: center;
-    white-space: nowrap;
-}
+}  
 .data-table tfoot tr {
     background-color: #DEE5E8 !important;
 }
@@ -184,6 +154,34 @@ address {
     padding: 8px 0 0;
     text-align: right;
 }
+
+.btn_block{
+	background: url("<?php echo $this->getSkinUrl();?>images/btn_bg1.jpg") repeat-x scroll 0 0 transparent;
+    float: right;
+    margin: 0 280px 0 0;
+    padding: 6px 20px 7px;
+    position: relative;
+}
+.rad_8 {
+    border-radius: 8px 8px 8px 8px;
+    position: relative;
+}
+.btn_block button {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+}
+.btn_block span {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    position: static;
+}
+.acctn_personal span {
+    font-size: 11px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
 </style>
 </head>
 <body class="page-print<?php echo $this->getBodyClass()?$this->getBodyClass():'' ?>">
@@ -196,8 +194,11 @@ address {
     </div>
     <?php echo $this->getChildHtml('content') ?>
     <div class="buttons-set">
-        <button type="button" title="<?php echo $this->__('Close Window') ?>" class="button" onclick="window.close();"><span><span><?php echo $this->__('Close Window') ?></span></span></button>
-    </div>
+    <div class="rad_8 btn_block" style="margin:0px;">  
+		<button type="submit" onclick="window.close();" title="<?php echo $this->__('Close Window') ?>" class="button"><span><span><?php echo $this->__('Close Window') ?></span></span></button>
+	</div>	      
+	</div>
+	
     <?php echo $this->getAbsoluteFooter() ?>
 </div>
 </body>
