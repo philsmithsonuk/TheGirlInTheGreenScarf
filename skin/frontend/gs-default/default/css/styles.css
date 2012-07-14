@@ -1841,6 +1841,7 @@ ul.messages{
 #footer_1 .pcontent .validation-advice {
 	color: #E6D3A9;
 	width: 216px;
+    font-size: smaller;
 }
 /**********************************************************************/
 #footer_2{
@@ -1902,6 +1903,15 @@ ul.messages{
 .detail_tn .btn-prev a.prev:hover {
     background: url(../images/graydirt_sprite_png.png) no-repeat scroll -377px 0 transparent;
 }
+.detail_tn .btn-prev a.disabled, .detail_tn .btn-prev a.disabled:active {
+    background: url(../images/graydirt_sprite_png.png) no-repeat scroll -344px 0 transparent !important;
+    height: 20px;
+    width: 33px;
+    display: block;
+    position: absolute;
+    left: 46px;
+    cursor: auto;
+}
 .detail_tn .btn-next a.next {
     background: url(../images/graydirt_sprite_png.png) no-repeat scroll -278px 0 transparent;
     height: 20px;
@@ -1912,6 +1922,15 @@ ul.messages{
 }
 .detail_tn .btn-next a.next:hover {
     background: url(../images/graydirt_sprite_png.png) no-repeat scroll -311px 0 transparent;
+}
+.detail_tn .btn-next a.disabled, .detail_tn .btn-next a.disabled:active {
+    background: url(../images/graydirt_sprite_png.png) no-repeat scroll -278px 0 transparent !important;
+    height: 20px;
+    width: 33px;
+    display: block;
+    position: absolute;
+    left: 46px;
+    cursor: auto;
 }
 /**********************************************************************/
 /********************* Related Products List **************************/
