@@ -1930,7 +1930,7 @@ ul.messages{
     display: block;
     position: absolute;
     left: 46px;
-    cursor: auto;
+    cursor:default;
 }
 .detail_tn .btn-next a.next {
     background: url(../images/graydirt_sprite_png.png) no-repeat scroll -278px 0 transparent;
@@ -1950,7 +1950,7 @@ ul.messages{
     display: block;
     position: absolute;
     left: 46px;
-    cursor: auto;
+    cursor:default;
 }
 /**********************************************************************/
 /********************* Related Products List **************************/
@@ -2005,7 +2005,7 @@ ul.messages{
 	background:url(../images/graydirt_sprite_png.png) no-repeat -182px 0px !important;
 	display:block;
 	text-indent:-1000px;
-	cursor:auto;
+	cursor:default;
 }
 #related-product-list .carousel .btn-next{
 	width:24px;
@@ -2044,7 +2044,7 @@ ul.messages{
 	background:url(../images/graydirt_sprite_png.png) no-repeat -206px 0px !important;
 	display:block;
 	text-indent:-1000px;
-	cursor:auto;
+    cursor:default;
 }
 #related-product-list .carousel .jCarouselLite {
 	float: left;
