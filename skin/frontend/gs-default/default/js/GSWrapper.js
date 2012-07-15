@@ -1,5 +1,5 @@
 /**
- * Based from Magento Enterprise Edition Enterprise.TopCart Class
+ * Wrapper Class
  * 
  * @author: Awesemo
  * @email : xdreucker@gmail.com
@@ -9,6 +9,10 @@ if (!window.GSWrapper) {
     window.GSWrapper = {};
 }
 
+/**
+ * Based from Magento Enterprise Edition Enterprise.TopCart Class
+ * handles top cart animation
+ */
 GSWrapper.HeaderCart = {
     initialize: function (container) {
         this.container = $(container);
@@ -56,8 +60,11 @@ GSWrapper.HeaderCart = {
             this.interval = setTimeout(this.hideCart.bind(this), this.timePeriod);
         }
     },
-    hideCart: function () {
-        if (!$(this.container.id).hasClassName('process') && $(this.elementHeader).hasClassName('show')) {
+    hideCart: function (immediate) {
+        if (typeof(immediate)=="undefined") {
+            immediate = false;
+        }
+        if (!$(this.container.id).hasClassName('process') && $(this.elementHeader).hasClassName('show') || immediate) {
             new Effect.SlideUp(this.container.id, { duration: 0.5,
                 beforeStart: function(effect) {$( effect.element.id ).addClassName('process');},
                 afterFinish: function(effect) {
