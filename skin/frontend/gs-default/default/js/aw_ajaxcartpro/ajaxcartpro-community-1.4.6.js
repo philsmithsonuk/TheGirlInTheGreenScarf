@@ -144,8 +144,8 @@ function updateCartView(resp){
         /** Added by Awesemo
          * Trigger Slide Down Cart Status in Header when cart is updated
          */
-         //GSWrapper.HeaderCart.initialize('header-bag-items');
         if (GSWrapper && GSWrapper.HeaderCart) {
+            GSWrapper.HeaderCart.initialize('header-bag-items');
             GSWrapper.HeaderCart.showCart(4);
         }
     }
