@@ -100,6 +100,7 @@ Product.Config.prototype.convertToLabel =  function(elem) {
 			ProductDefaults.addToDefault(childProductId, this);
 		}
 	}
+    elem.selectedIndex = 1;
 	$(elem).setStyle({"visibility":"hidden"});
 };
 
