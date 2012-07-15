@@ -40,10 +40,12 @@
 		<td> 
 			<label for="zip" class="required"><?php echo $this->__('Zip/Postal Code') ?><em>*</em></label> 
 			<input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
-		<div class="btn-dynamic" id="postcode_finder_btn" style="display:none;position:relative;"> <br/>
-					<div class="rad_8 btn_block" style="float:none;width:89px;">  
-						<button type="button" id="postcode_finder" title="<?php echo $this->__('Find Address') ?>" class="button"><span><span><?php echo $this->__('Find Address') ?></span></span></button>
-				   </div>
+			<div style="position:relative;">
+				<div class="btn-dynamic" id="postcode_finder_btn" style="display:none;position:absolute;left: 327px;position: absolute;top: -45px;"> <br/>
+						<div class="rad_8 btn_block" style="float:none;width:89px;">  
+							<button type="button" id="postcode_finder" title="<?php echo $this->__('Find Address') ?>" class="button"><span><span><?php echo $this->__('Find Address') ?></span></span></button>
+					   </div>
+				</div>
 			</div>
 		   </td>
 	</tr> 
@@ -142,7 +144,7 @@
 	if (CraftyPostcodeCreate) {
 				addressPostCodeObj = CraftyPostcodeCreate();
 				addressPostCodeObj.set("access_token","<?php echo $conf['craftyclicks']['access_token'];?>");
-				addressPostCodeObj.set("max_width", '260px');
+				addressPostCodeObj.set("max_width", '321px');
 				addressPostCodeObj.set("result_elem_id", 'address_result');
 				addressPostCodeObj.set("elem_company", 'company');
 				addressPostCodeObj.set("elem_street1", 'street_1');
