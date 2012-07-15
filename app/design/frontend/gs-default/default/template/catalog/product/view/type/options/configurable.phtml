@@ -10,7 +10,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 		</td>
 		<td>
 			<div class="input-box">
-				<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+				<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select" style="width:125px;">
 					<option><?php echo $this->__('Choose an Option...') ?></option>
 				</select>
 			</div>
