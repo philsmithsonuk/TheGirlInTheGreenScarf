@@ -1,6 +1,15 @@
 <?php
 class Magestore_Onestepcheckout_Block_Onestepcheckout extends Mage_Checkout_Block_Onepage_Abstract {
 	var $configData = array();
+
+    public function _prepareLayout() {
+        if ($breadcrumbs = $this->getLayout()->getBlock('breadcrumbs')) {
+            $breadcrumbs->addCrumb('home', array('label'=>Mage::helper('onestepcheckout')->__('Home'), 'title'=>Mage::helper('customer')->__('Go to Home Page'), 'link'=>Mage::getBaseUrl()));
+            $breadcrumbs->addCrumb('checkout', array('label'=>Mage::helper('onestepcheckout')->__('Checkout'), 'title'=>Mage::helper('customer')->__('Checkout')));
+        }
+        parent::_prepareLayout();
+    }
+
 	public function __construct() {
 		$this->configData = $this->_getConfigData();
 		//when customer is logged in, we need to set postcode from customer address
