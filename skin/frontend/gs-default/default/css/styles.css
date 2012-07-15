@@ -253,6 +253,9 @@ input[type="button"] {
 	position:relative;
 	min-width:146px;
 }
+#header_wrapper .shop_bag .status span {
+    float:left;
+}
 /*
 #header_wrapper .shop_bag .success-msg {
     color: #FFFFFF;
@@ -290,8 +293,10 @@ input[type="button"] {
 	/*width:22px;*/
 	width:10px;
 	height:12px;
-	margin:2px 0 0 5px;
-	float:right;
+	/*margin:2px 0 0 5px;*/
+    margin:2px 0 0 10px;
+	/*float:right;*/
+    float:left;
 }
 #header_wrapper .block-cart .show .arrow{
 	background: url(../images/arrow_basket_up.png) no-repeat scroll center center transparent;
