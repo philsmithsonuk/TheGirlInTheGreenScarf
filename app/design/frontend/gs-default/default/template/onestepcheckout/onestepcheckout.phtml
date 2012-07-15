@@ -3,8 +3,15 @@
 
 <div class="checkout_wrapper">
 	
-	<div class="detail_title"><?php echo $this->__('Please enter your details below to complete your purchase.');?></div>
-  
+	<div class="detail_title">
+         <?php echo $this->__('Please enter your details below to complete your purchase.');?><br/>
+        <?php if ($this->isShowLoginLink() && !$this->isCustomerLoggedIn()):?>
+            <a href="#" id="show-login" onclick ="showloginbox();return false;" style="font-size:11px;color:#606163">
+                <?php echo $this->configData['login_link_title'] ? $this->configData['login_link_title'] : $this->__('Already have an account? Click here to login')?>
+            </a>
+        <?php endif?>
+    </div>
+
 	<form id="one-step-checkout-form" method="post" action="<?php echo $this->getCheckoutUrl(); ?>">
   
 		<div class="checkout_block">
