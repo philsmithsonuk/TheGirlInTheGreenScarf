@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+    color: #0A263C;
+    line-height: 1.35;
+    margin: 0 0 5px;
+}
+
+.page-print {
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 25px 30px;
+    text-align: left;
+}
+.clearer:after, .header-container:after, .header-container .top-container:after, .header:after, .header .quick-access:after, #nav:after, .main:after, .footer:after, .footer-container .bottom-container:after, .col-main:after, .col2-set:after, .col3-set:after, .col3-layout .product-options-bottom .price-box:after, .col4-set:after, .search-autocomplete li:after, .block .block-content:after, .block .actions:after, .block li.item:after, .block-poll li:after, .block-layered-nav .currently li:after, .page-title:after, .products-grid:after, .products-list li.item:after, .box-account .box-head:after, .dashboard .box .box-title:after, .box-reviews li.item:after, .box-tags li.item:after, .pager:after, .sorter:after, .ratings:after, .add-to-box:after, .add-to-cart:after, .product-essential:after, .product-collateral:after, .product-view .product-img-box .more-views ul:after, .product-view .box-tags .form-add:after, .product-view .product-shop .short-description:after, .product-view .box-description:after, .product-options .options-list li:after, .product-options-bottom:after, .product-review:after, .cart:after, .cart-collaterals:after, .cart .crosssell li.item:after, .opc .step-title:after, .checkout-progress:after, .multiple-checkout .place-order:after, .group-select li:after, .form-list li:after, .form-list .field:after, .buttons-set:after, .page-print .print-head:after, .advanced-search-summary:after, .gift-messages-form .item:after, .send-friend .form-list li p:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #0A263C;
+    line-height: 1.35;
+    margin: 0 0 5px;
+}
+
+.page-print .print-head {
+    margin: 0 0 15px;
+}
+.page-print .print-head .logo {
+    float: left;
+}
+.page-print h1 {
+    font-size: 16px;
+    font-weight: bold;
+}
+.page-print .order-date {
+    background: url("<?php echo $this->getSkinUrl();?>images/bkg_divider1.gif") repeat-x scroll 0 100% transparent;
+    margin: 0 0 10px;
+    padding: 0 0 10px;
+}
+.col2-set .col-1 {
+    float: left;
+    width: 48.5%;
+}
+.page-print h2, .page-print h3 {
+    font-size: 13px;
+    font-weight: bold;
+} 
+.data-table {
+    border: 1px solid #BEBCB7;
+    width: 100%;
+}
+table {
+    border: 0 none;
+    border-spacing: 0;
+    empty-cells: show;
+    font-size: 100%;
+}
+.data-table tfoot {
+    border-bottom: 1px solid #D9DDE3;
+}
+.data-table tr.last th, .data-table tr.last td {
+    border-bottom: 0 none !important;
+}
+.data-table thead th {
+    background: url("<?php echo $this->getSkinUrl();?>images/bkg_th.gif") repeat-x scroll 0 100% #D9E5EE;
+}
+.data-table thead th {
+    border-right: 1px solid #C2D3E0;
+    color: #0A263C;
+    font-weight: bold;
+    padding: 2px 8px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.data-table th {
+    font-weight: bold;
+    padding: 3px 8px;
+}
+caption, th, td {
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+}
+.data-table tbody.odd tr.border td, .data-table tbody.even tr.border td {
+    border-bottom: 1px solid #D9DDE3;
+}
+.data-table tbody.odd tr.border td, .data-table tbody.even tr.border td {
+    border-bottom: 1px solid #D9DDE3;
+}
+.data-table tbody.odd tr td, .data-table tbody.even tr td {
+    border-bottom: 0 none;
+}
+.data-table tr.last th, .data-table tr.last td {
+    border-bottom: 0 none !important;
+}
+.data-table tbody th, .data-table tbody td {
+    border-bottom: 1px solid #D9DDE3;
+    border-right: 1px solid #D9DDE3;
+}
+.data-table td {
+    padding: 3px 8px;
+}
+.buttons-set button.button {
+    float: right;
+    margin-left: 5px;
+}
+button.button {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    width: auto;
+}
+button.button {
+}
+input, select, textarea, button {
+    color: #2F2F2F;
+    font: 12px/15px Arial,Helvetica,sans-serif;
+    vertical-align: middle;
+}
+button.button span span {
+    border: 0 none;
+    padding: 0;
+}
+button.button span {
+    background: none repeat scroll 0 0 #F18200;
+    border: 1px solid #DE5400;
+    color: #FFFFFF;
+    display: block;
+    font: bold 12px/19px Arial,Helvetica,sans-serif;
+    height: 19px;
+    padding: 0 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+.data-table tfoot tr {
+    background-color: #DEE5E8 !important;
+}
+.data-table tfoot td {
+    border-bottom: 0 none;
+    border-right: 1px solid #D9DDE3;
+    padding-bottom: 1px;
+    padding-top: 1px;
+}
+.a-right {
+    text-align: right !important;
+}
+.data-table tr.last th, .data-table tr.last td {
+    border-bottom: 0 none !important;
+}
+.data-table tfoot td {
+    border-bottom: 0 none;
+    border-right: 1px solid #D9DDE3;
+    padding-bottom: 1px;
+    padding-top: 1px;
+}
+.data-table tfoot strong {
+    font-size: 16px;
+}
+strong {
+    font-weight: bold;
+}
+address {
+    font-style: normal;
+    line-height: 1.35;
+}
+.data-table thead th {
+   background:#DFDFE0;
+   background-color:#DFDFE0;
+}
+.buttons-set {
+    border-top: 1px solid #E4E4E4;
+    clear: both;
+    margin: 4em 0 0;
+    padding: 8px 0 0;
+    text-align: right;
+}
+</style>
+</head>
+<body class="page-print<?php echo $this->getBodyClass()?$this->getBodyClass():'' ?>">
+<div>
+    <div class="print-head">
+        <img src="<?php echo $this->getPrintLogoUrl() ? $this->getPrintLogoUrl() : $this->getSkinUrl('images/logo_print.gif') ?>" class="logo" alt="" />
+        <?php if ($this->getPrintLogoText()):?>
+            <address><?php echo nl2br($this->htmlEscape($this->getPrintLogoText())) ?></address>
+        <?php endif;?>
+    </div>
+    <?php echo $this->getChildHtml('content') ?>
+    <div class="buttons-set">
+        <button type="button" title="<?php echo $this->__('Close Window') ?>" class="button" onclick="window.close();"><span><span><?php echo $this->__('Close Window') ?></span></span></button>
+    </div>
+    <?php echo $this->getAbsoluteFooter() ?>
+</div>
+</body>
+</html>
