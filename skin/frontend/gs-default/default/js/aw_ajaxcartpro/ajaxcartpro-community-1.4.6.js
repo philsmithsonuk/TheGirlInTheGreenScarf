@@ -146,7 +146,7 @@ function updateCartView(resp){
          */
         if (GSWrapper && GSWrapper.HeaderCart) {
             GSWrapper.HeaderCart.initialize('header-bag-items');
-            GSWrapper.HeaderCart.showCart(4);
+            GSWrapper.HeaderCart.showCart(4,false);
         }
     }
     updateDeleteLinks();
