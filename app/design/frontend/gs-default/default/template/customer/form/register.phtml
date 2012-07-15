@@ -29,7 +29,7 @@ div.btn_block button{ cursor:pointer;}
                 </tr>
                 <tr>
                   <td><label><?php echo $this->__('Confirm Email Address*:');?></label>
-                      <input type="text" name="email" id="email_address" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                      <input type="text" name="email" id="confirm_email_address" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
 				  </td>
                 </tr>
 				
@@ -46,9 +46,11 @@ div.btn_block button{ cursor:pointer;}
 					<?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?>
 				<?php endif ?>
 				  <?php if ($this->isNewsletterEnabled()): ?>
+				  <?php $page = Mage::getModel('cms/page')->load('privacy-policy', 'identifier');?>
                 <tr>
                   <td><input id="is_subscribed" value="1"  title="<?php echo $this->__('Sign Up for Newsletter') ?>" name="is_subscribed" type="checkbox" <?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
-                    <div class="ppolicy"><strong><?php echo $this->__('Newsletter signup');?></strong><?php echo $this->__('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris');?> <a href="#"><?php echo $this->__('Privacy Policy');?></a>.</div></td>
+                    <div class="ppolicy"><strong><?php echo $this->__('Newsletter signup');?></strong>
+					<div style="margin-left:-22px;margin-top:10px;"><?php echo $this->__('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris');?> <a href="<?php echo $this->getUrl($page->getIdentifier());?>"><?php echo $this->__('Privacy Policy');?></a>.</div></div></td>
                 </tr>
 				<?php endif;?>
 				 <?php if($this->getShowAddressFields()): ?>

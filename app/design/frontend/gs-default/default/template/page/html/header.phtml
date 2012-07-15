@@ -6,6 +6,9 @@
 			<strong><?php //echo $this->getLogoAlt() ?></strong>
 			<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
 	<?php endif?>
+</div>    
+<div style="position:relative;">
+  <p style="position:absolute;top:7px;color:#606163;right:32px;"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>
 </div>
 <div class="top_links">
 	<?php echo $this->getChildHtml('topLinks') ?>

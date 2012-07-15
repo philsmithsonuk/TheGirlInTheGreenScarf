@@ -1,14 +1,6 @@
 <?xml version="1.0"?> 
 
-<layout> 	
-	<customer_address_form>                             
-		<reference name="head"> 
-			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
-			<action method="addJs"><script>craftyclicks/craftyclicks_magento.js</script></action>
-		</reference>
-	</customer_address_form>			 
-	
-	
+<layout> 	  
 	<checkout_onepage_index>                             
 		<reference name="head">
 			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
