@@ -100,7 +100,7 @@ Product.Config.prototype.convertToLabel =  function(elem) {
 			ProductDefaults.addToDefault(childProductId, this);
 		}
 	}
-	$(elem).hide();
+	$(elem).setStyle({"visibility":"hidden"});
 };
 
 /**
@@ -170,7 +170,8 @@ Product.Config.prototype.resetElementState = function(element){
     if ($(labelId) !== null) {
         $(labelId).hide();
     }
-    element.show();
+    $(element).setStyle({"visibility":"visible"});
+    //element.show();
 };
 
 Product.Config.prototype.hasAllAttributeSet = function() {
