@@ -251,7 +251,7 @@ input[type="button"] {
 	color:#fff;
 	/*width:160px;*/
 	position:relative;
-	min-width:146px;
+	/*min-width:146px;*/
 }
 #header_wrapper .shop_bag .status span {
     float:left;
@@ -296,7 +296,7 @@ input[type="button"] {
 	/*margin:2px 0 0 5px;*/
     margin:2px 0 0 10px;
 	/*float:right;*/
-    float:left;
+    float:right;
 }
 #header_wrapper .block-cart .show .arrow{
 	background: url(../images/arrow_basket_up.png) no-repeat scroll center center transparent;
@@ -2090,6 +2090,9 @@ ul.messages{
 	display:block;
 	font-size:11px;
 	color:#606163;
+}
+#messages_product_view {
+    margin-bottom:10px;
 }
 /*------------------------footer ends------------------------*/
 /*clark fortuna - http://www.graydirt.com*/
