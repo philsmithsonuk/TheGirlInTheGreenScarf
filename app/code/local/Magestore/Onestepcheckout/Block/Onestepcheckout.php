@@ -128,7 +128,7 @@ class Magestore_Onestepcheckout_Block_Onestepcheckout extends Mage_Checkout_Bloc
 				->setClass('validate-select')
 				->setValue($countryId)
 				->setOptions($this->getCountryOptions())
-				->setExtraParams('style="width:135px"');
+				->setExtraParams('style="width:277px"');
 		//if ($type === 'shipping') {
 		//	$select->setExtraParams('onchange="shipping.setSameAsBilling(false);"');
 		//}
@@ -257,7 +257,7 @@ class Magestore_Onestepcheckout_Block_Onestepcheckout extends Mage_Checkout_Bloc
 					->setName($type.'_address_id')
 					->setId($type.'-address-select')
 					->setClass('address-select')
-					->setExtraParams('style="width:350px"')
+					->setExtraParams('style="width:277px"')
 					->setValue($addressId)
 					->setOptions($options);
 
