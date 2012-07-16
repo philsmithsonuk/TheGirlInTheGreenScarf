@@ -1630,6 +1630,22 @@ ul.dbrands li .desc_bname a:hover {
 .checkout_block td{
 	padding:3px 0px;
 }
+.checkout_block ul{
+	margin:0px auto 12px;
+	width:277px;
+}
+.checkout_block ul li{
+	padding:3px 0px;
+	width:277px;
+	float:left;
+}
+#billing_cp_button_div_id{
+	height:18px;
+	margin:8px 0px;
+}
+#billing_cp_button_div_id br, #billing_cp_button_div_id label, #billing_cp_result_display{
+	display:none;
+}
 .checkout_block label{
 	display:block;
 }
