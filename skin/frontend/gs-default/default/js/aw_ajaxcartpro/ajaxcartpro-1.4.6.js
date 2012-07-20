@@ -407,6 +407,14 @@ function __onACPRender(){
 
 function addEffectACP(obj, effect)
 {
+    /**
+     * Added by Awesemo
+     * fix overlapping element issue when adding to cart
+     * 
+     * or set Cart animation to None in admin
+     */
+     return;
+     /*****************************************************************/
     if (effect == 'opacity'){
         $(obj).hide();
         new Effect.Appear(obj);
