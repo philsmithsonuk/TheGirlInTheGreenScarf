@@ -25,6 +25,32 @@
     <?php if($this->getLastPageNum()>1): ?>
         <input type="hidden" class="adjnav-page-autoload-nextpage" value="<?php echo ($this->getCurrentPage() + 1) ?>"/>
     <?php endif; ?>
+
+
+    <div class="sort_block">
+        <span><?php echo $this->__('SORT BY') ?>:</span>
+        <select onchange="setLocation(this.value)">
+            <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+            <option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
+                <?php echo $this->__($_order) ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+        <div class="clear"></div>
+    </div>
+
+    <div class="items_number">
+        <?php if($this->getLastPageNum()>1): ?>
+            <?php echo $this->__('ITEM(S) %s OF %s TOTAL', $this->getLastNum(), $this->getTotalNum()) ?>
+        <?php else: ?>
+            <?php echo $this->__('%s ITEM(S)', $this->getTotalNum()) ?>
+        <?php endif; ?>
+
+    </div>
+    <div class="clear"></div>
+
+
+    <?php /* ?>
     <div class="pager">
         <p class="amount">
             <?php if($this->getLastPageNum()>1): ?>
@@ -70,6 +96,9 @@
         </div>
     </div>
     <?php endif; ?>
+
+    <?php */ ?>
+
 </div>
 <?php endif ?>
 
