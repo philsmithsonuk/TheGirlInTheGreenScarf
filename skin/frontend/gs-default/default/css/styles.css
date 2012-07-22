@@ -1639,10 +1639,21 @@ ul.dbrands li .desc_bname a:hover {
 	width:277px;
 	float:left;
 }
+
+#crafty_postcode_lookup_result_option1{
+    width:276px;
+}
+
+#crafty_postcode_lookup_result_option2{
+    width:276px;
+}
+/*
 #billing_cp_button_div_id{
 	height:18px;
 	margin:8px 0px;
 }
+
+
 #billing_cp_button_div_id br, #billing_cp_button_div_id label, #billing_cp_result_display{
 	display:none;
 }
@@ -1654,6 +1665,7 @@ ul.dbrands li .desc_bname a:hover {
 #shipping_cp_button_div_id br, #shipping_cp_button_div_id label, #shipping_cp_result_display{
     display:none;
 }
+*/
 
 .checkout_block label{
 	display:block;
