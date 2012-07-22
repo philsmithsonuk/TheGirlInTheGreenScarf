@@ -1646,6 +1646,15 @@ ul.dbrands li .desc_bname a:hover {
 #billing_cp_button_div_id br, #billing_cp_button_div_id label, #billing_cp_result_display{
 	display:none;
 }
+
+#shipping_cp_button_div_id{
+    height:18px;
+    margin:8px 0px;
+}
+#shipping_cp_button_div_id br, #shipping_cp_button_div_id label, #shipping_cp_result_display{
+    display:none;
+}
+
 .checkout_block label{
 	display:block;
 }
