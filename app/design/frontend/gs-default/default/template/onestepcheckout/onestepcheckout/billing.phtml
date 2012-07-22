@@ -232,6 +232,7 @@
 				<label for="billing:country_id"><?php echo $this->__('Country') ?> <span class="required">*</span></label>
 				<?php echo $this->getCountryHtmlSelect('billing') ?>
 			</div>
+
 			<?php if ($this->configData['show_region']):?>
 			<div class="input-box">
 				<label for="billing:region"><?php echo $this->__('State/Province') ?> <span class="required">*</span></label>
@@ -253,7 +254,7 @@
 			</div>
 			<?php endif;?>							
 			<?php if ($this->configData['show_zipcode']):?>
-			<div class="input-box">
+			<div class="input-box" style="margin-bottom: 4px;">
 				<label for="billing:postcode"><?php echo $this->__('Zip/Postal Code') ?> <span class="required">*</span></label>
 				<input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->htmlEscape($this->getBillingAddress()->getPostcode()) ?>" class="validate-zip-international required-entry input-text"/>
 			</div>
