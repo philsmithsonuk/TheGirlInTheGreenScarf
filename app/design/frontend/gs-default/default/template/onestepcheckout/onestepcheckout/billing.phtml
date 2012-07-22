@@ -185,6 +185,12 @@
 <?php endif; ?>
 <fieldset class="group-select" id="billing-new-address-form" <?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>	
 	<input type="hidden" name="billing[address_id]" value="<?php echo $this->getBillingAddress()->getId() ?>" id="billing:address_id" />
+    <input type="hidden" name="billing[use_for_shipping]" id="billing:use_for_shipping" value="1" />
+
+    <?php if ( !($this->isCustomerLoggedIn() && $this->customerHasAddresses()) ):?>
+        <input type="hidden" name="billing[save_in_address_book]" value="1" />
+    <?php endif;?>
+
 	<ul>
 		<li>
 			<div class="input-box fleft">
@@ -214,7 +220,6 @@
 			<?php endif; ?>
 		</li>
 		
-		
 		<li class="wide">
 			<label for="billing:street1"><?php echo $this->__('Address') ?> <span class="required">*</span></label>
 			<input type="text" style="margin:0px 0px 8px 0px;" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]" id="billing:street1" value="<?php echo $this->htmlEscape($this->getBillingAddress()->getStreet(1)) ?>" class="required-entry input-text"/>
@@ -230,7 +235,7 @@
 			<?php if ($this->configData['show_region']):?>
 			<div class="input-box">
 				<label for="billing:region"><?php echo $this->__('State/Province') ?> <span class="required">*</span></label>
-				<select id="billing:region_id" name="billing[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;width:135px;" >
+				<select id="billing:region_id" name="billing[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;width:277px;" >
 						<option value=""><?php echo $this->__('Please select region, state or province') ?></option>
 				</select>
 				<script type="text/javascript">
@@ -302,12 +307,7 @@
 		<li class="control">
 			<input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getBillingAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
 		</li>
-		<?php else:?>
-		<li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
 		<?php endif;?>
-		<li>
-			<input type="hidden" name="billing[use_for_shipping]" id="billing:use_for_shipping" value="1" />
-		</li>
 	</ul>
 </fieldset>
 <?php endif; ?>
