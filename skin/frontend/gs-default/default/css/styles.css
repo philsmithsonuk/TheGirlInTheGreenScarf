@@ -2170,3 +2170,73 @@ ul.messages{
 .notice-msg { border-color:#FFFFCF; background-color:#fafaec; background-image:url(../images/i_msg-note.gif); color:#3d6611; }
 /*------------------------footer ends------------------------*/
 /*clark fortuna - http://www.graydirt.com*/
+
+
+.login_wrapper {
+    width:400px;
+    background:#fff;
+    margin:auto;
+}
+.login_wrapper .page-title {
+    position:relative;
+}
+.login_wrapper .page-title h1 {
+    font-size:14px;
+    margin:0px 0px 15px 0px;
+    padding:7px;
+    background:#DFDFE0;
+}
+.login_wrapper .xclose_main {
+    position:absolute;
+    right:5px;
+    top:4px;
+}
+.login_wrapper .xclose_main a.xclose {
+    width:23px;
+    height:23px;
+    background:url(../images/xclose.png) no-repeat 0 0;
+    display:block;
+    text-indent:-9999px;
+}
+.login_wrapper form label {
+    padding:0px 0px 1px 0px;
+    display:block;
+}
+.login_wrapper form input {
+    padding:2px;
+    border:1px solid #bcbcbc;
+    width:200px;
+    color:#606163;
+    margin:0px 0px 15px 0px;
+}
+.login_wrapper form input.error_field[type="text"] {
+    border:1px solid #EF132D;
+}
+.login_wrapper .login-button a {
+    display:block;
+    font-size:11px;
+    color:#606163;
+    line-height:20px;
+}
+.login_wrapper .btn_block {
+    position:relative;
+    padding:4px 15px 5px;
+    margin:0px 0px 0px 30px;
+    float:left;
+    background:url(../images/btn_bg1.jpg) repeat-x 0 0;
+}
+.login_wrapper .btn_block button {
+    background:none;
+    border:none;
+}
+.login_wrapper .btn_block span {
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:700;
+    position:static;
+}
+.login_wrapper .login-fields span.req_field {
+    font-size:11px;
+    display:block;
+    padding:0px 0px 10px 0px;
+}
