@@ -2207,7 +2207,7 @@ ul.messages{
     border:1px solid #bcbcbc;
     width:200px;
     color:#606163;
-    margin:0px 0px 15px 0px;
+    margin:0px 0px 5px 0px;
 }
 .login_wrapper form input.error_field[type="text"] {
     border:1px solid #EF132D;
@@ -2224,10 +2224,14 @@ ul.messages{
     margin:0px 0px 0px 30px;
     float:left;
     background:url(../images/btn_bg1.jpg) repeat-x 0 0;
+	cursor:pointer;
+	cursor:hand;
 }
 .login_wrapper .btn_block button {
     background:none;
     border:none;
+	cursor:pointer;
+	cursor:hand;
 }
 .login_wrapper .btn_block span {
     color:#FFFFFF;
