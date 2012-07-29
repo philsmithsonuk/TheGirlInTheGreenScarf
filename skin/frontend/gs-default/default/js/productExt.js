@@ -14,19 +14,20 @@ Product.Config.prototype.configureForValues = function () {
                 // convert option to label
                 this.convertToLabel(element);
             }
-            this.configureElement(element);
+            this.configureElement(element, true);
         }.bind(this));
     } else {
         this.settings.each(function(element){
             var attributeId = element.attributeId;
             var options = this.getElementAttributeOptions(element);
             if (options.length == 1) {
+                isDefault = true;
                 // set first valid value as selected
                 element.selectedIndex = 1;
                 // convert option to label
                 this.convertToLabel(element);
             }
-            this.configureElement(element);
+            this.configureElement(element, true);
         }.bind(this));
     }
     // convert option to label if single value
@@ -36,7 +37,11 @@ Product.Config.prototype.configureForValues = function () {
  * Overriden by Awesemo
  * Override SCP configureElement, add single option to label feature
  */
-Product.Config.prototype.configureElement = function(element) {
+Product.Config.prototype.configureElement = function(element, initLoad) {
+    // fix IE KB 927917 Bug, make sure not to call reload price on page load
+    if (typeof(initLoad) == "undefined") {
+        initLoad = false;
+    }
     this.reloadOptionLabels(element);
     if(element.value){
         this.state[element.config.id] = element.value;
@@ -56,12 +61,14 @@ Product.Config.prototype.configureElement = function(element) {
                 this.resetElementState(element.nextSetting);
             }
             this.resetChildren(element.nextSetting);
-            this.configureElement(element.nextSetting);
-            if (!element.nextSetting.nextSetting) {
+            this.configureElement(element.nextSetting,initLoad);
+            if (!element.nextSetting.nextSetting && !initLoad) {
                 this.reloadPrice();
             }
         } else {
-            this.reloadPrice();
+            if (!initLoad) {
+                this.reloadPrice();
+            }
         }
     }
     else {
