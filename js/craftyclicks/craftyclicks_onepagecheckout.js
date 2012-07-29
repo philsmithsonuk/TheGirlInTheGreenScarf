@@ -120,7 +120,7 @@ function CraftyClicksMagentoClass () {
 			$(this.fields.country_id).up('li').insert(  {after: $(this.fields.postcode_id).up('li')} );
 			// add result box
 			if (!$(this.prefix+'_cp_result_display')) {
-				var tmp_html = '<li class="'+this.li_class+'" style="display: none"><div class="input-box" id="'+this.prefix+'_cp_result_display">&nbsp;</div></li>';
+				var tmp_html = '<li class="'+this.li_class+'" style="display: none"><div class="input-box" id="'+this.prefix+'_cp_result_display"></div></li>';
 				$(this.fields.postcode_id).up('li').insert( {after: tmp_html} );
 			}
 			// show result box
@@ -128,11 +128,14 @@ function CraftyClicksMagentoClass () {
 			// add button
 			if (!$(this.prefix+'_cp_button_div_id')) {
 				var tmp_html = '';
+
 				if (0 == this.div_depth) {
-					tmp_html = '<div class="input-box" id="'+this.prefix+'_cp_button_div_id"><label style="width:5px" for="'+this.prefix+'_cp_button_id">&nbsp;</label><br/>';
+					//tmp_html = '<div class="input-box" id="'+this.prefix+'_cp_button_div_id"><label style="width:5px" for="'+this.prefix+'_cp_button_id">&nbsp;</label><br/>';
+                    tmp_html = '<div class="input-box" id="'+this.prefix+'_cp_button_div_id">';
 				} else {
 					tmp_html = '<div class="field" id="'+this.prefix+'_cp_button_div_id"><label style="width:5px" for="'+this.prefix+'_cp_button_id">&nbsp;</label><div class="input-box">';
 				}
+
 				if ('' != _cp_button_image) {
 					tmp_html += '<img style="cursor: pointer;" src="'+_cp_button_image+'" id="'+this.prefix+'_cp_button_id" class="'+_cp_button_class+'" title="'+_cp_button_text+'"/>';
 				} else {

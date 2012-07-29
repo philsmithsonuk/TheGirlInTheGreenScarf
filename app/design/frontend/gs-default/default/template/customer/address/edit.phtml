@@ -1,5 +1,6 @@
 <style type="text/css">
 	.btn_block,.btn_block *{cursor:pointer;}
+	#address_result{color:#FF0000;font-size:10px;}
 </style>    
 <?php $conf = Mage::getStoreConfig('general');?>
 <?php if($this->getTitle()): ?>
@@ -165,8 +166,11 @@
 					jQuery('#country').change(function(){
 					if (this.value == 'GB') {
 						jQuery('#postcode_finder_btn').show();
+						jQuery('#address_result').html('');
+						jQuery('#address_result').show();
 					} else {
 						jQuery('#postcode_finder_btn').hide();
+						jQuery('#address_result').hide();
 					}
 					});
 					if (jQuery('#country').val()=='GB') {

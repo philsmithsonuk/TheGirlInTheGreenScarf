@@ -24,13 +24,16 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<div class="head_result">
 <div class="block_step3">
-	<div class="shopping_bag">
+	<div class="checkout_success">
 		<div class="page-title">
-			<h1><?php echo $this->__('Your order has been received.') ?></h1>
+			<strong><?php echo $this->__('Your order has been received.') ?></strong>
 		</div>
+        <br/>
 		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-		<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+		<p><?php echo $this->__('Thank you for your purchase!') ?></p>
 
 		<?php if ($this->getOrderId()):?>
 		<?php if ($this->getCanViewOrder()) :?>
@@ -38,7 +41,8 @@
 		<?php  else :?>
 			<p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
 		<?php endif;?>
-			<p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+
+		<p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
 		<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
 			<p>
 				<?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
@@ -60,11 +64,12 @@
 		<?php endforeach;?>
 		</ul>
 		<?php endif;?>
-
-		<div style="margin-right:10px;" class="rad_8 btn_block2">
-			<button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+        <br/>
+		<div class="checkout_success_button_container">
+			<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
 		</div>
 		
 	</div>
 </div>
 <div class="clear"></div>
+</div>

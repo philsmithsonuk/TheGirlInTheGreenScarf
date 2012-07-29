@@ -55,12 +55,12 @@
                     <?php endfor ?>
                 </li>
                 <li>
-                    <div  class="input-box fleft">
+                    <div  class="input-box">
                         <label for="shipping:country_id"><?php echo $this->__('Country') ?> <span class="required">*</span></label>
                         <?php echo $this->getCountryHtmlSelect('shipping') ?>
                     </div>
                     <?php if ($this->configData['show_region']):?>
-                    <div  class="input-box fright">
+                    <div  class="input-box">
                         <label for="shipping:region"><?php echo $this->__('State/Province') ?> <span class="required">*</span></label>
                         <select id="shipping:region_id" name="shipping[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;width:277px;" >
                             <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
@@ -81,7 +81,7 @@
                     <?php endif;?>
 
                     <?php if($this->configData['show_zipcode']): ?>
-                    <div class="input-box">
+                    <div class="input-box" style="margin-bottom: 4px;">
                         <label for="shipping:postcode"><?php echo $this->__('Zip/Postal Code') ?> <span class="required">*</span></label>
                         <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="shipping[postcode]" id="shipping:postcode" value="<?php echo $this->htmlEscape($this->getShippingAddress()->getShippingZipcode()) ?>" class="validate-zip-international required-entry input-text"/>
                     </div>
