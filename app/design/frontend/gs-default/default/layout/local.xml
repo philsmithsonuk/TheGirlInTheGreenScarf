@@ -106,6 +106,7 @@
             <action method="addJs"><script>jquery/jcarousellite_1.0.1.js</script></action>
             // add our extended product.js
             <action method="addItem"><type>skin_js</type><name>js/productExt.js</name></action>
+            <block type="catalog/product_view" name="facebook_meta" before="-" template="catalog/product/view/fb_og_meta.phtml"/>
 		</reference>
         
         <reference name="product.info.options.wrapper.bottom">
