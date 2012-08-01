@@ -74,7 +74,6 @@ Product.Config.prototype.configureElement = function(element, initLoad) {
     else {
         this.resetChildren(element);
     }
-    //if (this.settings[this.settings.length-1].attributeId == element.
     if (!initLoad) {
         this.reloadPrice();
     }
