@@ -309,7 +309,7 @@ class Magestore_Bannerslider_Adminhtml_BannersliderController extends Mage_Admin
 		while(false !== ($file = readdir($handle))) {
 			if($file != '.' and $file != '..' ) {
 				$fullpath = $path.$file;
-				if(is_dir($fullpath)) _remove_dir($fullpath); else unlink($fullpath);
+				if(is_dir($fullpath)) $this->_cleanDir($fullpath); else unlink($fullpath);
 			}
 		}
 		closedir($handle);

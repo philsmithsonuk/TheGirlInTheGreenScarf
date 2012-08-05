@@ -1640,6 +1640,8 @@ ul.dbrands li .desc_bname a:hover {
 
 #crafty_postcode_lookup_result_option1{
     width:276px;
+    color:#606163;
+    font-size: 10px;
 }
 
 #crafty_postcode_lookup_result_option2{
@@ -1669,18 +1671,21 @@ ul.dbrands li .desc_bname a:hover {
 }
 
 .checkout_success_button_container {
-    float:left;
-}
-
-.checkout_success_button_container button {
     background: url("../images/btn_bg2.jpg") repeat-x scroll 0 0 transparent;
     border: 1px solid #CCCCCC;
     color: #606163;
     font-size: 11px;
     font-weight: 700;
-    margin: 0 0 20px;
+    margin: 5px 0 0;
     overflow: hidden;
-    padding: 3px;
+    float:left;
+}
+
+.checkout_success_button_container button {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    cursor: pointer;
+    padding: 3px 10px 4px;
 }
 
 
