@@ -10,6 +10,13 @@
 	<?php // add placeholder div for any ajax-loaded custom options ?>
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
         <div class="no-display">
+            <?php
+                // make sure to add cpid hidden field for configurable products
+                // added by Awesemo
+            ?>
+            <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+            <input type="hidden" name="cpid" value="<?php echo $_product->getId() ?>" />
+            <?php endif; ?>
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
@@ -19,11 +26,9 @@
             //<![CDATA[
                 function initProductZoom() {
                     jQuery('.jqzoom-image').jqzoom({
-                        zoomType: "standard",
+                        zoomType: "reverse",
                         imageOpacity: 0.2,
                         preloadImages: true,
-                        showPreload: true,
-                        preloadText: "Loading",
                         lens: true,
                         lensCursor: "crosshair",
                         position: "right",
@@ -42,6 +47,11 @@
                     });
                 }
                 jQuery(document).ready(function($){
+                    $("#size-guide-delivery-returns").accordion({
+                        active: false,
+                        collapsible: true,
+                        autoHeight: true
+                    });
                     initProductZoom();
                 });  
             //]]>
@@ -239,17 +249,6 @@
     </script>
     </div>
 </div>
-<script type="text/javascript">
-//<![CDATA[
-	jQuery(document).ready(function(){
-		jQuery( "#size-guide-delivery-returns" ).accordion({
-				active: false,
-				collapsible: true,
-				autoHeight: true
-		});
-	});
-//]]>
-</script>
 </div>
 <?php echo $this->getChildHtml('related_products') ?>
 <div class="clear"></div>
