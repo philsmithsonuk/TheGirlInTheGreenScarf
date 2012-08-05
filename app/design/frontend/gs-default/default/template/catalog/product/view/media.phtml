@@ -3,7 +3,7 @@
     $_helper = $this->helper('catalog/output');
 ?>
 <div class="more-views detail_tn" style="height:458px;">
-<?php if (($galleryItemCount = count($this->getGalleryImages())) > 0): ?>
+    <?php if (($galleryItemCount = count($this->getGalleryImages())) > 0): ?>
     <div class="btn-prev">
         <a href="javascript:void(0);" class="prev disabled"></a>
     </div>
@@ -22,10 +22,10 @@
     <div class="btn-next">
         <a href="javascript:void(0);" class="next<?php if($galleryItemCount<=3):?> disabled<?php endif; ?>"></a>
     </div>
-	<div style="display:none;position:absolute;top:0;left:0;width:inherit;height:inherit;background:#ffffff;opacity:0.6;border-radius:5px;z-index:999;" class="scp-please-wait"></div>
-<?php else: ?>
-	&nbsp;
-<?php endif; ?>
+    <span style="display:none;" class="scp-please-wait"></span>
+    <?php else: ?>
+        &nbsp;
+    <?php endif; ?>
 </div>
 <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
 <div class="product-image product-image-zoom detail_large">
@@ -35,9 +35,9 @@
 		echo $_helper->productAttribute($_product, $_img, 'image');
 	?>
     </a>
-	<div style="display:none;position:absolute;top:0;left:0;width:inherit;height:inherit;background:#ffffff;opacity:0.6;border-radius:5px;z-index:999;" class="scp-please-wait">
+	<span style="display:none;" class="scp-please-wait">
 		<img src="<?php echo $this->getSkinUrl('images/preview.gif') ?>" class="v-middle" alt="" style="position:absolute;top:212px;left:141px;"/>
-	</div>
+	</span>
 </div>
 <div class="clear"></div>
 <div style="text-align:center; padding:10px 0px 0px 0px;width:307px;float:right;">
