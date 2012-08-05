@@ -2244,3 +2244,15 @@ ul.messages{
     display:block;
     padding:0px 0px 10px 0px;
 }
+
+.scp-please-wait {
+    position:absolute;
+    top:0;
+    left:0;
+    width:inherit;
+    height:inherit;
+    background:#ffffff;
+    opacity:0.6;
+    border-radius:5px;
+    z-index:999;
+}
