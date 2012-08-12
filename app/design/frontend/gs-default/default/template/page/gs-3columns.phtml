@@ -10,13 +10,13 @@
 </head>
 <body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
 <?php echo $this->getChildHtml('after_body_start') ?>
+    <?php echo $this->getChildHtml('global_notices') ?>
 <div id="graydirt-container">
 	<div id="w960">
 		<div id="header_wrapper">
 			<?php echo $this->getChildHtml('header') ?>
 		</div>
-		<div id="main_wrapper">
-			<?php echo $this->getChildHtml('global_notices') ?>
+		<div id="main_wrapper"> 
 			<div class="w898">			
 				
 				<?php echo $this->getChildHtml('breadcrumbs') ?>
