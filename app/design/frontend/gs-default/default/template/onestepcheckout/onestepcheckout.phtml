@@ -6,7 +6,7 @@
 	<div class="detail_title">
          <?php echo $this->__('Please enter your details below to complete your purchase.');?><br/>
         <?php if ($this->isShowLoginLink() && !$this->isCustomerLoggedIn()):?>
-            <a href="#" id="show-login" onclick ="showloginbox();return false;" style="font-size:11px;color:#606163">
+            <a href="#" class="show-login" id="show-login" onclick ="showloginbox();return false;" style="font-size:11px;color:#8a2be2;">
                 <?php echo $this->configData['login_link_title'] ? $this->configData['login_link_title'] : $this->__('Already have an account? Click here to login')?>
             </a>
         <?php endif?>
