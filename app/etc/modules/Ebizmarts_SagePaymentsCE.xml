@@ -1,0 +1,14 @@
+<config>
+    <modules>
+        <Ebizmarts_SagePaymentsCE>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+				<Mage_Payment />
+				<Mage_Adminhtml />
+				<Mage_Checkout />
+				<Mage_Sales />
+            </depends>
+        </Ebizmarts_SagePaymentsCE>
+    </modules>
+</config>
