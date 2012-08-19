@@ -16,7 +16,8 @@
     function add_recipient(){
         ul = $('recipients_options');
         var li_mail = Element.extend(document.createElement("LI"));
-        li_mail.addClassName('fields additional-row');
+        //li_mail.addClassName('fields additional-row');
+        li_mail.addClassName('fields');
         li_mail.innerHTML = '<p><a href="delete_email" title="<?php echo $this->__('Remove Email') ?>" onclick="remove_recipient('+i+'); return false" class="btn-remove"><?php echo $this->__('Remove Email') ?>"<\/a><\/p>'
         li_mail.innerHTML += '<div class="field"><label for="recipients_name'+i+'" class="required"><?php echo $this->__('Name:') ?><em>*<\/em><\/label><div class="input-box"><input name="recipients[name][]" type="text" class="input-text required-entry" id="recipients_name'+i+'" /><\/div>';
         li_mail.innerHTML += '<div class="field"><label for="recipients_email'+i+'" class="required"><?php echo $this->__('Email Address:') ?><em>*<\/em><\/label><div class="input-box"><input name="recipients[email][]" value="" title="<?php echo $this->__('Email Address') ?>" id="recipients_email'+i+'" type="text" class="input-text required-entry validate-email" /><\/div><\/div>';
@@ -70,7 +71,7 @@
 }
 .send-friend .form-list {
     overflow: hidden;
-    width: 619px;
+    /*width: 619px;*/
 }
 .btn_block {
     background: url("<?php echo $this->getSkinUrl();?>images/btn_bg1.jpg") repeat-x scroll 0 0 transparent;
@@ -113,6 +114,8 @@ textarea{
 }
 .send-friend .form-list li {
     margin-right: -15px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 .send-friend .form-list li.wide textarea {
     width: 617px;
@@ -177,9 +180,10 @@ textarea{
         <h1><?php echo $this->__('Email to a Friend') ?></h1>
     </div>
     <form action="<?php echo $this->getSendUrl() ?>" method="post" id="product_sendtofriend_form">
-        <div class="fieldset">
+        <div class="head_result" style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;width:350px;"><?php echo $this->__('Sender:') ?></div>
+        <div style="border:1px solid #DFDFE0;padding:5px;margin-bottom:15px;">
             <?php echo $this->getBlockHtml('formkey')?>
-            <h2 class="legend"><?php echo $this->__('Sender:') ?></h2>
+            <!--// <h2 class="legend"><?php echo $this->__('Sender:') ?></h2> //-->
             <ul class="form-list" id="sender_options">
                 <li class="fields">
                     <div class="field">
@@ -203,8 +207,9 @@ textarea{
                 </li>
             </ul>
         </div>
-        <div class="fieldset">
-            <h2 class="legend"><?php echo $this->__('Recipient:') ?></h2>
+        <div class="head_result" style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;width:350px;"><?php echo $this->__('Recipient:') ?></div>
+        <div style="border:1px solid #DFDFE0;padding:5px;margin-bottom:15px;">
+            <!--<h2 class="legend"><?php echo $this->__('Recipient:') ?></h2>-->
             <ul class="form-list" id="recipients_options">
                 <li class="fields">
                     <div class="field">
