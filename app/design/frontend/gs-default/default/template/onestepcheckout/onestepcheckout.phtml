@@ -28,15 +28,19 @@
 	  
 		<div class="checkout_block">
 			<div class="head_area">2. <?php echo $this->__('DELIVERY METHOD');?></div>
-			
-			<?php if (!$this->isVirtual() && !Mage::helper('onestepcheckout')->isHideShippingMethod()):?>		
-				<?php echo $this->getChildHtml('onestepcheckout.shipping_method'); ?>			
-				<div class="ajax-loader1" id="ajax-loader1" style="display:none;"></div>
-			<?php elseif (Mage::helper('onestepcheckout')->isHideShippingMethod()):?>
-				<?php $_shippingMethod = $this->hasOnlyOneShippingMethod();?>
-				<span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_shippingMethod;?>" id="s_method_<?php echo $_shippingMethod; ?>" checked="checked" /></span>
-			<?php endif; ?>
-			
+            <ol>
+                <?php if (!$this->isVirtual() && !Mage::helper('onestepcheckout')->isHideShippingMethod()):?>
+                    <li class="shipping-method">
+                        <div class="onestepcheckout-shipping-method-section">
+                            <?php echo $this->getChildHtml('onestepcheckout.shipping_method'); ?>
+                            <div class="ajax-loader1" id="ajax-loader1" style="display:none;"></div>
+                        </div>
+                    </li>
+                <?php elseif (Mage::helper('onestepcheckout')->isHideShippingMethod()):?>
+                    <?php $_shippingMethod = $this->hasOnlyOneShippingMethod();?>
+                    <span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_shippingMethod;?>" id="s_method_<?php echo $_shippingMethod; ?>" checked="checked" /></span>
+                <?php endif; ?>
+            </ol>
 			<div class="head_area">3. <?php echo $this->__('PAYMENT METHOD');?></div>			
 			<div class="block_step3">
 				<?php echo $this->getChildHtml('onestepcheckout.payment_method'); ?>
@@ -84,9 +88,9 @@
 							<?php echo $this->__('SHIPPING METHOD'); ?>
 						</h3>
 						<div class="onestepcheckout-shipping-method-section">
-							<?php echo $this->getChildHtml('onestepcheckout.shipping_method'); ?>						
+							<?php echo $this->getChildHtml('onestepcheckout.shipping_method'); ?>
+                            <div class="ajax-loader1" id="ajax-loader1" style="display:none;"></div>
 						</div>
-						<div class="ajax-loader1" id="ajax-loader1" style="display:none;"></div>
 					</li>
 					<?php elseif (Mage::helper('onestepcheckout')->isHideShippingMethod()):?>
 						<?php $_shippingMethod = $this->hasOnlyOneShippingMethod();?>
