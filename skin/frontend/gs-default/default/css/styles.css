@@ -797,6 +797,8 @@ ol#cart-item-list .item-options dd {
 }
 .product_list_left ul.selector_list li span {
 	font-weight:700;
+	padding:5px 0px;
+	display:block;
 }
 .product_list_left ul.selector_list li input[type="checkbox"]{
 	float:left;
@@ -814,6 +816,8 @@ ol#cart-item-list .item-options dd {
 	background:#14142a;
 	border:1px solid #ccc;
 	margin:0px 0px 15px 0px;
+	min-height:184px;
+	height:auto !important;
 	height:184px;
 }
 .product_list_right .img_featured{
@@ -840,8 +844,13 @@ ol#cart-item-list .item-options dd {
 }
 .detail_block {
 	display:block;
-	padding:0px 0px 15px 0px;
-	position:relative;
+	padding:0px 25px 15px 25px;
+}
+.productdetail_wrapper {
+	width:960px;
+}
+.productdetail_wrapper .breadcrumbs {
+	padding:0px 32px 15px;
 }
 .detail_tn {
 	float:left;
@@ -1000,9 +1009,11 @@ ol#cart-item-list .item-options dd {
 ul.sort_list {
 	list-style:none;
 }
-ul.sort_list li{
+ul.sort_list li {
 	float:left;
 	width:190px;
+	min-height:232px;
+	height:auto !important;
 	height:232px;
 	overflow:hidden;
 	margin:0px 11px 15px 10px;
@@ -2265,4 +2276,60 @@ a.show-login:hover,a.show-login:active {
     opacity:0.6;
     border-radius:5px;
     z-index:999;
+}
+.checkout_block ul li {
+	padding:3px 0px;
+	width:277px;
+	float:left;
+}
+/*--------------------------*/
+.static_area {
+	display:block;
+	padding:0px 10px;
+}
+.static_area a {
+	color:#79A240;
+}
+.static_area p {
+	padding:0px 0px 15px 0px;
+}
+.static_area p strong {
+	font-size:12px;
+}
+.static_area span {
+	font-size:14px;
+}
+.ui-widget-content a {
+	color:#79A240 !important;
+}
+.fs_11 {
+	font-size:11px;
+}
+.sg_table {
+	display:block;
+}
+.sg_table table {
+	border-collapse:inherit;
+}
+.sg_table table th {
+	border-bottom:1px dotted #bbbbbc;
+	font-weight:700;
+}
+.sg_table table th, .sg_table table td {
+	padding:3px 3px;
+}
+.sg_table table tr.alt_color {
+	background:#f5f5f5;
+}
+ul.static_list {
+	list-style:none;
+	padding:0px 0px 15px 0px;
+}
+ul.static_list li {
+	display:block;
+	padding:3px 0px;
+	font-size:12px !important;
+}
+ul.static_list li span {
+	padding:0px 5px 0px 0px;
 }
