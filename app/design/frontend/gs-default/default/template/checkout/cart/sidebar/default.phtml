@@ -7,7 +7,7 @@
 	<div class="imgdesc_brand">
 		<img src="<?php echo $this->getProductThumbnail()->resize(84, 84)->setWatermarkSize('30x10'); ?>" width="84" height="84" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" />
 	</div>
-	<div class="imgdesc_brand">
+	<div class="brand_details">
 		<p><?php echo $this->htmlEscape($this->getProductName()) ?>&nbsp;(Qty <?php echo $this->getQty() ?>)</p>
 		<?php if ($_options = $this->getOptionList()):?>
 			<?php foreach ($_options as $_option) : ?>
