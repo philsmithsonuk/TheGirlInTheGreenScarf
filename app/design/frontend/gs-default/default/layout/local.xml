@@ -13,6 +13,7 @@
              <action method="removeItem"><type>css</type><name>css/reset.css</name></action>
              <action method="removeItem"><type>css</type><name>css/styles.css</name></action>
              <action method="removeItem"><type>css</type><name>css/styles.css</name></action>
+             <action method="addItem"><type>skin_js</type><name>js/email.js</name></action>
 			 // lets remove the original Ajax Cart Pro js, we will not be modifying the original code in /js/aw_ajaxcartpro folder
 			 // this is to prevent breaking the default layout if we change the package
 			 <action method="removeItem"><type>js</type><name>aw_ajaxcartpro/ajaxcartpro-1.4.6.js</name></action>
