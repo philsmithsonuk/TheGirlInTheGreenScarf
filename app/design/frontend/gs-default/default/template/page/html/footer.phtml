@@ -8,19 +8,20 @@
 	</ul>
 	<div class="social_icons">
 		<?php
-			if($block = Mage::getModel('cms/block')
-                ->setStoreId(Mage::app()->getStore()->getId())
-                ->load('social-media')){
+			if($block = Mage::getModel('cms/block')->setStoreId(Mage::app()->getStore()->getId())
+												   ->load('social-media')){
 				if ($block->getIsActive()) { 
-					$helper = Mage::helper('cms');
-					$processor = $helper->getBlockTemplateProcessor();
+					$helper 	= Mage::helper('cms');
+					$processor  = $helper->getBlockTemplateProcessor();
 					echo $processor->filter($block->getContent());
 				}
             }
 			/*
-		<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_in.png');?>" alt="" /></a></div>
-		<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_twitter.png');?>" alt="" /></a></div>
-		<div class="icons_block" style="padding:0px;"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_fb.png');?>" alt="" /></a></div>*/?>
+				<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_in.png');?>" alt="" /></a></div>
+				<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_twitter.png');?>" alt="" /></a></div>
+				<div class="icons_block" style="padding:0px;"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_fb.png');?>" alt="" /></a></div>
+			*/
+		?>
 	</div>
 	<div class="clear"></div>
 </div>
