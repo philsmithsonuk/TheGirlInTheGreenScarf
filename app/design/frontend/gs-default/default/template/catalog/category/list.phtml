@@ -12,14 +12,16 @@
 	</div>
 	<div class="clear"></div>
 	<ul class="sort_list">
+        <?php $count = 1; ?>
 		<?php foreach ($_categories as $_category): ?>
 	
 			<?php 
 				
-				$cur_category = Mage::getModel('catalog/category')->load($_category->getId());				
-				
-				if(!$_imgUrl = Mage::getBaseUrl('media').'catalog/category/'.$cur_category->getThumbnail()){
-					$_imgUrl = $this->getSkinUrl()."images/placeholder/small_image.jpg";
+				$cur_category = Mage::getModel('catalog/category')->load($_category->getId());
+                $_imgUrl = Mage::getBaseUrl('media').'catalog/category/'.$cur_category->getThumbnail();
+                $imageprop = getimagesize($_imgUrl);
+                if(!is_array($imageprop)){
+					$_imgUrl = $this->getSkinUrl()."images/catalog/product/placeholder/small_image.jpg";
 				}
 				
             ?>
@@ -31,8 +33,15 @@
 				</div>
 				<div class="catproduct_name"><a href="<?php echo $this->getCategoryUrl($cur_category)?>"><?php echo $this->htmlEscape($cur_category->getName()) ?></a></div>
 				<div class="catproduct_desc"><?php echo $cur_category->getDescription() ?></div>
-			</li>	  
+			</li>
+
+            <?php if($count % 3 == 0) : ?>
+                <li class="clear"></li>
+            <?php endif; ?>
+
+            <?php $count++; ?>
 			<?php endif; ?>
+
 		<?php endforeach; ?>
 	</ul>
 	<div class="clear"></div>
