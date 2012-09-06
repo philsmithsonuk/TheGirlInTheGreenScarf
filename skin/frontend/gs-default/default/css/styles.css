@@ -2338,7 +2338,7 @@ ul.static_list {
 ul.static_list li {
 	display:block;
 	padding:3px 0px;
-	font-size:12px !important;
+	/*font-size:12px !important;*/
 }
 ul.static_list li span {
 	padding:0px 5px 0px 0px;
