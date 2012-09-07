@@ -2343,3 +2343,21 @@ ul.static_list li {
 ul.static_list li span {
 	padding:0px 5px 0px 0px;
 }
+
+ul.sort_list li.clear {
+	float:none;
+	margin:0px;
+	min-height:0px !important;
+	height:auto !important;
+	height:0px !important;
+	width:auto;
+}
+
+.product_list_right h6 {
+	font-size:13px;
+	font-weight:700;
+	padding:0px 0px 15px 0px;
+}
+.product_list_right h6 a {
+	color:#606163;
+}
