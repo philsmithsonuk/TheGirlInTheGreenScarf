@@ -829,7 +829,8 @@ ol#cart-item-list .item-options dd {
 }
 .product_list_right .img_featured{
 	float:right;
-	margin:0px 25px 0px 0px;
+	/*margin:0px 25px 0px 0px;*/
+    margin:0px 0px -4px 0px;
 }
 .product_list_right .content_featured {
     float:left;
