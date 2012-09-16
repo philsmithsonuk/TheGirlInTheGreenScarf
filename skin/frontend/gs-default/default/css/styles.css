@@ -468,6 +468,9 @@ ol#cart-item-list .item-options dd {
 #header_wrapper .navigation ul li a:hover, #header_wrapper .navigation ul li a.active{
 	color:#ccc;
 }
+#header_wrapper .navigation ul li.active a{
+	color:#ccc;
+}
 #header_wrapper .search{
 	float:right;
 	padding:0px 31px 0px 0px;
