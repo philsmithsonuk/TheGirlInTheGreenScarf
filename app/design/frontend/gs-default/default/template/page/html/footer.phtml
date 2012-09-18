@@ -7,9 +7,21 @@
 		<?php echo $this->getChildHtml('cms_footer_links') ?>
 	</ul>
 	<div class="social_icons">
-		<div class="icons_block"><img src="<?php echo $this->getSkinUrl('images/social_in.png');?>" alt="" /></div>
-		<div class="icons_block"><img src="<?php echo $this->getSkinUrl('images/social_twitter.png');?>" alt="" /></div>
-		<div class="icons_block" style="padding:0px;"><img src="<?php echo $this->getSkinUrl('images/social_fb.png');?>" alt="" /></div>
+		<?php
+			if($block = Mage::getModel('cms/block')->setStoreId(Mage::app()->getStore()->getId())
+												   ->load('social-media')){
+				if ($block->getIsActive()) { 
+					$helper 	= Mage::helper('cms');
+					$processor  = $helper->getBlockTemplateProcessor();
+					echo $processor->filter($block->getContent());
+				}
+            }
+			/*
+				<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_in.png');?>" alt="" /></a></div>
+				<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_twitter.png');?>" alt="" /></a></div>
+				<div class="icons_block" style="padding:0px;"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_fb.png');?>" alt="" /></a></div>
+			*/
+		?>
 	</div>
 	<div class="clear"></div>
 </div>
