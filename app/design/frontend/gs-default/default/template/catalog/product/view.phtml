@@ -102,11 +102,11 @@
             </div>
             <div class="clear"></div>
             <div class="pdescription">
-				<?php if ($_product->getShortDescription()):?>
+				<?php if ($_product->getDescription()):?>
 					<?php if(false): ?>
 					<?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
 					<?php endif; ?>
-					<?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+					<?php echo $_helper->productAttribute($_product, $_product->getDescription(), 'description') ?>
 				<?php endif;?>
             </div>
             <?php
