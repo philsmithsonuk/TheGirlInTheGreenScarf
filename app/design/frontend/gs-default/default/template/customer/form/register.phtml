@@ -50,8 +50,7 @@ div.btn_block button{ cursor:pointer;}
                 <tr>
                   <td><input id="is_subscribed" value="1"  title="<?php echo $this->__('Sign Up for Newsletter') ?>" name="is_subscribed" type="checkbox" <?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
                     <div class="ppolicy"><strong><?php echo $this->__('Newsletter signup');?></strong>
-					<div style="margin-left:-22px;margin-top:10px;"><?php echo $this->__('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris');?> <a href="<?php echo $this->getUrl($page->getIdentifier());?>"><?php echo $this->__('Privacy Policy');?></a>.</div></div></td>
-                </tr>
+					<div style="margin-left:-22px;margin-top:10px;"><?php echo $this->__('For more details about our privacy policy please %s',"<a href='".$this->getUrl($page->getIdentifier())."'>click here.</a>");?></div></div></td>                </tr>
 				<?php endif;?>
 				 <?php if($this->getShowAddressFields()): ?>
 				<div class="fieldset">
