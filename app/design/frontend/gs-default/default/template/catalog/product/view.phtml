@@ -1,3 +1,10 @@
+<style type="text/css">
+    .size-guide-lnk,.size-guide-lnk:hover,.size-guide-lnk:link,.size-guide-lnk:visited {
+        color: #79A240;
+        padding: 2px;
+        text-decoration: underline;
+    }
+</style>
 <div class="w898">
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
@@ -53,6 +60,24 @@
                         autoHeight: true
                     });
                     initProductZoom();
+                    $('.tbl_quality tr.last td:last > div.input-box').append('&nbsp;<a class="size-guide-lnk" href="#" title="Show Size Guide">Size Guide</a>');
+                    $('.tbl_quality tr.last td:last div.input-box').delegate('.size-guide-lnk', 'click', function(e){
+                        e.preventDefault();
+                        var active = $('#size-guide-delivery-returns').accordion( "option", "active" );
+                        console.log(active);
+                        if ((active === false) || active != 0) {
+                            $('#size-guide-delivery-returns').focus().accordion( "option", "active", 0 );
+                        }
+                    });
+                    /*
+                    $('.tbl_quality tr.last td:last div.input-box').delegate('select', 'hover', function(e){
+                        if(e.type === 'mouseover') {
+                            $(this).find('.size-guide-lnk').stop(false,true).show('2000')
+                        } else {
+                            $(this).find('.size-guide-lnk').stop(false,true).hide('2000')
+                        }
+                    });
+                    */
                 });
             //]]>
             </script>
