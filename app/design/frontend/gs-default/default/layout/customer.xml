@@ -123,4 +123,22 @@
         </reference>
         <remove name="reorder"></remove>
     </customer_logged_out>
+	
+	<customer_account_forgotpassword translate="label">
+        <label>Customer Forgot Password Form</label>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="head">
+            <action method="setTitle" translate="title" module="customer"><title>Forgot Your Password</title></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/gs-1column.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Password forgotten</title></action>
+        </reference>
+        <reference name="content">
+            <!--<block type="core/template" name="forgotPassword" template="customer/form/forgotpassword.phtml"/>-->
+            <block type="customer/account_forgotpassword" name="forgotPassword" template="customer/form/forgotpassword.phtml" />
+        </reference>
+    </customer_account_forgotpassword>
 </layout>
