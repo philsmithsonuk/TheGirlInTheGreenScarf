@@ -2367,3 +2367,17 @@ ul.sort_list li.clear {
 .product_list_right h6 a {
 	color:#606163;
 }
+
+.notice-inner {
+    color:#FFFFFF;
+    background-color:#D75F07;
+    text-align:center;
+}
+
+p.notice-inner {
+    text-align: center;
+}
+
+.notice-inner .button {
+    margin-left:12px;
+}
