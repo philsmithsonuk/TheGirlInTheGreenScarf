@@ -1026,9 +1026,11 @@ ul.sort_list {
 ul.sort_list li {
 	float:left;
 	width:190px;
-	min-height:232px;
+/*	min-height:232px;*/
+	min-height:249px;
 	height:auto !important;
-	height:232px;
+/*	height:232px;*/
+	height:249px;
 	overflow:hidden;
 	margin:0px 11px 15px 10px;
 }

@@ -48,6 +48,7 @@
     <?php $_iterator = 0; ?>
 	
     <ul class="sort_list" id="products-list">
+        <?php $count = 1; ?>
     <?php foreach ($_productCollection as $_product): ?>
 		
 		<?php /* ?>
@@ -97,6 +98,12 @@
 				<?php echo $this->getPriceHtml($_product, false) ?>
 			</div>
 		</li>
+
+        <?php if($count % 3 == 0) : ?>
+            <li class="clear"></li>
+        <?php endif; ?>
+
+        <?php $count++; ?>
 		
     <?php endforeach; ?>
     </ul>
