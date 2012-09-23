@@ -12,6 +12,8 @@
         <?php endif?>
     </div>
 
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
 	<form id="one-step-checkout-form" method="post" action="<?php echo $this->getCheckoutUrl(); ?>">
   
 		<div class="checkout_block">
