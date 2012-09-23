@@ -1,0 +1,527 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <xtento translate="label">
+            <label>XTENTO Extensions</label>
+            <sort_order>650</sort_order>
+        </xtento>
+    </tabs>
+    <sections>
+        <customtrackers translate="label" module="customtrackers">
+            <label>Custom Carrier Trackers</label>
+            <tab>xtento</tab>
+            <sort_order>250</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Extension Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment>
+                        <![CDATA[
+                    <a href="http://www.xtento.com" target="_blank"><img src="//www.xtento.com/media/images/xtento_module.png" style="border:none;"></a>
+
+                    <div style="margin-top:0px 4px 8px; color: #666;">Custom Trackers by <a href="http://www.xtento.com" target="_blank">www.xtento.com</a></div>
+                    <strong>Copyright © <script>var today=new Date(); document.write(today.getFullYear());</script> <a href="http://www.xtento.com" target="_blank">www.xtento.com</a> / <a href="mailto:support@xtento.com">support@xtento.com</a></strong><br /><br/>
+                    Got questions? Feel like you need help? Please check out our <a href="http://support.xtento.com/" target="_blank">support wiki</a> before contacting us.<br/><br/>
+                    <hr />
+                    <script>
+                    function setCommentHtml(message) {
+                        if (Prototype.Browser.IE) {
+                            $('customtrackers_general_serial').next('p').outerHTML = message;
+                        } else {
+                            $('customtrackers_general_serial').next('p').innerHTML = message;
+                        }
+                    }
+                    Event.observe(window, 'load', function() {
+                        if ($('customtrackers_general_server_name')) {
+                            $('customtrackers_general_server_name').style.backgroundColor='#f0f0f0';
+                            $('customtrackers_general_server_name').disable();
+                            if ($('row_customtrackers_general_server')) {
+                                $('row_customtrackers_general_server').hide();
+                            }
+                        }
+
+                        if ($('customtrackers_general_serial') && $('customtrackers_general_serial').value !== '' && $('customtrackers_general_server') && $('customtrackers_general_server').value !== '') {
+                            if ($('customtrackers_general_serial').value.length !== 40) {
+                                setCommentHtml('<a href="http://www.xtento.com" target="_blank"><img src="//www.xtento.com/license/check/?d='+$('customtrackers_general_server').value+'" border="0" style="margin-top: 4px;"/></a>');
+                            } else {
+                                if (typeof $('customtrackers_general_serial').nextSibling !== 'undefined' && typeof $('customtrackers_general_serial').nextSibling.nextSibling !== 'undefined') {
+                                    setCommentHtml('<a href="http://www.xtento.com" target="_blank"><img src="//www.xtento.com/license/check/?d='+$('customtrackers_general_server').value+'" border="0" style="margin-top: 4px;"/></a>');
+                                }
+                            }
+                        } else {
+                            setCommentHtml('<a href="http://www.xtento.com" target="_blank"><img src="//www.xtento.com/license/check/?d='+$('customtrackers_general_server').value+'" border="0" style="margin-top: 4px;"/></a>');
+                        }
+                    });
+                    </script>
+                    ]]>
+                    </comment>
+                    <fields>
+                        <heading translate="label">
+                            <label>General Configuration</label>
+                            <frontend_model>xtcore/system_config_form_field_heading</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading>
+                        <server_name translate="label">
+                            <label>Server Name</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>customtrackers/system_config_backend_import_servername</backend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </server_name>
+                        <serial translate="label">
+                            <label>License Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Enter your license key here</comment>
+                        </serial>
+                        <enabled translate="label">
+                            <label>Module Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>customtrackers/system_config_backend_import_enabled</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>A valid license key is required in order to enable the module.</comment>
+                        </enabled>
+                        <disabled_carriers translate="label">
+                            <label>Disabled default carriers</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>customtrackers/system_config_source_shipping_carriers</source_model>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Using this functionality you can disable all or some of the built-in default carriers. Select multiple carriers by holding down Shift or Ctrl while selecting carriers.]]></comment>
+                        </disabled_carriers>
+                        <server translate="label">
+                            <label/>
+                            <frontend_type>hidden</frontend_type>
+                            <backend_model>customtrackers/system_config_backend_import_server</backend_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </server>
+                    </fields>
+                </general>
+                <tracker1 translate="label" module="customtrackers">
+                    <label>Custom Tracker 1</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker1>
+                <tracker2 translate="label" module="customtrackers">
+                    <label>Custom Tracker 2</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker2>
+                <tracker3 translate="label" module="customtrackers">
+                    <label>Custom Tracker 3</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker3>
+                <tracker4 translate="label" module="customtrackers">
+                    <label>Custom Tracker 4</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker4>
+                <tracker5 translate="label" module="customtrackers">
+                    <label>Custom Tracker 5</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker5>
+                <tracker6 translate="label" module="customtrackers">
+                    <label>Custom Tracker 6</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker6>
+                <tracker7 translate="label" module="customtrackers">
+                    <label>Custom Tracker 7</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker7>
+                <tracker8 translate="label" module="customtrackers">
+                    <label>Custom Tracker 8</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker8>
+                <tracker9 translate="label" module="customtrackers">
+                    <label>Custom Tracker 9</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker9>
+                <tracker10 translate="label" module="customtrackers">
+                    <label>Custom Tracker 10</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Tracker Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Tracker Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <url translate="label">
+                            <label>Tracking URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is the URL which will be used for tracking the order and which will also be
+                                sent to your customers. Use the variable #TRACKINGNUMBER# to output the tracking number
+                                associated to the shipment in the URL. Use the variable #ZIP# to output the receivers postcode.
+                            </comment>
+                        </url>
+                    </fields>
+                </tracker10>
+            </groups>
+        </customtrackers>
+    </sections>
+</config>
+<!--
+/**
+ * Product:       Xtento_CustomTrackers (1.2.1)
+ * ID:            hVPLLqeEzuQ5DkfzBxKNNCKve+ibrwXHzqE3QSFFjvk=
+ * Packaged:      2012-09-22T09:34:21+00:00
+ * Last Modified: 2012-02-11T17:35:12+01:00
+ * File:          app/code/local/Xtento/CustomTrackers/etc/system.xml
+ * Copyright:     Copyright (c) 2012 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->
