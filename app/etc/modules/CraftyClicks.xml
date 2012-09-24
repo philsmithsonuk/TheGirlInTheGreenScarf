@@ -2,7 +2,7 @@
 <config>
     <modules>
         <CraftyClicks>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
             <version>2.4.1</version>
         </CraftyClicks>
