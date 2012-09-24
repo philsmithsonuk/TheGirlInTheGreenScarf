@@ -137,6 +137,8 @@
 
 <script type="text/javascript">
 //<![CDATA[
+
+
 	var preloadImage = '<?php echo $this->getSkinUrl('images/onestepcheckout/preload.gif')?>';
 	var shipping_method_url = '<?php echo $this->getUrl('onestepcheckout/index/save_shipping', array('_secure' => true));?>';
 	var enable_update_payment = <?php echo $this->configData['update_payment'] ? 'true' : 'false'; ?>;
@@ -145,7 +147,9 @@
 	var show_term_condition_url = '<?php echo $this->getUrl('onestepcheckout/index/show_term_condition', array('_secure' => true));?>';
 	var form = $('one-step-checkout-form');
 	var reload_payment = <?php echo $this->configData['reload_payment']; ?>
-	
+
+
+
 	function showloginbox() {
 		var url = '<?php echo $this->getUrl('onestepcheckout/index/show_login', array('_secure' => true));?>';
 		showLogin(url);
