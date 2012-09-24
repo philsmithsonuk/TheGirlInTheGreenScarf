@@ -12,7 +12,7 @@ set_time_limit(0);
  Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
  $count = 0;
  
- $file = fopen(MAGENTO . '/var/import/catalog_product_SIMPLE_QTY_20120923.csv', 'r');
+ $file = fopen(MAGENTO . '/catalog_product_SIMPLE_QTY_20120923.csv', 'r');
 	while (($line = fgetcsv($file)) !== FALSE) { 
 	 if ($count == 0) {
 		foreach ($line as $key=>$value) {
