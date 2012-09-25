@@ -19,6 +19,10 @@
     border: 0 none;
     padding: 0;
 }
+.notice-inner a{
+	color:inherit;
+	font-weight:bold;
+}
 </style>
 <?php
 
@@ -46,7 +50,7 @@
 <?php if (Mage::helper('core/cookie')->isUserNotAllowSaveCookie()): ?>
     <div class="global-site-notice notice-cookie" id="notice-cookie-block" style="display: none">
         <div class="notice-inner">
-            <p><?php echo $this->__('This website requires cookies to provide all of its features. For more information on what data is contained in the cookies, please see our <a href="%s">Privacy Policy page</a>. To accept cookies from this site, please click the Allow button below.', $this->getPrivacyPolicyLink()) ?>
+            <p><?php echo $this->__('This website requires cookies to provide all of its features. For more information on what data is contained in the cookies, please see our <a href="%s">Cookie Policy page</a>. To accept cookies from this site, please click the Allow button below.', $this->getPrivacyPolicyLink()) ?>
                 <button class="button" onclick="allowSaveCookie()"><span><span><?php echo $this->__('Allow');?></span></span></button>
             </p>
         </div>
