@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Magestore_Onestepcheckout>
-			<active>true</active>
+			<active>false</active>
 			<codePool>local</codePool>
 		</Magestore_Onestepcheckout>
 	</modules>
