@@ -63,8 +63,7 @@
                     $('.tbl_quality tr.last td:last > div.input-box').append('&nbsp;<a class="size-guide-lnk" href="#" title="Show Size Guide">Size Guide</a>');
                     $('.tbl_quality tr.last td:last div.input-box').delegate('.size-guide-lnk', 'click', function(e){
                         e.preventDefault();
-                        var active = $('#size-guide-delivery-returns').accordion( "option", "active" );
-                        console.log(active);
+                        var active = $('#size-guide-delivery-returns').accordion( "option", "active" );                         
                         if ((active === false) || active != 0) {
                             $('#size-guide-delivery-returns').focus().accordion( "option", "active", 0 );
                         }
