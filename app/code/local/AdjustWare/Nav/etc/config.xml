@@ -2,7 +2,7 @@
 <config>
     <modules>
         <AdjustWare_Nav>
-            <version>2.4.2</version>
+            <version>2.4.7</version>
         </AdjustWare_Nav>
     </modules>
     <adminhtml>
@@ -103,6 +103,11 @@
             <catalog>
                 <rewrite>
                     <product_list_toolbar>AdjustWare_Nav_Block_Rewrite_FrontCatalogProductListToolbar</product_list_toolbar>
+                </rewrite>
+            </catalog>
+            <catalog>
+                <rewrite>
+                    <breadcrumbs>AdjustWare_Nav_Block_Rewrite_FrontCatalogBreadcrumbs</breadcrumbs>
                 </rewrite>
             </catalog>
             <catalogsearch>
@@ -215,6 +220,7 @@
                 <price_style>default</price_style>
                 <remove_links>0</remove_links>
                 <reset_filters>1</reset_filters>
+                <rel_prev_next>0</rel_prev_next>
             </adjnav>
             <adjnav_featured>
                 <use_ranges_attr>0</use_ranges_attr>
@@ -233,11 +239,11 @@
 </config>
 <!--
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
- * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
- * Generated:   2012-06-12 14:40:26
- * File path:   app/code/local/AdjustWare/Nav/etc/config.data.xml
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
+ * Purchase ID: RtE0qeQE7RRjsdRvhv07l9cGxzFoZAJ502qOJCvubx
+ * Generated:   2012-12-20 08:02:01
+ * File path:   app/code/local/AdjustWare/Nav/etc/config.xml
  * Copyright:   (c) 2012 AITOC, Inc.
  */
 -->

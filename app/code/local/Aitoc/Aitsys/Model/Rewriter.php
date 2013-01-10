@@ -91,7 +91,7 @@ class Aitoc_Aitsys_Model_Rewriter extends Aitoc_Aitsys_Model_Rewriter_Abstract
                         $inheritanceModel = new Aitoc_Aitsys_Model_Rewriter_Inheritance();
                         $baseClass          = $classModel->getBaseClass($groupType, $alias);
                         $inheritedClasses   = $inheritanceModel->buildAbstract($rewriteClass, $baseClass);
-                        $mergedFilename     = $merge->merge($inheritedClasses);
+                        $mergedFilename     = $merge->merge($inheritedClasses, true);
                         if ($mergedFilename)
                         {
                             $rewriterConfig->add($mergedFilename, array($rewriteClass,$baseClass));
@@ -105,7 +105,4 @@ class Aitoc_Aitsys_Model_Rewriter extends Aitoc_Aitsys_Model_Rewriter_Abstract
         
         Aitoc_Aitsys_Model_Rewriter_Autoload::instance()->setupConfig();
     }
-    
-    
-    
 }

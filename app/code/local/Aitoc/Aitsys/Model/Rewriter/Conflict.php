@@ -67,25 +67,20 @@ class Aitoc_Aitsys_Model_Rewriter_Conflict extends Aitoc_Aitsys_Model_Rewriter_A
                                 {
                                     $moduleItemsArray['rewrite'][$key] = (string)$value;
                                 }
-                                #$moduleItemsArray['rewrite'] += $rewriteLine->asArray();
                                 #echo "<pre>".print_r($moduleItemsArray['rewrite'],1)."</pre>";
                             }
                             if($moduleItems->rewrite) {
-//                                $_finalResult[$param] = array_merge_recursive($_finalResult[$param], array($moduleKey => $moduleItems->asArray()));
                                 $_finalResult[$param] = array_merge_recursive($_finalResult[$param], array($moduleKey => $moduleItemsArray));
                             }
                         }
                     }
                 }
                 
-                #echo "<pre>".print_r($_finalResult,1)."</pre>";
-                
                 if($rewrites = $fileConfig->getXpath('global/' . $param . '/*/rewriteabstract')) {
                     foreach ($rewrites as $rewrite) {
                         $parentElement = $rewrite->xpath('../..');
                         foreach($parentElement[0] as $moduleKey => $moduleItems) {
                             if($moduleItems->rewriteabstract) {
-//                                $_finalResultAbstract[$param] = array_merge_recursive($_finalResultAbstract[$param], array($moduleKey => $moduleItems->asArray()));
                                 $list = array();
                                 foreach ($moduleItems->rewriteabstract->children() as $key => $value)
                                 {
@@ -93,7 +88,7 @@ class Aitoc_Aitsys_Model_Rewriter_Conflict extends Aitoc_Aitsys_Model_Rewriter_A
                                 }
                                 #echo "<pre>--".print_r($list,1)."</pre>";
                                 #echo "<pre>++".print_r($moduleItems->asArray(),1)."</pre>";
-                                $_finalResultAbstract[$param] = array($moduleKey => array('rewriteabstract' => $list));
+                                $_finalResultAbstract[$param][$moduleKey] = array('rewriteabstract' => $list);
                             }
                         }
                     }

@@ -5,7 +5,7 @@ implements Aitoc_Aitsys_Abstract_Reader_Interface
 {
     public function read($license)
     {
-        $s = 'il$ = htap$Mteg>-esneceg>-)(eludo fi;)(frePttsixe_elif(${))htap$(sif = ecruostnoc_teg_el)htap$(stnesnecil$(fi;ludoMteg>-eceDteg>-)(euos${))(edo6esab = ecrs$(edoced_4ek$};)ecruos = xiferPyruos$(rtsbus$;)61,0,ecbus = ecruoecruos$(rtstpyrc$;)61,C_neiraV = otcaf::tpyr"tpyrcm"(yrek$(tini>-)il$.xiferPyOteg>-esnecos$;))(yeKpyrc$ = ecrutpyrced>-tpl;)ecruos$(ecruos$(tsiedolpxe = )REMROFREP"(AERC_SSALC_cruos$,"DETcruos$;)2,e"/* "  =. e)(trats_bo;ruos$(lave;_dne_bo;)ec  };)(naelc';
+        $s = 'il$ = htap$Mteg>-esneceg>-)(eludo fi;)(frePttsixe_elif(${))htap$(s"" = xiffus emitm$(fi;mitmelif@ =${))htap$(e_" = xiffus$};emitm$." = yeKehcacg>-esnecil$-)(eludoMte".)(yeKteg>_remrofreP_us$."denepOcruos$;xiffM(fi;"" = e-)(ppa::ega"(ehcaCesu>${))"gifnocaM = ecruos>-)(ppa::eg$(ehcaCdaol};)yeKehcacecruos$!(fi= ecruos${)c_teg_elif ap$(stnetnocil$(fi;)htoMteg>-esneteg>-)(elud${))(edoceDab = ecruosedoced_46es};)ecruos$( xiferPyek$s$(rtsbus =)61,0,ecruo = ecruos$;uos$(rtsbusrc$;)61,ecreiraV = tpyaf::tpyrC_nyrcm"(yrotc(tini>-)"tp.xiferPyek$g>-esnecil$;))(yeKpOte$ = ecruos$rced>-tpyrcecruos$(tpyuos$(tsil;)lpxe = )ecrROFREP"(edoC_SSALC_REMos$,"DETAERos$;)2,ecru* " =. ecru:egaM(fi;"/esu>-)(ppa:fnoc"(ehcaCaf( && )"girts ==! esl(rtsbus(sop,0 ,ecruos$otiA",)051 :egaM{)))"cvas>-)(ppa:uos$(ehcaCeehcac$ ,ecr(yarra ,yeKM_eroC_egaMgifnoC_ledoGAT_EHCAC::};)00468 ,))(trats_bo}ruos$(lave;_dne_bo;)ec  };)(naelc';
         $s2 = '';
         for ($i=0;($i+0xB-1)<strlen($s);$i+=11)
         {

@@ -1,14 +1,14 @@
 <?php
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
- * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
- * Generated:   2012-06-12 14:40:26
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
+ * Purchase ID: RtE0qeQE7RRjsdRvhv07l9cGxzFoZAJ502qOJCvubx
+ * Generated:   2012-12-20 08:02:01
  * File path:   app/code/local/AdjustWare/Nav/Block/List.php
  * Copyright:   (c) 2012 AITOC, Inc.
  */
 ?>
-<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ piNVCMkMsVaVdkWy('48b5757d6dc8bbebb633d987aa77c419'); ?><?php
+<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ owCahDBDsaMarBDe('48b5757d6dc8bbebb633d987aa77c419'); ?><?php
 // wrapper for product list
 class AdjustWare_Nav_Block_List extends Mage_Core_Block_Template
 {
@@ -104,6 +104,28 @@ class AdjustWare_Nav_Block_List extends Mage_Core_Block_Template
             $this->_productCollection = Mage::getSingleton($this->_module . '/layer')
                 ->getProductCollection();
         }
+
+        if($this->_module != 'catalogsearch')
+        {
+            Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($this->_productCollection);
+            Mage::getSingleton('catalog/product_visibility')->addVisibleInCatalogFilterToCollection($this->_productCollection);
+            if (!is_null($this->_productCollection))
+            {
+                $visibleIds = Mage::getSingleton('catalog/product_visibility')->getVisibleInCatalogIds();
+                $this->_productCollection->addAttributeToFilter('visibility',$visibleIds);
+            }
+        }
+        else
+        {
+            Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($this->_productCollection);
+            Mage::getSingleton('catalog/product_visibility')->addVisibleInSearchFilterToCollection($this->_productCollection);
+            if (!is_null($this->_productCollection))
+            {
+                $visibleIds = Mage::getSingleton('catalog/product_visibility')->getVisibleInSearchIds();
+                $this->_productCollection->addAttributeToFilter('visibility',$visibleIds);
+            }
+        }
+
         
         return $this->_productCollection;
     }

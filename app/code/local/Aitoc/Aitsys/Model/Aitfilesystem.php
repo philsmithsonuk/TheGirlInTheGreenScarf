@@ -15,6 +15,12 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
     //may be eighter 'all' or 'normal'
     protected $_permissionsMode;
 
+    protected $_subsystemsDirs = array();
+    
+    protected $_closedMainFolders;
+    
+    protected $_forbiddenDirs = array('.', '..', '.svn', '.git');
+
     /**
      * Makes temporary file in var/ folder
      *
@@ -52,7 +58,7 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
     
     public function getAitsysDir()
     {
-        return dirname($this->tool()->platform()->getInstallDir(true)).'/';
+        return $this->getAitocModulesDir().'Aitsys';
     }
     
     public function mkDir($sPath)
@@ -93,7 +99,7 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
                 $items = new RecursiveDirectoryIterator($path);
                 foreach ($items as $item)
                 {
-                    if(in_array(basename($item), array('.','..')))
+                    if(in_array(basename($item), $this->getForbiddenDirs()))
                     {
                         continue;
                     }
@@ -203,16 +209,52 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
         $this->_permissionsMode = $mode;
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function checkMainPermissions()
+    {
+        if (is_null($this->_closedMainFolders))
+        {
+            $this->_closedMainFolders  = array();
+            $foldersToCheck = array();
+            $subsystemsDirs = $this->getSubsystemsDirs();
+            $modulesDirs    = array(); // deprecated since 2.19.0 $this->getAitocModulesDirs();
+            
+            $foldersToCheck[] = BP . DS . 'var' . DS;
+            $foldersToCheck = array_merge($foldersToCheck, $subsystemsDirs, $modulesDirs);
+    
+            foreach($foldersToCheck as $i => $folder)
+            {
+                if (file_exists($folder) && is_dir($folder) && !$this->isWriteable($folder, false, (bool)$i))
+                {
+                    $this->_closedMainFolders[] = $folder;
+                }
+            }
+        }
+        return $this->_closedMainFolders;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getSubsystemsDirs()
+    {
+        if(empty($this->_subsystemsDirs))
+        {
+            $this->_subsystemsDirs[] = BP . Aitoc_Aitsys_Model_Rewriter_Abstract::REWRITE_CACHE_DIR;
+            $this->_subsystemsDirs[] = BP . DS . 'var' . DS . Aitoc_Aitsys_Model_Platform::INSTALLATION_DIR . DS;
+            $this->_subsystemsDirs[] = BP . DS . 'var' . DS . Aitoc_Aitsys_Model_Aitpatch::PATCH_DIR . DS;
+        }
+
+        return $this->_subsystemsDirs;
+    }
     
     public function permissonsChange($mode)
     {
         $all = ($mode === self::MODE_ALL);
-        $root = dirname(Mage::getRoot());
-        
-        $folders = array();
-        $folders[] = $root . Aitoc_Aitsys_Model_Rewriter_Abstract::REWRITE_CACHE_DIR;
-        $folders[] = $root . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . Aitoc_Aitsys_Model_Platform::INSTALLATION_DIR . DIRECTORY_SEPARATOR;
-        $folders[] = $root . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . Aitoc_Aitsys_Model_Aitpatch::PATCH_DIR . DIRECTORY_SEPARATOR;
+        $folders = $this->getSubsystemsDirs();
         
         foreach ($folders as $folder)
         {
@@ -261,7 +303,7 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
     {
         if (!$this->hasData('aitoc_modules_dir'))
         {
-            $dir = dirname(dirname(dirname(__FILE__))).DS;
+            $dir = $this->getLocalDir().'Aitoc/';
             $this->setAitocModulesDir($dir);
         }
         return $this->getData('aitoc_modules_dir');
@@ -272,7 +314,7 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
         if (!$this->hasData('aitoc_modules_dirs'))
         {
             $result = array();
-            $base = dirname($this->getAitocModulesDir()).DS;
+            $base = $this->getLocalDir();
             foreach ($this->tool()->platform()->getModuleDirs() as $dir)
             {
                 $result[] = $base.$dir.DS;
@@ -286,36 +328,14 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
     {
         if (!$path) return false;
 
-        if (file_exists($path))
+        if (!$this->isWriteable($path) && !$this->tool()->isPhpCli())
         {
-            if (!$this->isWriteable($path) && !$this->tool()->isPhpCli())
+            if ($exception)
             {
-                if ($exception)
-                {
-                    if (is_file($path))
-                    {
-                        $this->_exception($path);
-                    }
-                    else 
-                    {
-                        $this->_exception($path);
-                    }
-                }
-                return false;
+                $this->_exception($path);
             }
+            return false;
         }
-        else 
-        {
-            if (!$this->isWriteable($path) && !$this->tool()->isPhpCli())
-            {
-                if ($exception)
-                {
-                    $this->_exception($path);
-                }
-                return false;
-            }
-        }
-        
         return true;
     }
     
@@ -324,18 +344,38 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
         throw new Aitoc_Aitsys_Model_Aitfilesystem_Exception($msg);
     }
     
-    public function isWriteable($sPath, $bCheckParentDirIfNotExists = true)
+    public function isWriteable($sPath, $bCheckParentDirIfNotExists = true, $recursive = false)
     {
         clearstatcache();
-        if (file_exists($sPath) and is_file($sPath))
+        if (file_exists($sPath))
         {
-            return $this->isFileWritable($sPath);
+            if(is_file($sPath))
+            {
+                return $this->isFileWritable($sPath);
+            }
+            else
+            {
+                $return = $this->isDirWritable($sPath);
+                if($return && $recursive)
+                {
+                    $items = new RecursiveDirectoryIterator($sPath);
+                    foreach ($items as $item)
+                    {
+                        if(in_array(basename($item), $this->getForbiddenDirs()))
+                        {
+                            continue;
+                        }
+                        if(!$this->isWriteable((string)$item, false, true))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                
+                return $return;
+            }
         }
-        if (file_exists($sPath) and is_dir($sPath))
-        {
-            return $this->isDirWritable($sPath);
-        }
-        if (!file_exists($sPath))
+        else
         {
             if (!$bCheckParentDirIfNotExists)
             {
@@ -452,7 +492,7 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
 
 		while (false !== ($file = $dir->read()))
 		{
-			if (!in_array($file,array('.','..','.svn')) && is_dir($directoryPath.$file))
+			if (!in_array($file, $this->getForbiddenDirs()) && is_dir($directoryPath.$file))
 			{
 				$directories[] = $file;
 			}
@@ -557,5 +597,13 @@ class Aitoc_Aitsys_Model_Aitfilesystem extends Aitoc_Aitsys_Abstract_Model
 	public function sortSubdirectories($directoryA, $directoryB)
 	{
 		return version_compare($directoryA, $directoryB);
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getForbiddenDirs()
+	{
+	   return $this->_forbiddenDirs;
 	}
 }

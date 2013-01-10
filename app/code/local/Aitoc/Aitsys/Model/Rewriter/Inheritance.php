@@ -38,7 +38,7 @@ class Aitoc_Aitsys_Model_Rewriter_Inheritance extends Aitoc_Aitsys_Model_Rewrite
         {
             $order = array();
         }
-        if (!isset($order[$baseClass]))
+        if (!isset($order[$baseClass]) || !$this->_aithelper('Rewriter')->validateSavedClassConfig($order[$baseClass], $rewriteClasses))
         {
             $config = Aitoc_Aitsys_Model_Rewriter_MageConfig::get()->getConfig();
             $tmp = array();

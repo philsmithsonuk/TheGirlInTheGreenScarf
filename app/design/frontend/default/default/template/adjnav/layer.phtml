@@ -1,9 +1,9 @@
 <?php
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
- * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
- * Generated:   2012-06-12 14:40:26
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
+ * Purchase ID: RtE0qeQE7RRjsdRvhv07l9cGxzFoZAJ502qOJCvubx
+ * Generated:   2012-12-20 08:02:01
  * File path:   app/design/frontend/default/default/template/adjnav/layer.phtml
  * Copyright:   (c) 2012 AITOC, Inc.
  */
@@ -75,8 +75,7 @@ if ('ajax' != Mage::app()->getRequest()->getControllerName())
                 <?php if ($_filter->getItemsCount()): ?>
                 <dt class="adj-nav-dt <?php if ($_filter->getIsOther()) : ?>adjnav-attr-other<?php endif ?>">
                     <?php if ($clearUrl = $_filter->getClearUrl()): ?>
-
-                    <a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear" title="<?php echo $this->__('Remove This Item')?>"><?php echo $this->__('Remove This Item')?></a>
+                        <a onclick="return false;" id="<?php echo $_filter->getVar()?>-clear" <?php if(!$this->getIsRemoveLinks()): ?>href="<?php echo $this->htmlEscape($clearUrl)?>" <?php endif; ?> class="btn-remove adj-nav-clear <?php if ( Mage::getStoreConfig('design/adjnav/reload_categories') && 'cat' == $_filter->getVar() ) { echo ' adj-nav-cat-reload '; }?>" title="<?php echo $this->__('Remove This Item')?>"><?php echo $this->__('Remove This Item')?></a>
                     <?php endif ?>
                     <?php echo $this->__($_filter->getName()) ?>
                 </dt>

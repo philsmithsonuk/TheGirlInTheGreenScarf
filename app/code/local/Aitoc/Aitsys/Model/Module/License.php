@@ -4,6 +4,8 @@
  */
 class Aitoc_Aitsys_Model_Module_License extends Aitoc_Aitsys_Model_Module_Abstract
 {
+    const LICENSE_FILE = 'license.xml';
+
     protected $_version = 'convenient';
     
     protected $_uninstallCount = 0;

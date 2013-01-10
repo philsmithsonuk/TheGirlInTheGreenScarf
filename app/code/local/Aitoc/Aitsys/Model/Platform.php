@@ -47,6 +47,8 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
     
     protected $_block = false;
     
+    protected $_modulesList; // Module_Name => array( 'module_path' => Module_Path, 'module_file' => Module_File )
+    
     protected $_modules = array();
     
     protected $_version;
@@ -153,22 +155,9 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
     public function getModuleKeysForced()
     {
         $modules = array();
-        $path = Mage::getBaseDir('code').DS.'local'.DS;
-        foreach ($this->_moduleDirs as $dir)
+        foreach($this->_modulesList as $moduleKey => $moduleData)
         {
-            $aModuleDirs = glob($path.$dir.DS.'*');
-            if (!$aModuleDirs)
-                continue;
-            foreach ($aModuleDirs as $tmpPath)
-            {
-                $name = pathinfo($tmpPath,PATHINFO_FILENAME);
-                $key = $dir.'_'.$name;
-                if ('Aitoc_Aitsys' == $key)
-                {
-                    continue;
-                }
-                $modules[$key] = 'true' == (string)Mage::getConfig()->getNode('modules/'.$key.'/active');
-            }
+            $modules[$moduleKey] = ('true' == (string)Mage::getConfig()->getNode('modules/'.$moduleKey.'/active'));
         }
         return $modules;
     }
@@ -180,10 +169,7 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
      */
     public function getModule( $key )
     {
-        if (!$this->_modules)
-        {
-            $this->_generateModuleList();
-        }
+        $this->getModules();
         return isset($this->_modules[$key]) ? $this->_modules[$key] : null;
     }
     
@@ -273,24 +259,25 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
         return $this->getData('mode') == 'test';
     }
     
+    public function isDemoMode()
+    {
+        return $this->getData('demo_mode') ? true : false;
+    }
+    
     public function getInstallDir( $base = false )
     {
         if (!$this->_installDir)
         {
-            $this->_installDir = dirname(dirname(__FILE__)).'/install/';
+            $this->_installDir = $this->tool()->filesystem()->getAitsysDir().'/install/';
         }
-        if ($base)
-        {
-            return $this->_installDir;
-        }
-        return rtrim($this->_installDir,'/').'/';
+        return $this->_installDir;
     }
     
     public function getLicenseDir( $base = false )
     {
         if (!$this->_licenseDir)
         {
-            $this->_licenseDir = dirname(Mage::getRoot()).'/var/'.self::INSTALLATION_DIR.'/';
+            $this->_licenseDir = BP.'/var/'.self::INSTALLATION_DIR.'/';
             
             if(!$this->tool()->filesystem()->isWriteable($this->_licenseDir))
             {
@@ -424,8 +411,8 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
      */
     public function reset()
     {
-        $this->_generateModuleList();
-        foreach ($this->_modules as $module) 
+        $this->_modules = array(); // to reinit all licensed modules after platform registration
+        foreach ($this->getModules() as $module) 
         {
             $this->tool()->testMsg('Update module '.$module->getLabel().' status after generating');
             $module->updateStatuses();
@@ -461,26 +448,13 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
         return $this;
     }    
     
-    public function isAitocModule( $module )
+    /**
+     * @param string $moduleKey
+     * @return bool
+     */
+    public function isIgnoredModule( $moduleKey )
     {
-        foreach ($this->_aitocPrefixList as $prefix)
-        {
-            if (0 === strpos($module,$prefix))
-            {
-                return true;
-            }
-        }
-    }
-    
-    public function isIgnoredModule( $module )
-    {
-        foreach ($this->_moduleIgnoreList as $ignoredModule)
-        {
-            if (false !== strstr($module,$ignoredModule))
-            {
-                return true;
-            }
-        }
+        return in_array($moduleKey, $this->_moduleIgnoreList);
     }
     
     public function isPlatformFileName( $filename )
@@ -510,18 +484,11 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
     
     public function getModulePurchaseIdQuickList()
     {
+        $this->_createModulesList()->_loadLicensedModules();
         $list = array();
-        $path = $this->getInstallDir().'*.xml';
-        if ($pathes = glob($path))
+        foreach($this->_modules as $module)
         {
-            foreach ($pathes as $path)
-            {
-                if (!$this->isPlatformFileName($path))
-                {
-                    $module = $this->_makeModuleByInstallFile($path);
-                    $list[$module->getKey()] = $module->getLicense()->getPurchaseId(); 
-                }
-            }
+            $list[$module->getKey()] = $module->getLicense()->getPurchaseId(); 
         }
         return $list;
     }
@@ -555,7 +522,7 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
     {
         $this->tool()->testMsg('Try to generate module list!'); 
         
-        $this->_loadLicensedModules()->_loadAllModules();
+        $this->_createModulesList()->_loadLicensedModules()->_loadAllModules();
 
         $this->tool()->event('aitsys_generate_module_list_after');
         $this->tool()->testMsg('Module list generated');
@@ -563,10 +530,42 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
     }
     
     /**
-     * 
      * @return Aitoc_Aitsys_Model_Platform
      */
     protected function _loadLicensedModules()
+    {
+        $this->_loadLicensedModulesOld();
+        foreach ($this->_modulesList as $moduleKey => $moduleData)
+        {
+            if(isset($this->_modules[$moduleKey]))
+            {
+                // module already loaded from the old-format license file
+                // in the _loadLicensedModulesOld method
+                continue;
+            }
+            
+            $licenseFile = $moduleData['module_path'].'/etc/'.Aitoc_Aitsys_Model_Module_License::LICENSE_FILE;
+            if(!@is_file($licenseFile))
+            {
+                // module license file not found in the module's `etc` folder
+                continue;
+            }
+            
+            // loading module
+            $this->tool()->testMsg("Try load licensed module");
+            $module = $this->_makeModuleByInstallFile($licenseFile);
+            
+            $this->_addLicensedModule($module);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Compatibility with Aitsys older then 2.18.0
+     * @return Aitoc_Aitsys_Model_Platform
+     */
+    protected function _loadLicensedModulesOld()
     {
         if (!file_exists($this->getInstallDir()))
         {
@@ -574,7 +573,6 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
         }
         
         $dir = new DirectoryIterator($this->getInstallDir());
-            
         
         foreach ($dir as $item)
         {
@@ -582,7 +580,7 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
             if ($item->isFile())
             {
                 $filename = $item->getFilename();
-                if (false !== strstr($filename,'.xml'))
+                if ('.xml' === substr($filename, -4, 4))
                 {
                     if ($this->isPlatformFileName($filename))
                     {
@@ -592,31 +590,37 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
                     {
                         continue;
                     }
-                    $this->tool()->testMsg("Try load licensed module");
+                    // loading module
+                    $this->tool()->testMsg("Try load licensed module with old license file");
                     $module = $this->_makeModuleByInstallFile($item->getPathname());
                     
-                    if ((!$this->_addEntHash() && $module->getLicense()->getEntHash()) || ($this->_addEntHash() && !$module->getLicense()->getEntHash()))
-                    {
-                        $this->_moduleIgnoreList[] = $module->getKey();
-                        continue;
-                    }
-                                     
-                    $key = $module->getKey();
-                    $this->tool()->testMsg("Try load licensed module finished: ".$key);
-                    if (!isset($this->_modules[$key]))
-                    {
-                        $this->tool()->testMsg("Add new module");
-                        $this->_modules[$key] = $module;
-                    }
-                    else
-                    {
-                        $this->tool()->testMsg("Reset existed module");
-                        $this->_modules[$key]->reset();
-                    }
+                    $this->_addLicensedModule($module);                 
                 }
             }
         }
         return $this;
+    }
+    
+    protected function _addLicensedModule(Aitoc_Aitsys_Model_Module $module)
+    {
+        if ((!$this->_addEntHash() && $module->getLicense()->getEntHash()) || ($this->_addEntHash() && !$module->getLicense()->getEntHash()))
+        {
+            $this->_moduleIgnoreList[] = $module->getKey();
+            return;
+        }
+    
+        $key = $module->getKey();
+        $this->tool()->testMsg("Try load licensed module finished: ".$key);
+        if (!isset($this->_modules[$key]))
+        {
+            $this->tool()->testMsg("Add new module");
+            $this->_modules[$key] = $module;
+        }
+        else
+        {
+            $this->tool()->testMsg("Reset existed module");
+            $this->_modules[$key]->reset();
+        }
     }
     
     protected function _addEntHash()
@@ -645,6 +649,7 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
     }
     
     /**
+     * Load certain module by using its license file
      * 
      * @param $path
      * @return Aitoc_Aitsys_Model_Module
@@ -659,48 +664,97 @@ final class Aitoc_Aitsys_Model_Platform extends Aitoc_Aitsys_Abstract_Model
     }
     
     /**
+     * Based on /code/local/Aitoc|AdjustWare subfolders
+     * 
+     * @return Aitoc_Aitsys_Model_Platform
+     */
+    protected function _createModulesList()
+    {
+        if(is_null($this->_modulesList))
+        {
+            $this->_modulesList = array();
+            $aitocModulesDirs = $this->tool()->filesystem()->getAitocModulesDirs();
+            foreach($aitocModulesDirs as $aitocModuleDir)
+            if(@file_exists($aitocModuleDir) && @is_dir($aitocModuleDir))
+            {
+                $aitocModuleSubdirs = new DirectoryIterator($aitocModuleDir);
+                foreach ($aitocModuleSubdirs as $aitocModuleSubdir)
+                {
+                    // skip dots folders
+                    if(in_array($aitocModuleSubdir->getFilename(), $this->tool()->filesystem()->getForbiddenDirs()))
+                    {
+                        continue;
+                    }
+                    
+                    $moduleKey  = basename($aitocModuleDir)."_".$aitocModuleSubdir->getFilename();
+                    if(!$this->isIgnoredModule($moduleKey))
+                    {
+                        $moduleFile = $this->tool()->filesystem()->getEtcDir()."/{$moduleKey}.xml";
+                        $this->_modulesList[$moduleKey] = array(
+                            'module_path' => $aitocModuleSubdir->getPathname(),
+                            'module_file' => @is_file($moduleFile) ? $moduleFile : null
+                        );
+                    }
+                }
+        }
+        }
+        return $this;
+    }
+    
+    /**
+     * Return list of all Aitocs' modules or certain module info
+     * 
+     * @return array
+     */
+    public function getModulesList($module = '')
+    {
+        if(!$module)
+        {
+            return $this->_modulesList;
+        }
+        return isset($this->_modulesList[$module]) ? $this->_modulesList[$module] : null;
+    }
+    
+    /**
+     * Load all modules which have main config file
      * 
      * @return Aitoc_Aitsys_Model_Platform
      */
     protected function _loadAllModules()
     {
-        $filesystem = $this->tool()->filesystem();
-        $dir = new DirectoryIterator($filesystem->getEtcDir());
-        foreach ($dir as $item)
+        foreach ($this->_modulesList as $moduleKey => $moduleData)
         {
-            /* @var $item DirectoryIterator */
-            if ($this->isIgnoredModule($item->getFilename()))
+            if($moduleData['module_file']) // only if the config file for this module in /app/etc/modules does exist
             {
-                continue;
-            }
-            if ($item->isFile() && $this->isAitocModule($item->getFilename()))
-            {
-                $this->_makeModuleByModuleFile($item->getPathname());
+                $this->_makeModuleByModuleFile($moduleKey, $moduleData['module_file']);
             }
         }
         return $this;
     }
     
 	/**
+	 * Load certain module by using its main config file 
+	 * 
+     * @param string $moduleKey
+     * @param string $moduleFile
      * 
-     * @param $path
      * @return Aitoc_Aitsys_Model_Module
      */
-    protected function _makeModuleByModuleFile( $path )
+    protected function _makeModuleByModuleFile( $moduleKey, $moduleFile )
     {
-        $moduleFile = new SplFileInfo($path);
-        $file = $moduleFile->getFilename();
+        $this->tool()->testMsg('Check: '.$moduleKey.' -- '.$moduleFile);
         
-        list($key) = explode('.',$file);
-        $this->tool()->testMsg('Check: '.$key.' -- '.$file);
-        if ($module = (isset($this->_modules[$key]) ? $this->_modules[$key] : null))
+        // check if module was already loaded during licensed modules load
+        if ($module = (isset($this->_modules[$moduleKey]) ? $this->_modules[$moduleKey] : null))
         {
             return $module;
         }
-        $this->tool()->testMsg('Create: '.$key);
+        
+        $this->tool()->testMsg('Create: '.$moduleKey);
         $module = new Aitoc_Aitsys_Model_Module();
-        $module->loadByModuleFile($path,$key);
-        return $this->_modules[$key] = $module;
+        $module->loadByModuleFile($moduleFile, $moduleKey);
+        
+        return $this->_modules[$moduleKey] = $module;
     }
 
     protected function _castPlatformId( $file )

@@ -1,9 +1,9 @@
 <?php
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
- * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
- * Generated:   2012-06-12 14:40:26
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
+ * Purchase ID: RtE0qeQE7RRjsdRvhv07l9cGxzFoZAJ502qOJCvubx
+ * Generated:   2012-12-20 08:02:01
  * File path:   app/design/frontend/base/default/template/adjnav/filter_price_slider.phtml
  * Copyright:   (c) 2012 AITOC, Inc.
  */
@@ -136,14 +136,14 @@
 ?>
 <ol>
     <li>
-<div id="adj-nav-price-slider" class="adj-nav-slider">
+<div id="adj-nav-price-slider<?php echo $this->_filter->getRequestVar()?>" class="adj-nav-slider">
     <div class="handle selected" style="left:<?php echo $firstOffset?>px"></div>
     <div class="handle" style="left:<?php echo $secondOffset?>px"></div>
   </div>
 <?php echo $this->__('Range:')?>
-<?php echo $this->getSymbol()?><span id="adj-nav-range-from"><?php echo $from?></span>-<?php echo $this->getSymbol()?><span id="adj-nav-range-to"><?php echo $to?></span>
+<?php echo $this->getSymbol()?><span id="adj-nav-range-from<?php echo $this->_filter->getRequestVar()?>"><?php echo $from?></span>-<?php echo $this->getSymbol()?><span id="adj-nav-range-to<?php echo $this->_filter->getRequestVar()?>"><?php echo $to?></span>
 <script type="text/javascript">
-    var adj_slider = adj_nav_create_slider(<?php echo $width.', '.$firstOffset.', '.$secondOffset.', '.$max?>);
+    var adj_slider = adj_nav_create_slider(<?php echo $width.', '.$firstOffset.', '.$secondOffset.', '.$max.',"'.$this->_filter->getRequestVar()?>");
 </script>
     </li>
 </ol>

@@ -67,6 +67,7 @@ class Aitoc_Aitsys_Model_Rewriter_Autoload
     
     static public function register( $base = false )
     {
+        /* deprecated since 2.19.0
         if (defined('COMPILER_INCLUDE_PATH'))
         {
             $paths = array();
@@ -78,7 +79,7 @@ class Aitoc_Aitsys_Model_Rewriter_Autoload
             $appPath = implode(PS, $paths);
             set_include_path($appPath . PS . get_include_path());
         }
-        
+        */
         $rewriter = new Aitoc_Aitsys_Model_Rewriter();
         $rewriter->preRegisterAutoloader($base);
         
@@ -146,6 +147,7 @@ class Aitoc_Aitsys_Model_Rewriter_Autoload
                 throw $e;
             }
         }
+        /* should work now without this fix
         foreach ($this->_aitocDirs as $dir)
         {
             if (stristr($class,$dir))
@@ -165,6 +167,7 @@ class Aitoc_Aitsys_Model_Rewriter_Autoload
                 }
             }
         }
+        */
         return false;
     }
     

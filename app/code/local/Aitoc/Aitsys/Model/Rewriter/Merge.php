@@ -28,14 +28,22 @@ class Aitoc_Aitsys_Model_Rewriter_Merge extends Aitoc_Aitsys_Model_Rewriter_Abst
     * @param array $classes
     * @return boolean
     */
-    public function merge($classes)
+    public function merge($classes, $isAbstract = false)
     {
         $this->_latestMergedFiles = array();
         if (!is_array($classes) || empty($classes))
         {
             return false;
         }
-        $filename = md5($classes[count($classes)-1]['child']);
+
+        if($isAbstract)
+        {
+            $filename = $classes[count($classes)-1]['parent'];
+        }
+        else
+        {
+            $filename = $classes[count($classes)-1]['child'];
+        }
         $filepath = $this->_rewriteDir . $filename . '.php';
         
         $fileContent = '';

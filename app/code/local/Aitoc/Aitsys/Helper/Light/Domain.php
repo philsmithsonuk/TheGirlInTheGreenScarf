@@ -1,8 +1,6 @@
 <?php
-
-class Aitoc_Aitsys_Helper_Light_Domain extends Mage_Core_Helper_Abstract
+class Aitoc_Aitsys_Helper_Light_Domain extends Aitoc_Aitsys_Abstract_Helper
 {    
-    
     protected $_subZones = array( // in alphabetical order 
         'co',
         'com',
@@ -13,11 +11,11 @@ class Aitoc_Aitsys_Helper_Light_Domain extends Mage_Core_Helper_Abstract
     public function parseUrl( $url ) 
     {
         $domain = parse_url($url);
-        if(false === $domain) 
+        if((false === $domain) || !isset($domain['host']))
         {
-            Mage::throwException($this->__('Failed to parse url: '.$url.''));
+            $this->tool()->testMsg('Incorrect url ['.$url.'] given to parser.');
+            $domain['host'] = '';
         }
-        
         $host = explode('.', $domain['host']);
         
         //check if domain starts with www.
@@ -41,7 +39,7 @@ class Aitoc_Aitsys_Helper_Light_Domain extends Mage_Core_Helper_Abstract
         $domain['zone'] = array_pop($host);
         
         //break url into an array and removing '/' at the beginning and at the end to prevend empty values
-        $path = trim($domain['path'],'/');
+        $path = trim(isset($domain['path'])? $domain['path'] : '','/');
         
         $domain['folder'] = '';
         $domain['admin'] = '';

@@ -1,19 +1,16 @@
 <?php
-
+/**
+ * @copyright  Copyright (c) 2009 AITOC, Inc. 
+ */
 class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Setup
 {
     protected $_allowUpdate = true;
+    
     const TYPE_AITOC_DB_UPGRADE           = 'upgrade';
     const TYPE_AITOC_DB_INSTALL           = 'install';
+    const TYPE_AITOC_DB_STATE_ACTIVATE    = 'activate';
+    const TYPE_AITOC_DB_STATE_UNINSTALL   = 'uninstall';
     
-    protected $_upgradeActionType = '';
-    protected $_installActionType = '';
-    
-    public function __construct($resourceName) {
-        $this->_upgradeActionType = (defined('Mage_Core_Model_Resource_Setup::TYPE_DB_UPGRADE') ? Mage_Core_Model_Resource_Setup::TYPE_DB_UPGRADE : self::TYPE_AITOC_DB_UPGRADE );
-        $this->_installActionType = (defined('Mage_Core_Model_Resource_Setup::TYPE_DB_INSTALL') ? Mage_Core_Model_Resource_Setup::TYPE_DB_INSTALL : self::TYPE_AITOC_DB_INSTALL );
-        return parent::__construct($resourceName);
-    }
     /**
      * Run resource upgrade files from $oldVersion to $newVersion
      *
@@ -24,7 +21,7 @@ class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Set
     protected function _upgradeResourceDb($oldVersion, $newVersion)
     {
         $this->_allowUpdate = true;
-        $this->_modifyResourceDb($this->_upgradeActionType, $oldVersion, $newVersion);
+        $this->_modifyResourceDb(self::TYPE_AITOC_DB_UPGRADE, $oldVersion, $newVersion);
         if($this->_allowUpdate) {
             $this->_getResource()->setDbVersion($this->_resourceName, $newVersion);
         }
@@ -41,8 +38,8 @@ class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Set
     protected function _installResourceDb($newVersion)
     {
         $this->_allowUpdate = true;
-        $oldVersion = $this->_modifyResourceDb($this->_installActionType, '', $newVersion);
-        $this->_modifyResourceDb($this->_upgradeActionType, $oldVersion, $newVersion);
+        $oldVersion = $this->_modifyResourceDb(self::TYPE_AITOC_DB_INSTALL, '', $newVersion);
+        $this->_modifyResourceDb(self::TYPE_AITOC_DB_UPGRADE, $oldVersion, $newVersion);
         if($this->_allowUpdate) {
             $this->_getResource()->setDbVersion($this->_resourceName, $newVersion);
         }
@@ -69,23 +66,11 @@ class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Set
      * @return string|false
      * @throws Mage_Core_Exception
      */
-
     protected function _modifyResourceDb($actionType, $fromVersion, $toVersion)
     {
-        /* Aitsys use only TYPE_DB_ files  */
-        /*switch ($actionType) {
-            case self::TYPE_DB_INSTALL:
-            case self::TYPE_DB_UPGRADE:*/
-                $files = $this->_getAvailableDbFiles($actionType, $fromVersion, $toVersion);
-/*                break;
-            case self::TYPE_DATA_INSTALL:
-            case self::TYPE_DATA_UPGRADE:
-                $files = $this->_getAvailableDataFiles($actionType, $fromVersion, $toVersion);
-                break;
-            default:
-                $files = array();
-                break;
-        }*/
+        // Aitsys use only TYPE_DB_ files
+        $files = $this->_getAvailableDbFiles($actionType, $fromVersion, $toVersion);
+
         if (empty($files) || !$this->getConnection()) {
             return false;
         }
@@ -204,101 +189,44 @@ class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Set
         return true;
     }
     
+    /**
+     * Apply module deactivation sql file
+     * 
+     * @param string $moduleName like [Aitoc|AdjustWare]_[AitModuleName]
+     * 
+     * @return bool
+     */
     public function applyAitocModuleUninstall($moduleName)
     {
-        $localDir = Aitoc_Aitsys_Abstract_Service::get()->filesystem()->getLocalDir();
-        $moduleDir = $localDir . str_replace('_', '/', $moduleName);
-        
-        $configFile = $moduleDir.DS.'etc'.DS.'config.xml';
-                
-        if (file_exists($configFile))
-        {
-            $config = simplexml_load_file($configFile);
-        }
- 
-        if (!isset($config))
-        {
-            return false;
-        }
-
-        foreach ($config->global->resources->children() as $key => $object)
-        {
-            if ($object->setup)
-            {
-                $resourceName = $key;
-                break;
-            }
-        }
-            
-        if (!isset($resourceName))
-        {
-            return false;
-        }
-
-        $sqlFilesDir = $moduleDir.DS.'sql'.DS.$resourceName;
-
-        if (!is_dir($sqlFilesDir) || !is_readable($sqlFilesDir)) {
-            return false;
-        }
-        // Read resource files
-        $arrAvailableFiles = array();
-        $sqlDir = dir($sqlFilesDir);
-        while (false !== ($sqlFile = $sqlDir->read())) {
-            $matches = array();
-            if (preg_match('#^mysql4-uninstall-(.*)\.(sql|php)$#i', $sqlFile, $matches)) {
-                $arrAvailableFiles[$matches[1]] = $sqlFile;
-            }
-        }
-        $sqlDir->close();
-        
-        if (empty($arrAvailableFiles)) {
-            return false;
-        }
-
-        
-        foreach ($arrAvailableFiles as $resourceFile) {
-            $sqlFile = $sqlFilesDir.DS.$resourceFile;
-            $fileType = pathinfo($resourceFile, PATHINFO_EXTENSION);
-            // Execute SQL
-            if ($this->_conn) {
-                if (method_exists($this->_conn, 'disallowDdlCache')) {
-                    $this->_conn->disallowDdlCache();
-                }
-                try {
-                    switch ($fileType) {
-                        case 'sql':
-                            $sql = file_get_contents($sqlFile);
-                            if ($sql!='') {
-                                $result = $this->run($sql);
-                            } else {
-                                $result = true;
-                            }
-                            break;
-                        case 'php':
-                            $conn = $this->_conn;
-                            $result = include($sqlFile);
-                            break;
-                        default:
-                            $result = false;
-                    }
-                } catch (Exception $e){
-                    echo "<pre>".print_r($e,1)."</pre>";
-                    throw Mage::exception('Mage_Core', Mage::helper('core')->__('Error in file: "%s" - %s', $sqlFile, $e->getMessage()));
-                }
-                if (method_exists($this->_conn, 'allowDdlCache')) {
-                    $this->_conn->allowDdlCache();
-                }
-            }
-        }
-        self::$_hadUpdates = true;
-        return true;
+        return $this->_processStateSql(self::TYPE_AITOC_DB_STATE_UNINSTALL, $moduleName);
     }
     
+    /**
+     * Apply module activation sql file
+     * 
+     * @param string $moduleName like [Aitoc|AdjustWare]_[AitModuleName]
+     * 
+     * @return bool
+     */
     public function applyAitocModuleActivate($moduleName)
+    {
+        return $this->_processStateSql(self::TYPE_AITOC_DB_STATE_ACTIVATE, $moduleName);
+    }
+    
+    /**
+     * Apply module sql file of appropriate type
+     *
+     * @param string $processType self::TYPE_AITOC_DB_STATE_*
+     * @param string $moduleName like [Aitoc|AdjustWare]_[AitModuleName]
+     * 
+     * @return bool 
+     */
+    protected function _processStateSql($processType, $moduleName)
     {
         $localDir = Aitoc_Aitsys_Abstract_Service::get()->filesystem()->getLocalDir();
         $moduleDir = $localDir . str_replace('_', '/', $moduleName);
         
+        // Attempt to locate and load module's main config file or its .data version
         $configFile = $moduleDir.DS.'etc'.DS.'config.data.xml';
         if (file_exists($configFile))
         {
@@ -312,13 +240,12 @@ class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Set
                 $config = simplexml_load_file($configFile);
             }
         }
-
+        
+        // Module config file not found
         if (!isset($config))
         {
             return false;
         }
-
-        //list($curVersion) = (array)$config->modules->$moduleName->version;
 
         if (isset($config->global) && isset($config->global->resources))
         {
@@ -331,42 +258,49 @@ class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Set
                 }
             }
         }
-        
+
+        // There's no resource setup entities in the config file
         if (!isset($resourceName))
         {
             return false;
         }
 
-        $dbVersion = Mage::getResourceModel('core/resource')->getDBVersion($resourceName);
-                
         $sqlFilesDir = $moduleDir.DS.'sql'.DS.$resourceName;
 
+        // Resource setup directory is empty
         if (!is_dir($sqlFilesDir) || !is_readable($sqlFilesDir)) {
             return false;
         }
+
         // Read resource files
         $arrAvailableFiles = array();
         $sqlDir = dir($sqlFilesDir);
-        
         while (false !== ($sqlFile = $sqlDir->read())) {
             $matches = array();
-            if (preg_match('#^mysql4-activate-(.*)\.(sql|php)$#i', $sqlFile, $matches)) {
+            if (preg_match('#^mysql4-'.$processType.'-(.*)\.(sql|php)$#i', $sqlFile, $matches)) {
                 $arrAvailableFiles[$matches[1]] = $sqlFile;
             }
         }
+        $sqlDir->close();
         
+        // There are no appropriate state sql files in the resource directory
         if (empty($arrAvailableFiles)) {
             return false;
         }
 
-        foreach ($arrAvailableFiles as $version => $resourceFile) {
+        $dbVersion = Mage::getResourceModel('core/resource')->getDBVersion($resourceName);        
+
+        foreach ($arrAvailableFiles as $version => $resourceFile)
+        {
+            // Stop processing if state script is for the higher version of the module
             if (version_compare($version, $dbVersion) > 0)
             {
                 break;
             }
+            
             $sqlFile = $sqlFilesDir.DS.$resourceFile;
             $fileType = pathinfo($resourceFile, PATHINFO_EXTENSION);
-            
+
             // Execute SQL
             if ($this->_conn) {
                 if (method_exists($this->_conn, 'disallowDdlCache')) {
@@ -403,5 +337,4 @@ class Aitoc_Aitsys_Model_Mysql4_Setup extends Aitoc_Aitsys_Abstract_Resource_Set
         self::$_hadUpdates = true;
         return true;
     }
-    
 }

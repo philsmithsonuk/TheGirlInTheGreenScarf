@@ -1,14 +1,14 @@
 <?php
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
- * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
- * Generated:   2012-06-12 14:40:26
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
+ * Purchase ID: RtE0qeQE7RRjsdRvhv07l9cGxzFoZAJ502qOJCvubx
+ * Generated:   2012-12-20 08:02:01
  * File path:   app/code/local/AdjustWare/Nav/Model/Catalog/Layer/Filter/Attribute.php
  * Copyright:   (c) 2012 AITOC, Inc.
  */
 ?>
-<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ hpAtIBPBstktlmVM('de30395b9b1d4b6f27155e733f9e638c'); ?><?php
+<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ qoIkiajaskBkEjaD('de30395b9b1d4b6f27155e733f9e638c'); ?><?php
 class AdjustWare_Nav_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Model_Layer_Filter_Attribute
 {
     private static $_filterAttributes = array();

@@ -101,7 +101,17 @@ class Aitoc_Aitsys_Block_Edit extends Mage_Adminhtml_Block_Widget
     {
         if ($this->_bAllowInstall)
         {
-            $sInstallText = Mage::helper('adminhtml')->__('<ul class="messages"><li class="notice-msg"><ul><li>Before any action with Aitoc Modules please set all Magento folders to have writable permission for the web server user (example: apache)</li></ul></li></ul>');
+            $sInstallText = '';
+            $closedFolders = $this->tool()->filesystem()->checkMainPermissions();
+            if(!empty($closedFolders))
+            {
+                $sInstallText = '<ul class="messages"><li class="notice-msg"><ul><li>'.
+                Mage::helper('aitsys')->__('Before any action with AITOC Modules, please ensure the folders below (including their files and subfolders) have writable permissions for the web server user (for example, apache):').
+                '<br /><b>'.
+                join('<br />', $closedFolders).
+                '</b></li></ul></li></ul>';
+            }
+            
         }    
         else 
         {

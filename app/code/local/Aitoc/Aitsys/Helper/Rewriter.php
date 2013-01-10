@@ -64,4 +64,31 @@ class Aitoc_Aitsys_Helper_Rewriter extends Aitoc_Aitsys_Helper_Data
         }
         return $configValue;
     }
+    
+    public function validateSavedClassConfig($savedClassConfig, $rewriteClasses)
+    {
+        if(!is_array($savedClassConfig) || !is_array($rewriteClasses))
+        {
+            return false;
+        }
+        
+        $savedClasses = array_keys($savedClassConfig);
+        
+        if(count($rewriteClasses)!=count($savedClasses))
+        {
+                return false;
+        }
+        
+        $diff1 = array_diff($rewriteClasses, $savedClasses);
+        $diff2 = array_diff($savedClasses, $rewriteClasses);
+        
+        if(!empty($diff1) || !empty($diff2))
+        {
+                return false;
+        }
+        
+        
+        return true;        
+    }
+    
 }

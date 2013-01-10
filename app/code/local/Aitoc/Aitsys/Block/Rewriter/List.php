@@ -86,9 +86,11 @@ class Aitoc_Aitsys_Block_Rewriter_List extends Aitoc_Aitsys_Abstract_Adminhtml_B
             {
                 $groups[$baseClass] = array_flip($group);
                 $isCurrentFound = !(bool)$currentExtension;
+                $savedRewritesValid = $this->_aithelper('Rewriter')->validateSavedClassConfig((isset($order[$baseClass])?$order[$baseClass]:array()), array_keys($groups[$baseClass]));
+
                 foreach ($groups[$baseClass] as $class => $i)
                 {
-                    if (isset($order[$baseClass][$class]))
+                    if (isset($order[$baseClass][$class]) && $savedRewritesValid)
                     {
                         $groups[$baseClass][$class] = $order[$baseClass][$class];
                     }

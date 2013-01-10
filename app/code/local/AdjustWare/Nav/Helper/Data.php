@@ -1,14 +1,14 @@
 <?php
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
- * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
- * Generated:   2012-06-12 14:40:26
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
+ * Purchase ID: RtE0qeQE7RRjsdRvhv07l9cGxzFoZAJ502qOJCvubx
+ * Generated:   2012-12-20 08:02:01
  * File path:   app/code/local/AdjustWare/Nav/Helper/Data.php
  * Copyright:   (c) 2012 AITOC, Inc.
  */
 ?>
-<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ hpAtIBPBstktlmVM('9e7153314d37394fedb2b8cb6ea9f7ab'); ?><?php
+<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ owQOhmrmsOZOVrPk('9e7153314d37394fedb2b8cb6ea9f7ab'); ?><?php
 class AdjustWare_Nav_Helper_Data extends Mage_Core_Helper_Abstract
 {
     protected $_params = null;
@@ -370,7 +370,7 @@ class AdjustWare_Nav_Helper_Data extends Mage_Core_Helper_Abstract
     }
     
     protected function getNonFilteringParamKeys(){
-        return array('x','y','mode','p','order','dir','limit','q','___store', '___from_store','sns');
+        return array('x','y','mode','p','order','dir','limit','q','___store', '___from_store','sns','no_cache');
     }
     
     public function isModuleEnabled($moduleName = null)

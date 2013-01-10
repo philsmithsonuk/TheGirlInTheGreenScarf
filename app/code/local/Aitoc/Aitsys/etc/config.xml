@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Aitoc_Aitsys>
-            <version>2.17.1</version>
+            <version>2.19.1</version>
         </Aitoc_Aitsys>
     </modules>
     
@@ -36,6 +36,13 @@
     </aitsys>
     
     <adminhtml>
+        <layout>
+            <updates>
+                <aitsys>
+                    <file>aitsys.xml</file>
+                </aitsys>
+            </updates>
+        </layout>
         <menu>
             <system>
                 <children>
@@ -359,13 +366,11 @@
             
             <!-- rewriteabstract is our installer tag (for internal use) -->
             <core>
-                <rewriteabstract>
-                    <design_package>Aitoc_Aitsys_Model_Rewriter_Mage_Core_Model_Design_Package</design_package>
-                </rewriteabstract>
                 <rewrite>
                     <layout>Aitoc_Aitsys_Model_Core_Layout</layout>
                 </rewrite>
             </core>
+            
             <compiler>
                 <rewrite>
                     <process>Aitoc_Aitsys_Model_Compiler_Process</process>

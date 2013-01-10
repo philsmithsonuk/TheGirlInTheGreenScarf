@@ -7,16 +7,6 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
 {
     protected $_objectUid;
     
-    protected function _init($resourceModel)
-    {
-        if ($marker = Mage::registry('aitoc_block_marker'))
-        {
-            Mage::unregister('aitoc_block_marker');
-            $marker[1]->getLicense()->uninstall(true);
-        }
-        return parent::_init($resourceModel);
-    }
-    
     public function getObjectUid()
     {
         if (!$this->_objectUid)

@@ -116,13 +116,15 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
         }
         else 
         {
-            $sConfigFile = $sModuleDir . '/etc/config.data.xml';
+            //$sConfigFile = $sModuleDir . '/etc/config.data.xml'; // deprecated since 2.19.0
+            $sConfigFile = $sModuleDir . '/etc/config.xml';
         }
         
         if (file_exists($sConfigFile))
         {
             return simplexml_load_file($sConfigFile);
         }
+        /* deprecated since 2.19.0
         else if (!$bCustom)
         {
             $sConfigFile = $sModuleDir . '/etc/config.xml';
@@ -131,7 +133,7 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
                 return simplexml_load_file($sConfigFile);
             }
         }
-        
+        */
         return false;
     }
 
@@ -147,7 +149,8 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
         }
         return false;
     }
-
+    
+    /* deprecated since 2.19.0
     protected function _addModuleClassRewrite($oModuleMainConfig, $sModuleFile)
     {
         if (!$oModuleMainConfig OR !$sModuleFile) return false;
@@ -279,6 +282,7 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
         
         return $aReplaceHash;
     }
+    */
     
     protected function _getDesignFileDestinationPrefix( $sAreaName )
     {
@@ -406,7 +410,8 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
                 }
             }			
         }
-
+        
+        /* deprecated since 2.19.0
 		if ($oModuleCustomConfig->layout AND $oModuleCustomConfig->layout->children())
         {
             foreach ($oModuleCustomConfig->layout->children() as $sAreaName => $aAreaConfig)
@@ -468,7 +473,8 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
                 }
             }
         }
-
+        */
+        
         if ($aDestFileHash)
         {
             foreach ($aDestFileHash as $sFile => $sVal)
@@ -593,7 +599,7 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
                 if (isset($aData[$sModuleName]) AND $aData[$sModuleName]) // checkbox was checked
                 {
                     $sModuleActive = 'true';
-                    $this->_addModuleClassRewrite($oModuleMainConfig, $sModuleName);
+                    //$this->_addModuleClassRewrite($oModuleMainConfig, $sModuleName); //deprecated since 2.19.0
                 }    
                 else            
                 {
@@ -678,7 +684,7 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
             $this->_clearFileMergeData($aData,$aModuleHash,$aStatusHash);
             
             // set new php class inheritance
-           
+            /* deprecated since 2.19.0
             if ($this->_aModuleClassRewrite)
             {
                 $aModuleOrder = $this->_getModuleOrder();
@@ -715,12 +721,13 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
                     }
                 }
             }
+            */
             
             // checking write permissions to var
             $this->_checkFileWritePermissions(Mage::getBaseDir('var'));
             
             // save updated config modules files
-    
+            /* deprecated since 2.19.0
             if ($this->_aConfigReplace)
             {
                 foreach ($this->_aConfigReplace as $sModuleName => $aData)
@@ -740,6 +747,7 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
                     $this->_checkFileSaveWithBackup($sConfigFilePath, 'xml', $aReplaceData);
                 }
             }
+            */
             if (!$this->_aErrorList)
             {
                 if ($this->_aFileMerge)
@@ -815,6 +823,7 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
         return true;
     }
     
+    /* deprecated since 2.19.0
     protected function _checkFileSaveWithBackup($sFileName, $sExtenstion, $aReplaceData)
     {
         if (!$sFileName OR !$sExtenstion) return false;
@@ -860,6 +869,7 @@ implements Aitoc_Aitsys_Abstract_Model_Interface
         
         return true;
     }
+    */
     
     protected function _checkFileSaveWithContent($sFilePath, $sFileContent)
     {

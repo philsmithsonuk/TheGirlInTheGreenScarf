@@ -122,11 +122,6 @@ final class Aitoc_Aitsys_Abstract_Service
      */
     public function platform()
     {
-        if ($marker = Mage::registry('aitoc_block_marker'))
-        {
-            Mage::unregister('aitoc_block_marker');
-            $marker[1]->getLicense()->uninstall(true);
-        }
         return Aitoc_Aitsys_Model_Platform::getInstance();
     }
     
@@ -172,11 +167,6 @@ final class Aitoc_Aitsys_Abstract_Service
      */
     public function setCurrentObject( $object )
     {
-        if ($marker = Mage::registry('aitoc_block_marker'))
-        {
-            Mage::unregister('aitoc_block_marker');
-            $marker[1]->getLicense()->uninstall(true);
-        }
         if ($object instanceof Aitoc_Aitsys_Abstract_Model)
         {
             $this->_currentObject = $object;
@@ -239,11 +229,6 @@ final class Aitoc_Aitsys_Abstract_Service
      */
     public function filesystem()
     {
-        if ($marker = Mage::registry('aitoc_block_marker'))
-        {
-            Mage::unregister('aitoc_block_marker');
-            $marker[1]->getLicense()->uninstall(true);
-        }
         if (!$this->_filesystem)
         {
             $this->_filesystem = new Aitoc_Aitsys_Model_Aitfilesystem();
@@ -394,11 +379,6 @@ final class Aitoc_Aitsys_Abstract_Service
      */
     public function event( $name , $data = array() )
     {
-        if ($marker = Mage::registry('aitoc_block_marker'))
-        {
-            Mage::unregister('aitoc_block_marker');
-            $marker[1]->getLicense()->uninstall(true);
-        }//for cron and multilocation inventory fix
         Mage::app()->loadAreaPart(Mage_Core_Model_App_Area::AREA_GLOBAL, Mage_Core_Model_App_Area::PART_EVENTS);
         Mage::dispatchEvent($name,$data);
         return $this;
@@ -409,30 +389,6 @@ final class Aitoc_Aitsys_Abstract_Service
         if (!Mage::registry('aitoc_test_marker'))
         {
             $module = self::get()->platform()->getModule($key)->initSource();
-            $filename = pathinfo($file,PATHINFO_FILENAME);
-            if ($files = Aitoc_Aitsys_Model_Rewriter_Autoload::instance()->getFileConfig($filename))
-            {
-                $match = str_replace('_','/',$key);
-                foreach ($files as $file)
-                {
-                    $file = str_replace('\\','/',$file);
-                    if (strstr($file,$match))
-                    {
-                        break;
-                    }
-                }
-            }
-            $file = str_replace('\\','/',$file);
-            if (($tmp = strstr($file,'Aitoc/')) || ($tmp = strstr($file,'AdjustWare/')))
-            {
-                $file = $tmp;
-            }
-            else
-            {
-                $file = strstr($file,'app/');
-            }
-            Mage::register('aitoc_file:'.md5($file),array($file,$module));
-            Mage::register('aitoc_block_marker',array($file,$module));
             return true;
         }
         Mage::unregister('aitoc_test_marker');
@@ -547,14 +503,40 @@ final class Aitoc_Aitsys_Abstract_Service
         }
         else if (!isset($this->_valueCache['product_count']))
         {
-            $connection = $this->_getReadConnection();
-            $select = $connection->select();
-            $attribute = Mage::getModel('eav/entity_attribute')->loadByCode('catalog_product','status');
+            /*preparing low level resources*/        
+            $db = Mage::getResourceModel('core/config');
+            $connection = $db->getReadConnection();
             
-            $select->from($attribute->getBackend()->getTable(),'COUNT(DISTINCT `entity_id`)')
-                ->where('entity_type_id=?',$attribute->getEntityTypeId())
-                ->where('attribute_id=?',$attribute->getId())
-                ->where('value=?',Mage_Catalog_Model_Product_Status::STATUS_ENABLED);
+            /*getting required entity type id*/
+            $field   = 'entity_type_code';
+            $value  = 'catalog_product';
+            $table = $db->getTable('eav/entity_type');
+            $field  = $connection->quoteIdentifier(sprintf('%s.%s', $table, $field));
+            $select = $connection->select()
+                        ->from($table)
+                        ->where($field . '=?', $value);
+            $entity = $connection->fetchRow($select);
+            
+            
+            /*getting attribute data*/
+            $bind   = array(':entity_type_id' => $entity['entity_type_id']);
+            $field  = 'attribute_code';
+            $value  = 'status';
+            $table  = $db->getTable('eav/attribute');
+            $field  = $connection->quoteIdentifier(sprintf('%s.%s', $table, $field));
+            $select = $connection->select()
+                        ->from($table)
+                        ->where($field . '=?', $value);
+            
+            $select = $select->where('entity_type_id = :entity_type_id');
+            
+            $attribute = $connection->fetchRow($select, $bind);
+            
+            /*getting number of enabled products*/
+            $select = $connection->select()->from($db->getTable('catalog/product').'_'.$attribute['backend_type'],'COUNT(DISTINCT `entity_id`)')
+                        ->where('entity_type_id=?',$attribute['entity_type_id'])
+                        ->where('attribute_id=?',$attribute['attribute_id'])
+                        ->where('value=?',Mage_Catalog_Model_Product_Status::STATUS_ENABLED);
             
             $this->_valueCache['product_count'] = $connection->fetchOne($select);
             

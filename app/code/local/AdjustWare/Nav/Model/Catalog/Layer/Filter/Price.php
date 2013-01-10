@@ -1,14 +1,14 @@
 <?php
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
- * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
- * Generated:   2012-06-12 14:40:26
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
+ * Purchase ID: RtE0qeQE7RRjsdRvhv07l9cGxzFoZAJ502qOJCvubx
+ * Generated:   2012-12-20 08:02:01
  * File path:   app/code/local/AdjustWare/Nav/Model/Catalog/Layer/Filter/Price.php
  * Copyright:   (c) 2012 AITOC, Inc.
  */
 ?>
-<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ qoIkiajaskBkEjaD('6b71f17e6d0b07a294dc12a1037c0cc2'); ?><?php
+<?php if(Aitoc_Aitsys_Abstract_Service::initSource(__FILE__,'AdjustWare_Nav')){ ihRWqyaysWDWOaEr('6b71f17e6d0b07a294dc12a1037c0cc2'); ?><?php
 
 /**
 * DIFFERENT CLASSED FOR DIFFERENT VERSIONS!
@@ -41,7 +41,7 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
             $style = Mage::getStoreConfig('design/adjnav/price_style');
             if ('default' == $style)
             {
-                if ($this->getMaxPriceInt())
+                if ($this->getMaxPriceInt() || version_compare( Mage::getVersion(),'1.7.0.0','>=' ))
                 {
                     if ($this->getAttributeModel()->getAttributeCode() == 'price')
                     {
@@ -56,9 +56,25 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
                             );
 
                         }
+
+                        //start fix for 28140 bug
+                        if(sizeof($data) == 0)
+                        {
+                            list($from, $to) = $this->getFilterValueFromRequest();
+                            $from = sprintf("%u", $from);
+                            $to = sprintf("%u", $to);
+                            $label = $this->_renderItemLabel($to, $from);
+                            $data[] = array(
+                                'label' => $label,
+                                'value' => $from . $this->_priceDelimeter . $to,
+                                'count' => 0,
+                                 );
+                        }
+                        //end fix for 28140 bug
+
                         return $data;
                     }
-                    else
+                    elseif($this->getMaxPriceInt())
                     {
                         return $this->_getDecimalItemsData();
                     }
@@ -136,6 +152,10 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
 
             if ('default' == Mage::getStoreConfig('design/adjnav/price_style'))
             {
+                if (($this->getAttributeModel()->getAttributeCode() != 'price') && ($this->getAttributeModel()->getFrontendInput() == 'price') && version_compare(Mage::getVersion(),'1.7.0.0','>='))
+                {}
+                else
+                {
                 if($this->_isPricesFilterUpdated) {
                     //magento 1.7+ style
                     $from = round($from);
@@ -144,6 +164,7 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
                     $to = ($to != 0) ? $to : '';//2000 and above = '2000-'
                     $this->setActiveState($from.$this->_priceDelimeter.$to);
                     return parent::apply($request, $filterBlock);
+                }
                 }
 
                 $index = $from;
@@ -421,12 +442,26 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
 
 
             $min = $this->getMinOrMax($filter, $bIsBasePrice, 'min');
+            if($bIsBasePrice)
+			{
             $product = Mage::getModel('catalog/product')->load($min['id']);
-            $minPrice = $taxHelper->getPrice($product, $product->getFinalPrice(), true) * $rate;
-
+		    $minPrice = $taxHelper->getPrice($product, $product->getFinalPrice(), true) * $rate;
+		    }
+			else
+			{
+			    $minPrice = ceil($min['value'] * $rate);
+            }
+			
             $max = $this->getMinOrMax($filter, $bIsBasePrice, 'max');
-            $product = Mage::getModel('catalog/product')->load($max['id']);
-            $maxPrice = ceil($taxHelper->getPrice($product, $product->getFinalPrice(), true) * $rate);
+	        if($bIsBasePrice)
+			{
+                $product = Mage::getModel('catalog/product')->load($max['id']);
+                $maxPrice = ceil($taxHelper->getPrice($product, $product->getFinalPrice(), true) * $rate);
+			}
+			else
+			{
+			    $maxPrice = ceil($max['value'] * $rate);
+			}
             return array($minPrice, $maxPrice);
         }
 
@@ -435,7 +470,6 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
         public function getMinMaxPriceInt()
         {
             $attribute    = $this->getAttributeModel();
-
             if ($attribute->getAttributeCode() == 'price')
             {
                 list($min, $max) = $this->getMinMax($this, true);
@@ -469,15 +503,28 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
                 $range      = $this->getRange();
                 $dbRanges   = $this->getDecimalRangeItemCounts($range);
 
+                $rangesSize = count($dbRanges);
+                $rangeIndex = 0;
                 foreach ($dbRanges as $index => $count) {
+                $rangeIndex ++;
+                if (($this->getAttributeModel()->getAttributeCode() != 'price') && ($this->getAttributeModel()->getFrontendInput() == 'price') && version_compare(Mage::getVersion(),'1.7.0.0','>='))
+                {
+                    $from   = ($index - 1) * $range;
+                    if($rangeIndex == $rangesSize)
+                        $to = '';
+                    else
+                        $to = $index * $range;
+                    $label = $this->_renderRangeLabel($from, $to);
+                }
+                else
+                    $label = $this->_renderItemLabel($range, $index);
+					
                     $data[] = array(
-                        'label' => $this->_renderItemLabel($range, $index),
+                        'label' => $label,
                         'value' => $index . $this->_priceDelimeter . $range,
                         'count' => $count,
                     );
                 }
-
-
             }
             return $data;
         }
@@ -510,7 +557,7 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
         protected function _getResource()
         {
             if (is_null($this->_resource)) {
-                if ($this->getAttributeModel()->getAttributeCode() == 'price')
+                if($this->getAttributeModel()->getAttributeCode() == 'price')
                 {
                     if($this->_isPricesFilterUpdated) {
                         //magento 1.7/1.12
@@ -521,8 +568,8 @@ if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
                 }
                 else
                 {
-                    $this->_resource = Mage::getResourceModel('catalog/layer_filter_decimal');
-                }
+				    $this->_resource = Mage::getResourceModel('adjnav/catalog_layer_filter_decimal');
+				}
             }
             return $this->_resource;
         }

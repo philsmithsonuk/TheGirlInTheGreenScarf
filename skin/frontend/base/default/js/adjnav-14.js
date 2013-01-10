@@ -1,9 +1,9 @@
 
 /**
- * Product:     Layered Navigation Pro - 07/06/12
- * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Product:     Layered Navigation Pro - 16/08/12
+ * Package:     AdjustWare_Nav_2.4.7_0.1.4_8_357526
  * Purchase ID: n/a
- * Generated:   2012-06-12 14:40:26
+ * Generated:   2012-12-20 08:02:01
  * File path:   skin/frontend/base/default/js/adjnav-14.js
  * Copyright:   (c) 2012 AITOC, Inc.
  */
@@ -124,6 +124,8 @@ function adj_nav_show_products(transport)
     }
     if (typeof(adj_slider) != 'undefined')
         adj_slider.setEnabled();
+
+    adj_nav_update_rellinks();
 }
 
 function adj_nav_add_params(k, v, isSingleVal)
@@ -310,6 +312,14 @@ function adj_nav_clear_listener(evt)
         if (Object.isElement(from)){
             from.value = from.name;
             to.value   = to.name;
+        }
+    }
+    if ( 'cat' == varName )
+    {
+        if ( adj_nav_cat_reload(link) )
+        {
+            Event.stop(evt);
+            return;
         }
     }
     
@@ -538,6 +548,14 @@ function adjnavHashChange()
     }
 
     var hashParams = jQuery.deparam(hash.substr(2));
+    var params = $('adj-nav-params').value.parseQuery();
+    if(typeof(params.q) != 'undefined' && typeof(hashParams.q) == 'undefined') {
+        var urlParams = window.location.search.parseQuery();
+        if(typeof(urlParams.q) != 'undefined') {
+            //preserving search query if hash was cleared, but it still in URI
+            hashParams.q = params.q;
+        }
+    }
 
     jQuery('#adj-nav-params').val(jQuery.param(hashParams));
 
@@ -888,4 +906,62 @@ function adj_nav_page_autoload_grid_update(el)
     }
 }
 
+function adj_nav_cat_reload(link)
+{
+    if ( !link.hasClassName('adj-nav-cat-reload')  )
+    {
+        return false;
+    }
+    adj_nav_prepare_params();
+    
+    var newLocation = window.location.href;
+    newLocation = newLocation.split('?',1) + '?' + $('adj-nav-params').value;
+    
+    window.location.href = newLocation;
+    return true;
+}
+
 /** Finish pages autoload changes */
+
+/** seo start **/
+function adj_nav_update_rellinks()
+{
+    var params = $('adj-nav-params').value.parseQuery();
+    if (!params['order']) params['order'] = 'position';
+    if (!params['dir']) params['dir'] = 'desc';
+    if (!params['limit']) params['limit'] = '12';
+    if (!params['p']) params['p'] = jQuery("li.current").html();
+    delete params['no_cache'];
+    
+    
+    if(jQuery("link[rel=canonical]").length > 0)
+    {
+        jQuery("link[rel=canonical]").attr("href", $('adj-nav-url').value + '?' + Object.toQueryString(params));
+    }
+    
+    if(jQuery("link[rel=prev]").length > 0 || jQuery("link[rel=next]").length > 0)
+    {
+        if (jQuery("a.previous").length == 0) {
+            if (jQuery("link[rel=prev]").length != 0) // no rel=prev on the first page, remove if exists
+                jQuery("link[rel=prev]").remove();
+        } else {
+            if (jQuery("link[rel=prev]").length == 0) // create rel=prev if not exists
+                jQuery('head').append('<link rel="prev">');
+            var paramsprev = jQuery("a.previous").attr("href").parseQuery();
+            params['p'] = paramsprev['p'];
+            jQuery("link[rel=prev]").attr("href", $('adj-nav-url').value + '?' + Object.toQueryString(params));
+        }
+        
+        if (jQuery("a.next").length == 0) {
+            if (jQuery("link[rel=next]").length != 0) // no rel=next on the last page, remove if exists
+            jQuery("link[rel=next]").remove();
+        } else {
+            if (jQuery("link[rel=next]").length == 0) // create rel=next if not exists
+                jQuery('head').append('<link rel="next">');
+            var paramsnext = jQuery("a.next").attr("href").parseQuery();
+            params['p'] = paramsnext['p'];
+            jQuery("link[rel=next]").attr("href", $('adj-nav-url').value + '?' + Object.toQueryString(params));
+        }
+    }
+}
+/** seo finish **/

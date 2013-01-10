@@ -54,12 +54,30 @@ class Aitoc_Aitsys_Block_Form extends Mage_Adminhtml_Block_Widget_Form
                 }
                 else 
                 {
-                    $sMessage = 'File does not have write permissions: %s';
-                    $fieldset->addField('ignore_'.$aModule['key'], 'note', array(
-                        'name'=>'ignore['.$aModule['key'].']',
-                        'label'=>$label,
-                        'text'=> '<ul class="messages"><li class="error-msg"><ul><li>' . Mage::helper('adminhtml')->__($sMessage, $aModule['file']) . '</li></ul></li></ul>'
-                    ));
+                    if($this->tool()->platform()->isDemoMode())
+                    {
+                        $sMessage = "The extension is already enabled on this Demo Magento installation and can't be disabled for security reasons. Please proceed to the next step outlined in the extension's <a href='%s' target='_blank'>User Manual</a> to see how it works.";
+                        $xml = simplexml_load_file(Mage::getBaseDir()."/aitmodules.xml");
+                        $link = (string) $xml->modules->$aModule['key'];
+                        if ($link == '')
+                        {
+                            $link = 'http://www.aitoc.com/';
+                        }
+                        $fieldset->addField('ignore_'.$aModule['key'], 'note', array(
+                            'name'=>'ignore['.$aModule['key'].']',
+                            'label'=>$label,
+                            'text'=> '<ul class="messages"><li class="notice-msg"><ul><li>' . Mage::helper('adminhtml')->__($sMessage, $link) . '</li></ul></li></ul>'
+                        ));
+                    }
+                    else
+                    {
+                        $sMessage = 'File does not have write permissions: %s';
+                        $fieldset->addField('ignore_'.$aModule['key'], 'note', array(
+                            'name'=>'ignore['.$aModule['key'].']',
+                            'label'=>$label,
+                            'text'=> '<ul class="messages"><li class="error-msg"><ul><li>' . Mage::helper('adminhtml')->__($sMessage, $aModule['file']) . '</li></ul></li></ul>'
+                        ));
+                    }
                 }
             }
         }
@@ -67,6 +85,11 @@ class Aitoc_Aitsys_Block_Form extends Mage_Adminhtml_Block_Widget_Form
         $this->setForm($form);
 
         return $this;
+    }
+    
+    public function tool()
+    {
+        return Aitoc_Aitsys_Abstract_Service::get();
     }
     
 }
