@@ -1,0 +1,166 @@
+<?php
+/*
+ * Adding javascript include
+ */
+if ('ajax' != Mage::app()->getRequest()->getControllerName())
+{
+    if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')):
+    ?>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-14.js'); ?>"></script>
+    <?php
+    else:
+    ?>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/adjnav-13.js');?>"></script>
+    <?php
+    endif;
+}
+?>
+
+<input type="hidden" id="adjnav-attr-expand" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show More Attributes')) ?>" />
+<input type="hidden" id="adjnav-attr-collapse" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show Less Attributes')) ?>" />
+<input type="hidden" id="adjnav-attr-val-expand" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show More')) ?>" />
+<input type="hidden" id="adjnav-attr-val-collapse" value="<?php echo $this->htmlEscape(Mage::helper('adjnav')->__('Show Less')) ?>" />
+
+<?php if(Aitoc_Aitsys_Abstract_Service::get()->isMagentoVersion('>=1.4')): ?>
+
+<?php
+	$_helper    = $this->helper('catalog/output');
+	
+	if($_currentCategory  = Mage::registry('current_category')){
+		$_currentCategoryParent = $_currentCategory->getParentCategory();
+		$layer = Mage::getSingleton('catalog/layer');
+		$parentChildCategories = $_currentCategoryParent->getChildrenCategories();
+	}
+?>
+
+	<?php if($this->canShowBlock() && $_currentCategory): $state = $this->getStateInfo()?>
+
+		<div class="product_list_left adj-nav">
+			
+			<h2><?php echo $_helper->categoryAttribute($_currentCategoryParent, $_currentCategoryParent->getName(), 'name') ?></h2>			
+			<h3><?php echo $this->__('CATEGORY'); ?></h3>
+			
+			<ul class="category_list">
+				<?php foreach ($parentChildCategories as $_category): ?>
+					<?php if($_category->getIsActive()): ?>
+					<li>					
+						<?php if($_currentCategory->getName() == $_category->getName()) : ?>						
+							<a href="<?php echo $_helper->categoryAttribute($_category, $_category->getUrl(), 'url') ?>" class="active"><?php echo $this->htmlEscape($_category->getName()) ?></a>
+						<?php else: ?>
+							<a href="<?php echo $_helper->categoryAttribute($_category, $_category->getUrl(), 'url') ?>"><?php echo $this->htmlEscape($_category->getName()) ?></a>
+						<?php endif; ?>						
+					</li>
+					<?php endif; ?>
+				<?php endforeach ?>
+			</ul>
+				
+			<?php if($this->canShowOptions()): ?>
+
+			<div class="narrow-by">
+				<input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+				<input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+				<input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+				
+				<?php $_filters = $this->getFilters(); ?>				
+				
+				<?php if(count($_filters) > 1) : ?>
+					<h3><?php echo $this->__('CHOOSE'); ?></h3>					
+					
+						<ul id="narrow-by-list" class="selector_list">
+							<?php foreach ($_filters as $_filter): ?>
+								<?php if ($_filter->getItemsCount()): ?>
+								
+									<?php if( strtolower($_filter->getName()) == 'price' || strtolower($_filter->getName()) == 'category' ) continue; ?>							
+								
+									<li><span><?php echo $this->__($_filter->getName()) ?></span></li>								
+									<?php echo $_filter->getHtml() ?>						
+								
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</ul>
+					
+					<script type="text/javascript">
+						decorateDataList('narrow-by-list');
+						adj_nav_init();
+					</script>
+				<?php endif; ?>
+				
+			</div>
+			<?php endif; ?>
+			
+			<div class="adj-nav-progress" style="display:none"></div>
+		</div>
+		
+	<?php else: ?>
+				
+		<?php $state = $this->getStateInfo() ?>		
+		<div class="product_list_left adj-nav">
+			
+
+			<div class="narrow-by">
+				<input type="hidden" id="adj-nav-url" value="<?php echo $this->htmlEscape($state[0])?>"/>
+				<input type="hidden" id="adj-nav-params" value="<?php echo $this->htmlEscape($state[1])?>"/>
+				<input type="hidden" id="adj-nav-ajax" value="<?php echo $this->htmlEscape($state[2])?>"/>
+			
+				<h3><?php echo $this->__('CHOOSE'); ?></h3>
+				
+				<?php if($this->canShowOptions()): ?>
+					
+					<?php $_filters = $this->getFilters(); ?>
+				
+					<?php if(count($_filters) > 1) : ?>
+								
+						
+							<ul id="narrow-by-list" class="selector_list">
+								<?php foreach ($_filters as $_filter): ?>
+									<?php if ($_filter->getItemsCount()): ?>
+									
+										<?php if( strtolower($_filter->getName()) == 'price' || strtolower($_filter->getName()) == 'category' ) continue; ?>							
+									
+										<li><span><?php echo $this->__($_filter->getName()) ?></span></li>								
+										<?php echo $_filter->getHtml() ?>						
+									
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</ul>
+						
+						<script type="text/javascript">
+							decorateDataList('narrow-by-list');
+							adj_nav_init();
+						</script>
+					<?php endif; ?>				
+			
+				<?php endif; ?>
+			</div>
+			<div class="adj-nav-progress" style="display:none"></div>
+		</div>
+	<?php endif; ?>
+	
+	
+	
+	
+
+<script type="text/javascript">
+if ('function' == typeof(sns_layer_add_attr))
+{
+    sns_layer_add_attr();
+}
+
+document.observe("dom:loaded", function() {
+   adj_nav_toolbar_init();
+});
+
+</script>
+
+<?php endif; ?>
+
+<script type="text/javascript">
+adjnavInitFeaturedValues();
+adjnavInitFeaturedAttributes();
+</script>
+
+<?php if(Mage::helper('adjnav')->isPageAutoload()):?>    
+<script type="text/javascript">
+    adj_nav_page_autoload_init();
+</script>
+<?php endif; ?>

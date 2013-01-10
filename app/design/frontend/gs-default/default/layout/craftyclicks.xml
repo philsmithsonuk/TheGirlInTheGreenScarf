@@ -1,0 +1,62 @@
+<?xml version="1.0"?> 
+
+<layout> 	  
+	<checkout_onepage_index>                             
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento.js</script></action>
+			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
+		</reference>
+	</checkout_onepage_index>
+	
+	<checkout_multishipping_customer_address>                             
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento.js</script></action>
+			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
+		</reference>
+	</checkout_multishipping_customer_address>
+	
+	<checkout_multishipping_register>
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento.js</script></action>
+			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
+		</reference>
+	</checkout_multishipping_register>
+	
+	<customer_address_form>                             
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento.js</script></action>
+			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
+		</reference>
+	</customer_address_form>		
+	
+	<customer_account_create>                             
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento.js</script></action>
+			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
+		</reference>
+	</customer_account_create>		
+
+<!-- after-market single page checkout extensions -->
+
+	<onestepcheckout_index_index>
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_onepagecheckout.js</script></action>
+			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
+		</reference>
+	</onestepcheckout_index_index>
+	
+	<gomage_checkout_onepage_index>
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_gomage_lightcheckout.js</script></action>
+			<block type="page/html" name="craftyclicks_config" template="craftyclicks/common_config.phtml"/>
+		</reference>
+	</gomage_checkout_onepage_index>
+	
+</layout>

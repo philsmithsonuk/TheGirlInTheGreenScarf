@@ -1,0 +1,35 @@
+<?php
+    $columns = $this->getColumns();
+?> 
+  <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
+	 <thead>
+        <tr>
+            <?php foreach ($columns as $column): ?>
+                <th><?php echo $column->getTitle();?></th>
+            <?php endforeach; ?>
+        </tr>
+    </thead>
+<?php if (count($this->getItems())): ?>
+	<?php foreach ($this->getItems() as $item): ?>
+		<tr valign="top" id="item_<?php echo $item->getId();?>">
+			<?php foreach ($columns as $column): ?>
+				<td><?php $column->setItem($item); echo $column->toHtml($item);?></td>
+			<?php endforeach; ?>
+		</tr>
+	<?php endforeach ?>
+<?php else: ?>
+	<tr><td colspan="<?php echo count($columns);?>" class="wishlist-empty"><?php echo $this->__('This Wishlist has no Items');?></td></tr>
+<?php endif; ?> 
+  </table>
+<?php foreach ($columns as $column): ?>
+    <?php echo $column->getAdditionalHtml();?>
+<?php endforeach; ?>
+<script type="text/javascript">
+//<![CDATA[
+    decorateTable('wishlist-table');
+
+<?php foreach ($columns as $column): ?>
+    <?php echo $column->getJs();?>
+<?php endforeach; ?>
+//]]>
+</script>

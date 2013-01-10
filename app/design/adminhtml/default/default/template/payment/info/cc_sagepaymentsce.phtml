@@ -1,0 +1,33 @@
+<?php
+	$orderId = $this->getInfo()->getOrder()->getId();
+	$sageinfo = $this->getSageInfo();
+//	var_dump($sageinfo);
+	$isReleased = (int)$this->getInfo()->getReleased();
+	$isAuthorised = $sageinfo->getAuthorised();
+	$isAborted = (int)$this->getInfo()->getAborted();
+//	$isVoided = (int)$this->getInfo()->getVoided();
+	$isVoided = $sageinfo->getVoided();
+	$status = $this->getInfo()->getStatus();
+	$CcTransId = $this->getInfo()->getCcTransId();
+	$cvvIndicator = $sageinfo->getCvvIndicator();
+	$avsIndicator = $sageinfo->getAvsIndicator();
+
+	$adminUsername = Mage::getSingleton('admin/session')->getUser()->getUsername();
+
+//	$refunds = $this->getRefundsCollection();
+?>
+<script type="text/javascript">
+	var TOTAL_ORDER_AMOUNT = <?php echo $this->getInfo()->getOrder()->getGrandTotal(); ?>;
+	var SUB_TOTAL_ORDER_AMOUNT = <?php echo $this->getInfo()->getOrder()->getSubtotal(); ?>;
+</script>
+
+	<ul style="border:1px solid #ccc;margin-bottom:10px;padding:10px;">
+		<li><strong><?php echo $this->__('Reference'); ?></strong>: <?php echo $this->getInfo()->getCcTransId(); ?></li>
+		<li><strong><?php echo $this->__('Code'); ?></strong>: <?php echo $sageinfo->getSecurityKey(); ?></li>
+		<li><strong><?php echo $this->__('Cvv'); ?></strong>: <?php echo $this->getCvvDescription($cvvIndicator); ?></li>
+		<li><strong><?php echo $this->__('Avs'); ?></strong>: <?php echo $this->getAvsDescription($avsIndicator); ?></li>
+	</ul>
+   <p>
+
+	</p>
+

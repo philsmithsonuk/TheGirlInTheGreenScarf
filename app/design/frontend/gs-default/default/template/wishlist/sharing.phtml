@@ -1,0 +1,61 @@
+<style type="text/css">
+	.btn_block,.btn_block *{cursor:pointer;}
+</style>
+<div class="head_result"> <?php echo $this->__('Share Your Wishlist') ?></div> 
+<div class="acctn_personal">
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php echo $this->getSendUrl() ?>" id="form-validate" method="post">
+<?php echo $this->getBlockHtml('formkey')?> 
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">  
+	<tr>
+		<td>
+			 <label for="email_address" class="required"><?php echo $this->__('Email addresses, separated by commas') ?><em>*</em></label>
+			 <textarea name="emails" cols="60" rows="5" id="email_address" class="validate-emails required-entry"><?php echo $this->getEnteredData('emails') ?></textarea>
+               
+		</td>
+	 </tr>
+	 <tr>
+		<td>
+			<label for="message"><?php echo $this->__('Message') ?></label>
+			<textarea id="message" name="message" cols="60" rows="5"><?php echo $this->getEnteredData('message') ?></textarea>
+               
+		</td>
+	 </tr>
+	<?php if($this->helper('wishlist')->isRssAllow()): ?>
+	<tr>
+		<td>
+			<input type="checkbox" name="rss_url" id="rss_url" value="1" title="<?php echo $this->__('Check this checkbox if you want to add a link to an rss feed to your wishlist.') ?>" class="checkbox" />
+			<label for="rss_url"><?php echo $this->__('Check this checkbox if you want to add a link to an rss feed to your wishlist.') ?></label>
+
+		</td>
+	</tr>
+	<?php endif; ?>
+</table>
+<div class="rad_8 btn_block">  
+	<button type="submit" title="<?php echo $this->__('Save Wishlist') ?>" class="button"><span><span><?php echo $this->__('Save Wishlist') ?></span></span></button>
+</div>		 
+</form>
+<script type="text/javascript">
+//<![CDATA[
+Validation.addAllThese([
+    ['validate-emails', '<?php echo $this->__('Please enter a valid email addresses, separated by commas. For example johndoe@domain.com, johnsmith@domain.com.') ?>', function (v) {
+    if(Validation.get('IsEmpty').test(v)) {
+        return true;
+    }
+
+    var valid_regexp = /^[a-z0-9\._-]{1,30}@([a-z0-9_-]{1,30}\.){1,5}[a-z]{2,4}$/i;
+    var emails = v.split(',');
+
+    for (var i=0; i<emails.length; i++) {
+        if(!valid_regexp.test(emails[i].strip())) {
+            return false;
+        }
+    }
+
+    return true;
+    }]
+]);
+var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>
+    </div>

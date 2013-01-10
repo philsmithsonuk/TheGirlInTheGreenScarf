@@ -1,0 +1,279 @@
+<style type="text/css">
+    .size-guide-lnk,.size-guide-lnk:hover,.size-guide-lnk:link,.size-guide-lnk:visited {
+        color: #79A240;
+        padding: 2px;
+        text-decoration: underline;
+    }
+</style>
+<div class="w898">
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view product_list">
+    <div class="product-essential detail_block">
+	<?php // add placeholder div for any ajax-loaded custom options ?>
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <?php
+                // make sure to add cpid hidden field for configurable products
+                // added by Awesemo
+            ?>
+            <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE): ?>
+            <input type="hidden" name="cpid" value="<?php echo $_product->getId() ?>" />
+            <?php endif; ?>
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="product-img-box fleft">
+			<?php echo $this->getChildHtml('media') ?>
+            <script type="text/javascript">
+            //<![CDATA[
+                function initProductZoom() {
+                    jQuery('.jqzoom-image').jqzoom({
+                        zoomType: "reverse",
+                        imageOpacity: 0.2,
+                        preloadImages: true,
+                        lens: true,
+                        lensCursor: "crosshair",
+                        position: "right",
+                        zoomWidth: 305,
+                        zoomHeight: 456,
+                        title: false 
+                    });  
+                    jQuery(".more-views .gallery-carousel").jCarouselLite({
+                        btnNext: ".more-views .btn-next .next",
+                        btnPrev: ".more-views .btn-prev .prev",
+                        visible: 3,
+                        scroll: 1,
+                        circular: false,
+                        speed: 500,
+                        vertical: true,
+                    });
+                }
+                jQuery(document).ready(function($){
+                    $("#size-guide-delivery-returns").accordion({
+                        active: false,
+                        collapsible: true,
+                        autoHeight: true
+                    });
+                    initProductZoom();
+                    $('.tbl_quality tr.last td:last > div.input-box').append('&nbsp;<a class="size-guide-lnk" href="#" title="Show Size Guide">Size Guide</a>');
+                    $('.tbl_quality tr.last td:last div.input-box').delegate('.size-guide-lnk', 'click', function(e){
+                        e.preventDefault();
+                        var active = $('#size-guide-delivery-returns').accordion( "option", "active" );                         
+                        if ((active === false) || active != 0) {
+                            $('#size-guide-delivery-returns').focus().accordion( "option", "active", 0 );
+                        }
+                    });
+                    /*
+                    $('.tbl_quality tr.last td:last div.input-box').delegate('select', 'hover', function(e){
+                        if(e.type === 'mouseover') {
+                            $(this).find('.size-guide-lnk').stop(false,true).show('2000')
+                        } else {
+                            $(this).find('.size-guide-lnk').stop(false,true).hide('2000')
+                        }
+                    });
+                    */
+                });
+            //]]>
+            </script>
+		</div>
+        <div class="product-shop  detail_description">
+            <div class="product-name">
+                <h3><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
+            </div>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" class="tbl_quality">
+				<tbody>
+				<tr>
+                    <td width="55">
+                        <strong><?php echo $this->__('Price:') ?></strong>
+                    </td>
+					<td>
+						<?php echo $this->getPriceHtml($_product) ?>
+					</td>
+				</tr>
+				<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+					<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+				<?php endif;?>
+				<?php if($_product->isSaleable()): ?>
+					<?php if(!$_product->isGrouped()): ?>
+					<tr>
+						<td width="55">
+							<label for="qty"><?php echo $this->__('Quantity:') ?></label>
+						</td>
+						<td>
+							<input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+						</td>
+					</tr>
+					<?php endif; ?>
+				<?php endif; ?>
+				</tbody>
+			</table>
+			<div class="rad_8 addtobag">
+				<?php echo $this->getChildHtml('addtocart') ?>
+			</div>
+			<div class="clear"></div>
+			<div class="rad_8 add_wishfriend">
+				<?php echo $this->getChildHtml('addto') ?>
+			</div>
+			<div class="rad_8 add_wishfriend">
+            <?php if ($this->canEmailToFriend()): ?>
+                <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Tell a Friend') ?></a>
+            <?php endif; ?>
+            </div>
+            <div class="clear"></div>
+            <div class="pdescription">
+				<?php if ($_product->getDescription()):?>
+					<?php if(false): ?>
+					<?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+					<?php endif; ?>
+					<?php echo $_helper->productAttribute($_product, $_product->getDescription(), 'description') ?>
+				<?php endif;?>
+            </div>
+            <?php
+                $helper = Mage::helper('cms');
+                $processor = $helper->getPageTemplateProcessor();
+            ?>
+			<!-- Size Guide and Delivery Returns Begins-->
+			<div id="size-guide-delivery-returns">
+                <?php if($sizeGuideContent = $_product->getGsSizeGuide()): ?>
+				<h4>
+					<a href="javascript:void();"><?php echo $this->__('Size Guide') ?></a>
+				</h4>
+				<div>
+					<p><?php echo $processor->filter($sizeGuideContent); ?></p>
+				</div>
+                <?php endif; ?>
+                <?php if($deliveryReturnsContent = $_product->getGsDeliveryReturns()): ?>
+				<h4>
+					<a href="javascript:void();"><?php echo $this->__('Delivery and Returns') ?></a>
+				</h4>
+				<div>
+					<p><?php echo $processor->filter($deliveryReturnsContent); ?></p>
+				</div>
+                <?php endif; ?>
+			</div>
+			<!-- Size Guide and Delivery Returns Ends-->
+			<div class="social_icons">
+                <!--
+				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_fb.jpg') ?>"></div>
+				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_twitter.jpg') ?>"></div>
+				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_gplus.jpg') ?>"></div>
+				<div class="social_block"><img alt="" src="<?php echo $this->getSkinUrl('images/details_share.jpg') ?>"></div>
+                -->
+                <!-- AddThis Button BEGIN -->
+                <div class="addthis_toolbox addthis_default_style addthis_toolbox">
+                <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                <a class="addthis_button_tweet"></a>
+                <a class="addthis_button_google_plusone" g:plusone:size="Medium"></a>
+                <a class="addthis_counter addthis_pill_style"></a>
+                </div>
+                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-5000e86342efa0fe"></script>
+                <!-- AddThis Button END -->
+			</div>
+			<?php if(false): ?>
+			<!-- NO REVIEW SUMMARY -->
+            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+            <!-- NO ALERT URLS -->
+            <?php echo $this->getChildHtml('alert_urls') ?>
+            <?php echo $this->getChildHtml('product_type_data') ?>
+            <?php echo $this->getTierPriceHtml() ?>
+            <?php echo $this->getChildHtml('extrahint') ?>
+			
+            <?php if (!$this->hasOptions()):?>
+                <div class="add-to-box">
+                    <?php if($_product->isSaleable()): ?>
+                        <?php echo $this->getChildHtml('addtocart') ?>
+                        <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                            <span class="or"><?php echo $this->__('OR') ?></span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+                <?php echo $this->getChildHtml('extra_buttons') ?>
+            <?php elseif (!$_product->isSaleable()): ?>
+                <div class="add-to-box">
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+            <?php endif; ?>
+
+            <?php endif; ?>
+
+            <?php //echo $this->getChildHtml('other');?>
+
+            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+            <?php endif;?>
+        </div>
+<?php if(false): ?>
+        <div class="product-img-box">
+            <?php echo $this->getChildHtml('media') ?>
+        </div>
+<?php endif; ?>
+        <div class="clear"></div>
+<?php if(false): ?>
+        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+        <?php endif;?>
+<?php endif; ?>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    
+    //]]>
+    </script>
+    </div>
+</div>
+</div>
+<?php echo $this->getChildHtml('related_products') ?>
+<div class="clear"></div>

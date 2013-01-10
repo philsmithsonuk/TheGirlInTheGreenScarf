@@ -1,0 +1,84 @@
+<style type="text/css">
+div.notify-message { margin-bottom:10px; margin-bottom:14px;}    
+div.notify-message ul.messages { padding-bottom:14px;border-bottom:1px solid #CCCCCC;}   
+</style>
+<style type="text/css">
+	.btn_block,.btn_block *{cursor:pointer;}
+</style>    
+<div class="head_result"><?php echo $this->__('Address Book') ?></div> 
+<div class="notify-message">
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?> 
+</div>
+<div class="acctn_personal">
+<div class="rad_8 btn_block" style="margin:0px;">  
+	<button type="button" onclick="window.location='<?php echo $this->getAddAddressUrl() ?>';" title="<?php echo $this->__('Add New Address') ?>" class="button"><span><span><?php echo $this->__('Add New Address') ?></span></span></button>
+</div> 
+    <div class="col-1 addresses-primary" style="width:400px;"> 
+        <?php if($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultBilling()): ?>
+            <div class="user_content" style="width:350px;">
+				<div class="head_result" style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;"><?php echo $this->__('DEFAULT BILLING ADDRESS') ?></div>
+				<div class="user_area"> 
+					<address>
+						<?php echo $this->getAddressHtml(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>
+					</address>
+					<p><a style="color: #77A33F; text-decoration: underline;" href="<?php echo $this->getAddressEditUrl(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>"><?php echo $this->__('Change Billing Address') ?></a></p>
+				</div>
+           </div>
+        <?php else: ?>
+                <div class="user_content" style="width:350px;">
+					<div class="head_result"  style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;"><?php echo $this->__('DEFAULT BILLING ADDRESS') ?></div>
+					<div class="user_area"> 
+						<?php echo $this->__('You have no default billing address in your address book.') ?>
+					</div>
+				</div>
+        <?php endif ?>
+		<br/>
+        <?php if($_pAddsses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultShipping()): ?>
+		   <div class="user_content" style="width:350px;">
+				<div class="head_result" style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;"><?php echo $this->__('DEFAULT SHIPPINGs ADDRESS') ?></div>
+				<div class="user_area"> 
+                <address>
+                    <?php echo $this->getAddressHtml(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>
+                </address>
+                <p><a  style="color: #77A33F; text-decoration: underline;" href="<?php echo $this->getAddressEditUrl(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddsses)) ?>"><?php echo $this->__('Change Shipping Address') ?></a></p>
+           	</div>
+				</div>
+        <?php else: ?>
+            <div class="user_content" style="width:350px;">
+					<div class="head_result"><?php echo $this->__('DEFAULT BILLING ADDRESS') ?></div>
+					<div class="user_area"> 
+						<?php echo $this->__('You have no default shipping address in your address book.') ?>
+					</div>
+			</div>
+        <?php endif ?> 
+    </div>
+	<br/>
+    <div class="user_content" style="width:350px;">
+				<div class="head_result" style="background: none repeat scroll 0 0 #DFDFE0;font-size: 12px;margin: 0 0 10px; padding: 5px 15px;"><?php echo $this->__('Additional Address Entries') ?></div>
+				<div class="user_area">   
+					<?php if($_pAddsses = $this->getAdditionalAddresses()): ?>
+						<?php foreach($_pAddsses as $_address): ?> 
+							<address>
+								<?php echo $this->getAddressHtml($_address) ?>
+							</address>
+							<p><a style="color: #77A33F; text-decoration: underline;" href="<?php echo $this->getUrl('customer/address/edit', array('id'=>$_address->getId())) ?>"><?php echo $this->__('Edit Address') ?></a> <span class="separator">|</span> <a href="#" style="color: #77A33F; text-decoration: underline;"   class="link-remove" onclick="return deleteAddress('<?php echo $_address->getId() ?>');"><?php echo $this->__('Delete Address') ?></a></p>
+							<br />
+						<?php endforeach; ?>
+					<?php else: ?>
+						<div class="user_area"> 
+							<?php echo $this->__('You have no additional address entries in your address book.') ?>
+						</div> 
+					<?php endif ?>         
+		</div>
+    </div>
+</div> 	
+<script type="text/javascript">
+//<![CDATA[
+    function deleteAddress(addressId) {
+        if(confirm('<?php echo $this->__('Are you sure you want to delete this address?') ?>')) {
+            window.location='<?php echo $this->getDeleteUrl() ?>id/'+addressId;
+        }
+        return false;
+    }
+//]]>
+</script>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <adjnav translate="title" module="adjnav">
+                                        <title>AdjustWare Layered Navigation Pro Section</title>
+                                    </adjnav>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
+<!--
+/**
+ * Product:     Layered Navigation Pro - 07/06/12
+ * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
+ * Generated:   2012-06-12 14:40:26
+ * File path:   app/code/local/AdjustWare/Nav/etc/adminhtml.xml
+ * Copyright:   (c) 2012 AITOC, Inc.
+ */
+-->

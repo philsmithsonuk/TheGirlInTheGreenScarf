@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GreenScarf_Wishlist>
+            <version>0.1.0</version>
+        </GreenScarf_Wishlist>
+    </modules>
+	<global>
+		<blocks>
+			<wishlist>
+				<rewrite>
+					<customer_wishlist>GreenScarf_Wishlist_Block_Customer_Wishlist</customer_wishlist> 
+					<customer_wishlist_item_column_item>GreenScarf_Wishlist_Block_Customer_Wishlist_Item_Column_Item</customer_wishlist_item_column_item> 
+				</rewrite>
+			</wishlist>
+		</blocks> 
+	</global> 
+</config>

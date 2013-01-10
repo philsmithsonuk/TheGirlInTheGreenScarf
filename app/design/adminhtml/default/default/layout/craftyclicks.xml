@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * Crafty Clicks Postcode Lookup 
+ *
+ * @category     Extension
+ * @copyright    Copyright (c) 2009-2012 Crafty Clicks (http://www.craftyclicks.com)
+ * @author       Crafty Clicks
+ */ 
+ -->
+
+<layout>
+	<adminhtml_sales_order_create_index>
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento_admin.js</script></action>
+		</reference>
+		<reference name="js">
+			<block type="adminhtml/template" name="craftyclicks_config" template="craftyclicks/common_config.phtml" />
+		</reference>
+	</adminhtml_sales_order_create_index>
+
+	<adminhtml_sales_order_create_load_block_data>
+		<reference name="content">
+			<block type="adminhtml/template" name="craftyclicks_config" template="craftyclicks/common_config.phtml" />
+		</reference>
+	</adminhtml_sales_order_create_load_block_data>
+
+	<adminhtml_customer_edit>
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento_admin.js</script></action>
+		</reference>
+		<reference name="js">
+			<block type="adminhtml/template" name="craftyclicks_config" template="craftyclicks/common_config.phtml" />
+		</reference>
+	</adminhtml_customer_edit>
+
+	<adminhtml_customer_new>
+		<reference name="head">
+			<action method="addJs"><script>craftyclicks/crafty_postcode.class.js</script></action>
+			<action method="addJs"><script>craftyclicks/craftyclicks_magento_admin.js</script></action>
+		</reference>
+		<reference name="js">
+			<block type="adminhtml/template" name="craftyclicks_config" template="craftyclicks/common_config.phtml" />
+		</reference>
+	</adminhtml_customer_new>
+</layout>

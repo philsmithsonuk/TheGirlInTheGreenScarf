@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<layout>
+	
+	<default>
+		<reference name="head">
+             // lets modify the default styles, use our custom styles
+             // first remove the default styles
+             <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>
+             <action method="addItem"><type>skin_css</type><name>css/reset.css</name></action>
+             <action method="addItem"><type>skin_css</type><name>css/styles.css</name></action>
+             <action method="addItem"><type>skin_css</type><name>css/fonts.css</name></action>
+             // add our custom styles
+             <action method="removeItem"><type>css</type><name>css/reset.css</name></action>
+             <action method="removeItem"><type>css</type><name>css/styles.css</name></action>
+             <action method="removeItem"><type>css</type><name>css/styles.css</name></action>
+             <action method="addItem"><type>skin_js</type><name>js/email.js</name></action>
+			 // lets remove the original Ajax Cart Pro js, we will not be modifying the original code in /js/aw_ajaxcartpro folder
+			 // this is to prevent breaking the default layout if we change the package
+			 <action method="removeItem"><type>js</type><name>aw_ajaxcartpro/ajaxcartpro-1.4.6.js</name></action>
+			 <action method="removeItem"><type>js</type><name>aw_ajaxcartpro/ajaxcartpro-community-1.4.6.js</name></action>
+			 <action method="addItem"><type>skin_js</type><name>js/GSWrapper.js</name></action>
+			 // now lets add our customized Ajax Cart Pro js from the gs-default package
+			 <action method="addItem"><type>skin_js</type><name>js/aw_ajaxcartpro/ajaxcartpro-1.4.6.js</name></action>
+			 <action method="addItem"><type>skin_js</type><name>js/aw_ajaxcartpro/ajaxcartpro-community-1.4.6.js</name></action>
+		</reference>
+		
+		<reference name="root">
+			 <action method="setTemplate"><template>page/gs-2columns-left.phtml</template></action>
+			<reference name="top.links">
+				<!-- Add the Signup Link to top links in the header block -->
+				<!--<action method="addLink" translate="label title">
+					<label>SIGN UP FOR EMAIL</label>
+					<url helper="core/url/getHomeUrl"/>
+					<title>SIGN UP FOR EMAIL</title>
+					<prepare/>
+					<urlParams/>
+					<position>99</position>
+					<liParams/>
+					<beforeText></beforeText>
+					<afterText><![CDATA[<span>|</span>]]></afterText>
+				</action>-->
+				<remove name="wishlist_link"/>
+				<remove name="checkout_cart_link"/>
+			</reference>
+			<reference name="footer">
+				<block type="newsletter/subscribe" before="-" name="newsletter" template="newsletter/subscribe.phtml"/>
+			</reference>
+		</reference>
+		
+		<reference name="left">
+			<action method="unsetChild"><name>left.newsletter</name></action>
+		</reference>
+		
+		<reference name="header">
+			<action method="unsetChild"><name>cart_sidebar</name></action>
+		</reference>
+		
+        <reference name="header">
+            <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml" before="-">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <label>Shopping Cart Sidebar Extra Actions</label>
+                </block>
+            </block>
+        </reference>
+
+	</default>
+    <cms_page>
+        <reference name="head">
+            <action method="addJs"><script>jquery/jquery-1.7.1.min.js</script></action>
+        </reference>
+    </cms_page>
+	<customer_logged_out>
+		<!-- Removes 'Log In' link - Default position: 60 -->
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+		</reference>
+	</customer_logged_out>
+
+	<customer_logged_in>
+		<!-- Removes 'Log Out' link - Default position: 60 -->
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLogoutUrl"/></action> 
+			<action method="addLink" translate="label title">
+					<label>Logout</label>
+					<url helper="customer/getLogoutUrl"/>
+					<title>Logout</title>
+					<prepare/>
+					<urlParams/>
+					<position>99</position>
+					<liParams/>
+					<beforeText></beforeText>
+					<afterText><![CDATA[<span>|</span>]]></afterText>
+				</action>
+		</reference>
+	</customer_logged_in>
+
+    <catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/gs-product-details.phtml</template></action>
+        </reference>
+        
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>css/jquery/jquery-ui-1.8.21.custom.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/jquery/jquery.jqzoom.css</name></action>
+            <action method="addJs"><script>jquery/jquery-1.7.1.min.js</script></action>
+			<action method="addJs"><script>jquery/jquery-ui-1.8.21.custom.min.js</script></action>
+			<action method="addJs"><script>jquery/jquery.jqzoom-core-pack.js</script></action>
+            <action method="addJs"><script>jquery/jcarousellite_1.0.1.js</script></action>
+            // add our extended product.js
+            <!--
+            <action method="addItem"><type>skin_js</type><name>js/productExt.js</name></action>
+            -->
+            <action method="addItem"><type>skin_js</type><name>js/scp_product_extensionExt.js</name></action>
+            <block type="catalog/product_view" name="facebook_meta" before="-" template="catalog/product/view/fb_og_meta.phtml"/>
+		</reference>
+        
+        <reference name="product.info.options.wrapper.bottom">
+			<action method="unsetChild"><name>prices</name></action>
+			<action method="unsetChild"><name>product.info.addtocart</name></action>
+			<action method="unsetChild"><name>product.info.addto</name></action>
+        </reference>
+        
+        <reference name="right">
+            <action method="unsetChild"><name>catalog.product.related</name></action>
+        </reference>
+        
+        <reference name="product.info">
+            <block type="catalog/product_list_related" name="catalog.product.related" as="related_products" template="catalog/product/list/related.phtml"/>
+        </reference>
+    </catalog_product_view>
+	
+    <customer_account_logoutsuccess translate="label">
+        <label>Customer Account Logout Success</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/gs-1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="customer_logout" template="customer/logout.phtml"/>
+        </reference>
+    </customer_account_logoutsuccess>
+	
+	<customer_account_create translate="label">
+        <label>Customer Account Registration Form</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/gs-1column.phtml</template></action>
+        </reference>
+        <reference name="content"> 
+            <block type="customer/form_login" name="customer_form_login" template="customer/form/login.phtml" />		
+            <block type="customer/form_register" name="customer_form_register" template="customer/form/register.phtml">
+                <block type="page/html_wrapper" name="customer.form.register.fields.before" as="form_fields_before" translate="label">
+                    <label>Form Fields Before</label>
+                </block>
+            </block>
+        </reference>
+    </customer_account_create>
+    
+    <checkout_onepage_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/gs-2columns-checkout.phtml</template></action>
+        </reference>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>css/style-checkout.css</name></action>
+        </reference>
+    </checkout_onepage_index>
+
+</layout>

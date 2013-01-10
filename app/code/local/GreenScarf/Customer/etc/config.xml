@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GreenScarf_Customer>
+            <version>0.1.0</version>
+        </GreenScarf_Customer>
+    </modules>
+	<global>
+		<blocks>
+			<customer>
+				<rewrite>
+					<account_dashboard>GreenScarf_Customer_Block_Account_Dashboard</account_dashboard> 
+					<form_edit>GreenScarf_Customer_Block_Form_Edit</form_edit> 
+					<form_login>GreenScarf_Customer_Block_Form_Login</form_login> 
+					<form_register>GreenScarf_Customer_Block_Form_Register</form_register> 
+					<address_book>GreenScarf_Customer_Block_Address_Book</address_book> 
+					<address_edit>GreenScarf_Customer_Block_Address_Edit</address_edit> 
+				</rewrite>
+			</customer>
+		</blocks> 
+	</global> 
+</config>

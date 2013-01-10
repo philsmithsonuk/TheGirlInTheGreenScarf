@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<GreenScarf_Page>
+			<version>1.6.0.0</version>
+		</GreenScarf_Page>
+	</modules>
+	<global>
+		<page>
+			<layouts>
+				<gs_one_column module="page" translate="label">
+					<label>1 Column (TGITGS)</label>
+					<template>page/gs-1column.phtml</template>
+					<layout_handle>gs_one_column</layout_handle>
+				</gs_one_column>
+				<gs_two_columns module="page" translate="label">
+					<label>2 Columns (TGITGS)</label>
+					<template>page/gs-2columns.phtml</template>
+					<layout_handle>gs_two_columns</layout_handle>
+				</gs_two_columns>
+				<gs_two_columns_right module="page" translate="label">
+					<label>2 Columns Right(TGITGS)</label>
+					<template>page/gs-2columns-right.phtml</template>
+					<layout_handle>gs_two_columns_right</layout_handle>
+				</gs_two_columns_right>
+				<gs_two_columns_left module="page" translate="label">
+					<label>2 Columns Left(TGITGS)</label>
+					<template>page/gs-2columns-left.phtml</template>
+					<layout_handle>gs_two_columns_left</layout_handle>
+				</gs_two_columns_left>
+				<gs_three_columns module="page" translate="label">
+					<label>3 Columns (TGITGS)</label>
+					<template>page/gs-3columns.phtml</template>
+					<layout_handle>gs_three_columns</layout_handle>
+				</gs_three_columns>
+			</layouts>
+		</page>
+	</global>
+</config>

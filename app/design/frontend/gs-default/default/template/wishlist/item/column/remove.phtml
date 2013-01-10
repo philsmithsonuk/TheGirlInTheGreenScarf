@@ -1,0 +1,6 @@
+<?php 
+$item = $this->getItem();
+$product = $item->getProduct();
+?>
+<div class="added_date"><?php echo $item ->getAddedAt();?></div>
+<div class="remove_list"><a href="<?php echo $this->getItemRemoveUrl($this->getItem()); ?>" onclick="return confirmRemoveWishlistItem();" title="<?php echo $this->__('Remove Item') ?>"><?php echo $this->__('Remove');?></a></div>

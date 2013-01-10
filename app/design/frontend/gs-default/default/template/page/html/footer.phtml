@@ -1,0 +1,46 @@
+<div id="footer_1">
+	<?php echo $this->getChildHtml('newsletter') ?>
+</div>
+<div id="footer_2">
+	<ul>
+		<li><?php echo $this->getCopyright() ?><span>|</span></li>
+		<?php echo $this->getChildHtml('cms_footer_links') ?>
+	</ul>
+	<div class="social_icons">
+		<?php
+			if($block = Mage::getModel('cms/block')->setStoreId(Mage::app()->getStore()->getId())
+												   ->load('social-media')){
+				if ($block->getIsActive()) { 
+					$helper 	= Mage::helper('cms');
+					$processor  = $helper->getBlockTemplateProcessor();
+					echo $processor->filter($block->getContent());
+				}
+            }
+			/*
+				<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_in.png');?>" alt="" /></a></div>
+				<div class="icons_block"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_twitter.png');?>" alt="" /></a></div>
+				<div class="icons_block" style="padding:0px;"><a href="#" target="_BLANK"><img src="<?php echo $this->getSkinUrl('images/social_fb.png');?>" alt="" /></a></div>
+			*/
+		?>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<?php if(false): ?>
+<div class="footer-container">
+    <div class="footer">
+        <?php echo $this->getChildHtml('bottomContainer') ?>
+        <div class="f-right">
+            <img src="<?php echo $this->getSkinUrl('images/media/footer_callout.png');?>" class="footer-callout" alt="" />
+            <?php echo $this->getChildHtml('store_switcher') ?>
+        </div>
+        <div class="f-left">
+            <?php echo $this->getChildHtml('cms_footer_links') ?>
+            <?php echo $this->getChildHtml('footer_links') ?>
+            <?php echo $this->getChildHtml('newsletter') ?>
+            <p class="bugs"><?php echo $this->__('Help Us to Keep Magento Healthy') ?> - <a href="http://www.magentocommerce.com/bug-tracking" onclick="this.target='_blank'"><strong><?php echo $this->__('Report All Bugs') ?></strong></a> <?php echo $this->__('(ver. %s)', Mage::getVersion()) ?></p>
+            <address><?php echo $this->getCopyright() ?></address>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,183 @@
+<style type="text/css">
+	.btn_block,.btn_block *{cursor:pointer;}
+	#address_result{color:#FF0000;font-size:10px;}
+</style>    
+<?php $conf = Mage::getStoreConfig('general');?>
+<?php if($this->getTitle()): ?>
+	<div class="head_result">
+		<?php echo $this->getTitle() ?> 
+	</div>
+<?php endif; ?> 
+<div class="acctn_personal">
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?> 
+		
+<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate">
+<div class="rad_8 btn_block" style="margin:0px;">  
+	<button type="submit" title="<?php echo $this->__('Save Address') ?>" class="button"><span><span><?php echo $this->__('Save Address') ?></span></span></button>
+</div>	
+ <table width="75%" border="0" cellspacing="0" cellpadding="0">  
+	<?php echo $this->getNameBlockHtml() ?> 
+	<tr>
+		<td>
+			<label for="telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label> 
+			<input type="text" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text  <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" />
+		</td>
+	</tr>           
+
+	<tr>
+		<td>
+			<label for="fax"><?php echo $this->__('Fax') ?></label>
+			<input type="text" name="fax" id="fax" title="<?php echo $this->__('Fax') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getFax()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>" />
+		</td>
+	</tr>   
+	   <tr>
+		<td>
+			<label for="country" class="required"><?php echo $this->__('Country') ?><em>*</em></label>			 
+				<?php echo $this->getCountryHtmlSelect() ?>
+	  </td>
+	</tr> 	
+	<tr>
+		<td> 
+			<label for="zip" class="required"><?php echo $this->__('Zip/Postal Code') ?><em>*</em></label> 
+			<input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
+			<div style="position:relative;">
+				<div class="btn-dynamic" id="postcode_finder_btn" style="display:none;position:absolute;left: 327px;position: absolute;top: -45px;"> <br/>
+						<div class="rad_8 btn_block" style="float:none;width:89px;">  
+							<button type="button" id="postcode_finder" title="<?php echo $this->__('Find Address') ?>" class="button"><span><span><?php echo $this->__('Find Address') ?></span></span></button>
+					   </div>
+				</div>
+			</div>
+		   </td>
+	</tr> 
+	<tr>
+		<td> 
+			<div class="field" id="address_result" ></div>			 
+	  </td>
+	</tr>  
+	
+	<tr>
+		<td> 
+		<?php echo $this->getBlockHtml('formkey')?>
+		<input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+		<input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />  
+                <label for="company"><?php echo $this->__('Company') ?></label> 
+                    <input type="text" name="company" id="company" title="<?php echo $this->__('Company') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
+           
+		  </td>
+	</tr>   
+	<tr>
+		<td> 
+        <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?> 
+                <label for="street_1" class="required"><?php echo $this->__('Street Address') ?><em>*</em></label> 
+                    <input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text <?php echo $_streetValidationClass ?>" />
+        	  </td>
+	</tr>  
+	 <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+        <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+            <tr>
+		<td>   
+               
+                    <input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i ?>" class="input-text <?php echo $_streetValidationClass ?>" />
+                 </td>
+		</tr>  
+        <?php endfor; ?> 
+		<?php if ($this->helper('customer/address')->isVatAttributeVisible()) : ?>  
+		<tr>
+			<td>       
+			<label for="vat_id"><?php echo $this->__('VAT Number') ?></label> 
+				<input type="text" name="vat_id" value="<?php echo $this->escapeHtml($this->getAddress()->getVatId()) ?>" title="<?php echo $this->__('VAT Number') ?>" id="vat_id" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('vat_id') ?>" />
+			</td>
+		</tr>  
+		<?php endif; ?> 
+		<tr>
+		  <td>  
+				<label for="city" class="required"><?php echo $this->__('City') ?><em>*</em></label>			 
+                <input type="text" name="city" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />
+		 </td>
+		</tr>   
+			<tr>
+				<td> 
+                    <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label> 
+                        <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                           <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                        </select>
+                        <script type="text/javascript">
+                        //<![CDATA[
+                            $('region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
+                        //]]>
+                        </script>
+                        <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" />
+			</td>
+		</tr>   
+		<tr>
+			<td> 
+            <li<?php if($this->canSetAsDefaultBilling()) echo ' class="control"' ?>>
+                <?php if($this->isDefaultBilling()): ?>
+                    <strong><?php echo $this->__('Default Billing Address') ?></strong>
+                <?php elseif($this->canSetAsDefaultBilling()): ?>
+                    <input type="checkbox" id="primary_billing" name="default_billing" value="1" title="<?php echo $this->__('Use as My Default Billing Address') ?>" class="checkbox" /><label style="display:inline;margin-left:5px;" for="primary_billing"><?php echo $this->__('Use as my default billing address') ?></label>
+                <?php else: ?>
+                    <input type="hidden" name="default_billing" value="1" />
+                <?php endif; ?>
+            </li>
+            <li<?php if($this->canSetAsDefaultShipping()) echo ' class="control"' ?>>
+                <?php if($this->isDefaultShipping()): ?>
+                    <strong><?php echo $this->__('Default Shipping Address') ?></strong>
+                <?php elseif($this->canSetAsDefaultShipping()): ?>
+                    <input type="checkbox" id="primary_shipping" name="default_shipping" value="1" title="<?php echo $this->__('Use as My Default Shipping Address') ?>" class="checkbox" /><label style="display:inline;margin-left:5px;" for="primary_shipping"><?php echo $this->__('Use as my default shipping address') ?></label>
+                <?php else: ?>
+                    <input type="hidden" name="default_shipping" value="1" />
+                <?php endif; ?>
+            </li> 
+		</td>
+	</tr> 
+	
+	</table> 
+</form>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannerslider/jquery-1.4.2.min.js') ?>"></script>
+<script type="text/javascript"> 
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+//]]>
+
+	if (CraftyPostcodeCreate) {
+				addressPostCodeObj = CraftyPostcodeCreate();
+				addressPostCodeObj.set("access_token","<?php echo $conf['craftyclicks']['access_token'];?>");
+				addressPostCodeObj.set("max_width", '321px');
+				addressPostCodeObj.set("result_elem_id", 'address_result');
+				addressPostCodeObj.set("elem_company", 'company');
+				addressPostCodeObj.set("elem_street1", 'street_1');
+				addressPostCodeObj.set("elem_street2", 'street_2');
+				addressPostCodeObj.set("elem_street3", 'street_3');
+				addressPostCodeObj.set("elem_town",    'city');
+				addressPostCodeObj.set("elem_postcode",'zip');
+				addressPostCodeObj.set("first_res_line", "<?php echo $conf['craftyclicks']['first_res_line'];?>");
+				addressPostCodeObj.set("res_autoselect", "0");
+				addressPostCodeObj.set("busy_img_url", "<?php echo $this->getSkinUrl("images/ajax-loader.gif");?>");
+				addressPostCodeObj.set("err_msg8" , "Daily demo limit reached. To continue, please use one of these postcodes: AA11AA, AA11AB, AA11AD or AA11AE.");
+				addressPostCodeObj.set("single_res_autoselect" , 1);
+				addressPostCodeObj.set("elem_udprn", "udprn");
+				jQuery('#postcode_finder').click(function(){
+					addressPostCodeObj.doLookup();
+				});
+				if ($('country')) {
+					jQuery('#country').change(function(){
+					if (this.value == 'GB') {
+						jQuery('#postcode_finder_btn').show();
+						jQuery('#address_result').html('');
+						jQuery('#address_result').show();
+					} else {
+						jQuery('#postcode_finder_btn').hide();
+						jQuery('#address_result').hide();
+					}
+					});
+					if (jQuery('#country').val()=='GB') {
+						jQuery('#postcode_finder_btn').show();
+					}
+				}
+			}
+</script>
+
+</div>

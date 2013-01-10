@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<sagepaymentsce_payment_error>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="sagepaymentsce/error" name="errormsg"  template="sagepaymentsce/error.phtml"/>
+        </reference>
+    </sagepaymentsce_payment_error>
+</layout>

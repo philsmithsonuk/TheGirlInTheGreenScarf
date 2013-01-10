@@ -1,0 +1,44 @@
+<style type="text/css">
+div.login-errors *{ color:#77A33F; } 
+div.login-errors{ position:relative; color:#77A33F; margin-bottm:20px;} 
+div.login-errors ul.messages{margin:0px 0px 8px 10px;border-bottom:1px solid #CCCCCC;padding:5px 5px 10px 0px;}
+div.login-errors ul.messages li.error-msg ul{ border:none; #77A33F;}   
+div.login-errors ul.messages li.error-msg ul li span{ position:relative !important;}   
+div.btn_block button{ cursor:pointer;}   
+</style>
+<div class="account_content fleft">
+          <div class="head_result"><?php echo $this->__('MY ACCOUNT SIGN IN') ?></div> 
+		 <div class="login-errors">
+			<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+			<?php $this->getMessagesBlock()->getMessageCollection()->clear(); ?>
+	     </div>
+          <div class="sign_in">
+			<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+              <table width="410" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><label> Email*:<span>* Required fields</span> </label> 
+					<input type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+					</td>
+                </tr>
+                <tr>
+                  <td><label><?php echo $this->__('Password*:') ?></label>
+                     <input style="" type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="<?php echo $this->getForgotPasswordUrl();?>" class="forgot_pword"><?php echo $this->__('Forgotten your password') ?></a></td>
+                </tr>
+                <tr>
+                  <td><div class="rad_8 btn_block">
+                      <button><span><?php echo $this->__('Sign In') ?></span></button>
+                    </div></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+	<script type="text/javascript">
+		//<![CDATA[
+		var dataForm = new VarienForm('login-form', true);
+		//]]>
+	</script>
+ </div> 

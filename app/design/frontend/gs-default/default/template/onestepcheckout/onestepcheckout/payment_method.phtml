@@ -1,0 +1,120 @@
+<div class="block_step2">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody>
+		<tr valign="top">
+			<td>
+				<div class="onestepcheckout-payment-methods">
+					<table width="100%" cellspacing="0" cellpadding="0" border="0"  id="checkout-payment-method-load">
+					<tbody>
+						<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+				
+						<tr valign="top">
+							<td>
+								<?php if( sizeof($this->getMethods()) > 1 ): ?>			
+									<input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="save_shipping_method(shipping_method_url);" <?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+								<?php else: ?>
+									<span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" onclick="save_shipping_method(shipping_method_url);" /></span>
+								<?php endif; ?>
+									<label for="p_method_<?php echo $_code ?>"><?php echo $this->getMethodTitle($_method) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+							</td>
+						</tr>
+						<?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+							<tr valign="top">
+								<td id="container_payment_method_<?php echo $_code; ?>" class="payment-method"><?php echo $html; ?></td>
+							</tr>					
+						<?php endif; ?>
+						
+					<?php endforeach; ?>
+						
+					</tbody>
+					</table>					
+				</div>
+			</td>
+		</tr>		
+	</tbody>
+	</table>
+</div>
+<div class="tool-tip" id="payment-tool-tip" style="display:none;">
+	<div class="btn-close" style="text-align:right;padding-right:5px;"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
+	<div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
+</div>
+
+<?php /* ?>
+<div class="onestepcheckout-payment-methods">
+	<dl class="sp-methods" id="checkout-payment-method-load">
+	<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+		<dt>
+		<?php if( sizeof($this->getMethods()) > 1 ): ?>			
+				<input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="save_shipping_method(shipping_method_url);" <?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+		<?php else: ?>
+				<span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" onclick="save_shipping_method(shipping_method_url);" /></span>
+		<?php endif; ?>
+				<label for="p_method_<?php echo $_code ?>"><?php echo $this->getMethodTitle($_method) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+		</dt>
+		<?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+		<dd id="container_payment_method_<?php echo $_code; ?>" class="payment-method">
+				<?php echo $html; ?>
+		</dd>
+		<?php endif; ?>
+	<?php endforeach; ?>
+	</dl>
+</div>
+<?php */ ?>
+
+
+<script type="text/javascript">
+//<![CDATA[
+$$('#checkout-payment-method-load td input').invoke('observe', 'click', function(e) {
+    var element = e.element();
+    var name = 'payment_form_' + element.value;
+    
+	if(element.value != ""){
+		/* Hide all other forms */
+		$$('td.payment-method').invoke('hide');
+    }
+    if(element.checked) {
+        var form = $(name);
+        var container = $('container_payment_method_' + element.value);
+
+        if(element !== null && container !== null)    {
+            container.show();
+            $(name).show();
+        }
+    }    
+});
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+	function toggleToolTip_(event){
+		if($('payment-tool-tip')){
+			$('payment-tool-tip').setStyle({
+				top: (Event.pointerY(event)-560)+'px'//,
+				//left: (Event.pointerX(event)+100)+'px'
+			})
+			$('payment-tool-tip').toggle();
+		}
+		Event.stop(event);
+	}
+	
+	
+	function toggleToolTip(event){
+        if($('payment-tool-tip')){
+            jQuery.blockUI({ message: jQuery('#payment-tool-tip'),
+                             css: { border: 0 }
+                            });
+            jQuery('.blockOverlay').attr('title','Click to unblock').click(jQuery.unblockUI);
+        }
+        Event.stop(event);
+    }
+	
+	
+	if($('payment-tool-tip-close')){
+		Event.observe($('payment-tool-tip-close'), 'click', function(){
+			jQuery.unblockUI();
+		});
+	}
+	
+	initWhatIsCvvListeners();	
+//]]>
+</script>

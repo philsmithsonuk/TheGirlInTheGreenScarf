@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GreenScarf_Newsletter>
+            <version>0.1.0</version>
+        </GreenScarf_Newsletter>
+    </modules>     
+ <frontend>   
+   <routers> 
+     <newsletter>  
+       <args>  
+         <modules>   
+           <GreenScarf_Newsletter before="Mage_Newsletter">GreenScarf_Newsletter</GreenScarf_Newsletter>  
+         </modules>  
+       </args>  
+     </newsletter>  
+   </routers>  
+ </frontend>  
+</config>

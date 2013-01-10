@@ -1,0 +1,17 @@
+<?php
+/**
+ * Product:     Layered Navigation Pro - 07/06/12
+ * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
+ * Generated:   2012-06-12 14:40:26
+ * File path:   app/design/frontend/base/default/template/adjnav/filter_price_default.phtml
+ * Copyright:   (c) 2012 AITOC, Inc.
+ */
+?>
+<ol>
+<?php foreach ($this->getItems() as $_item): ?>
+    <li>
+        <a id="<?php echo $_item->getFilter()->getRequestVar() . '-' . $_item->getValueString()?>" onclick="return false;" href="<?php echo $this->getItemUrl($_item); ?>" class="adj-nav-price <?php if ($this->isSelected($_item)) echo 'adj-nav-price-selected';?>" ><?php echo $_item->getLabel() ?></a> (<?php echo ($_item->getCount()>=0?$_item->getCount():$this->getCollectionSize()) ?>)
+    </li>
+<?php endforeach ?>
+</ol>

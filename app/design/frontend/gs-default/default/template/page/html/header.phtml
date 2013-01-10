@@ -1,0 +1,36 @@
+<div class="logo">
+	<?php if ($this->getIsHomePage()):?>
+		<h1><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+	<?php else:?>
+		<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>">
+			<strong><?php //echo $this->getLogoAlt() ?></strong>
+			<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+	<?php endif?>
+</div>    
+<div style="position:relative;">
+  <p style="position:absolute;top:7px;color:#606163;right:32px;"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>
+</div>
+<div class="top_links">
+	<?php echo $this->getChildHtml('topLinks') ?>
+	<div id="shop-bag" class="shop_bag">
+		<?php echo $this->getChildHtml('cart_sidebar'); ?>
+	</div>
+	<span id="updating-cart-status" style="display:none;">
+		<?php echo $this->__('UPDATING BAG') ?>
+		<img src="<?php echo $this->getSkinUrl('images/cart/progress.gif') ?>" width="10" height="10">
+	</span>
+</div>
+<div class="navigation">
+	<ul id="nav">
+		<li><a href="<?php echo $this->getUrl('') ?>"<?php if ($this->getIsHomePage()):?> class="active"<?php endif; ?>>HOME</a></li>
+		<?php echo $this->getChildHtml('topMenu') ?>
+	</ul>
+	<div class="search">
+		<?php echo $this->getChildHtml('topSearch'); ?>
+	</div>
+</div>
+<script type="text/javascript">
+	//<![CDATA[
+	GSWrapper.HeaderCart.initialize('header-bag-items');
+	//]]>
+</script>

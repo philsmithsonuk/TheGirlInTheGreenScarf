@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AdjustWare_Nav>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>Layered Navigation Pro</self_name>
+            <priority>10120</priority>
+            <depends><Mage_Tax/></depends>
+        </AdjustWare_Nav>
+    </modules>
+</config>
+<!--
+/**
+ * Product:     Layered Navigation Pro - 07/06/12
+ * Package:     AdjustWare_Nav_2.4.2_0.1.4_8_300402
+ * Purchase ID: QmqwcKnSEMUDkX35fJBKkoOUk2rsivOit75vaVFw7E
+ * Generated:   2012-06-12 14:40:26
+ * File path:   app/etc/modules/AdjustWare_Nav.xml
+ * Copyright:   (c) 2012 AITOC, Inc.
+ */
+-->
