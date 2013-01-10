@@ -164,14 +164,5 @@
             </block>
         </reference>
     </customer_account_create>
-    
-    <checkout_onepage_index>
-        <reference name="root">
-            <action method="setTemplate"><template>page/gs-2columns-checkout.phtml</template></action>
-        </reference>
-		<reference name="head">
-			<action method="addItem"><type>skin_css</type><name>css/style-checkout.css</name></action>
-        </reference>
-    </checkout_onepage_index>
 
 </layout>

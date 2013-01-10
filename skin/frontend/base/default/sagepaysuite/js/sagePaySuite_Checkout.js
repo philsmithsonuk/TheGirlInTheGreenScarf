@@ -635,7 +635,6 @@ EbizmartsSagePaySuite.Checkout.prototype = {
 
 try{
 	Event.observe(window,"load",function(){
-
 	$(document.body).insert(new Element('a', { 'id': 'sagepayserver-dummy-link', 'href': '#', 'style':'display:none' }).update('&nbsp;'));
 	$(document.body).insert(new Element('a', { 'id': 'sagepaydirectpro-dummy-link', 'href': '#', 'style':'display:none' }).update('&nbsp;'));
 

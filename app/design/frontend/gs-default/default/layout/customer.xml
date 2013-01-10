@@ -141,7 +141,7 @@
             <block type="customer/account_forgotpassword" name="forgotPassword" template="customer/form/forgotpassword.phtml" />
         </reference>
     </customer_account_forgotpassword>
-	
+    
     <customer_account_resetpassword translate="label">
         <label>Reset a Password</label>
         <remove name="right"/>
